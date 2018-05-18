@@ -11,9 +11,14 @@ visualizations that is an invaluable technique to understand in-depth system beh
 faster than just CLI tracing modes. The focus of this lab is on post-mortem analysis (the system failed and we want to
 understand the root cause). The tutorial first introduces attendees to system tracing, trace collection, 
 storage/aggregation/filtering and eventually visualization techniques such as flamecharts, flamegraphs, timeline views, 
-critical flow view (inter-process flow), container and VM views, resource usage etc). The introductory sessions also
-explain why and when is systems tracing required and its role in supporting related performance anlaysis techniques such 
-as distributed tracing, profiling, debugging and service log analysis. For this lab, primary trace collection will be 
+critical flow view (inter-process flow), container and VM views, resource usage etc). The introductory sessions (part I) 
+also explain why and when is systems tracing required and its role in supporting related performance anlaysis techniques 
+such as distributed tracing, profiling, debugging and service log analysis. Various visual techniques will be shown and 
+hands on activities that showcase how different "views" can help in scenarios such as resource contention, latency 
+analysis would be carried out. The advanced sessions (part 2) cater to views in Trace Compass that support analysis of
+containerized workloads, VMs, IRQs and creating custom views in Trace Compass. The session would also 
+
+For this lab, primary trace collection will be 
 through LTTng (https://lttng.org/), Perf/Ftrace and primary trace visualization system will be Trace Compass 
 (http://tracecompass.org) 
 
@@ -48,7 +53,24 @@ to pick and cycle through visualization and introduces **Trace Compass** as a to
 	  * Histograms - events, syscall latency
       * Critical path analysis (inter-process flow on a timeline)
 
-# Trace Visualization Lab - Part II
+# Trace Visualization Lab - Part II  
+
+Trace Visualization Lab is a two part lab session that would introduce the participants to system tracing and trace
+visualizations that is an invaluable technique to understand in-depth system behavior and reach root-cause of problems
+faster than just CLI tracing modes. The focus of this lab is on post-mortem analysis (the system failed and we want to
+understand the root cause). The tutorial first introduces attendees to system tracing, trace collection, 
+storage/aggregation/filtering and eventually visualization techniques such as flamecharts, flamegraphs, timeline views, 
+critical flow view (inter-process flow), container and VM views, resource usage etc). The advanced sessions (part 2) of 
+this lab cater to views in Trace Compass that support analysis of containerized workloads, VMs, IRQs and creating 
+custom views in Trace Compass. The session would also challenge users to solve a scenario and hunt bugs in real worloads
+that use all visual tools and techniques in tandem. Attending "Trace Visualization Lab - Part I" is a pre-requisite for
+this sesison.
+
+For this lab, primary trace collection will be 
+through LTTng (https://lttng.org/), Perf/Ftrace and primary trace visualization system will be Trace Compass 
+(http://tracecompass.org) 
+
+## Session 1: Advanced Usage
 **Duration:** 60 hrs  
 **Summary:** This session introduces advanced usage of Trace Compass such a VM and container visualizations, building 
 your own custom views and trace parser and inter-process control flows. 
@@ -57,7 +79,7 @@ your own custom views and trace parser and inter-process control flows.
   * IRQ analysis - network interrupts example exercise
   * Container and VM views - analysis of containerized and virtualized workloads
   * Creating custom views and trace parsers (maybe hardware trace example)
-  * Bug-hunting
+  * Bug-hunting with multiple Trace Compass views in tandem
 
 ## References
   * Sample Traces
