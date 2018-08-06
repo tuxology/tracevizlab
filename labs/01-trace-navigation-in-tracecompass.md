@@ -56,7 +56,7 @@ Views like the ``Resources`` view have built-in colors for some of the states th
 
 To get the meaning of the colored states and change their style (color, width), you can click on the ``Legend`` icon. The window that opens shows the legend of the current view and allows to change the colors by cliking on the color rectangle, or the width by using the gradient line right of the name. The arrow button at the end of each line will reset to defaults.
 
-In the following screenshot, we've change the color and width of the **System call** state.
+In the following screenshot, we've changed the color and width of the **System call** state.
 
 ![TimeGraphViewLegend](screenshots/timeGraphViewLegend.png "Time Graph View Legend")
 
