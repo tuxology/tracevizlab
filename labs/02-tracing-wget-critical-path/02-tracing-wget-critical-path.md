@@ -12,7 +12,16 @@ You need to save two traces of the same wget instruction. You can either use [lt
 or use lttng directly to trace the command:
 
 ```
+$ lttng-record-trace wget http://www.dorsal.polymtl.ca
+```
+or
+```
+$ lttng create
+$ lttng enable-event -k -a
+$ lttng start
 $ wget http://www.dorsal.polymtl.ca
+$ lttng stop
+$ lttng destroy
 ```
 
 - - -
