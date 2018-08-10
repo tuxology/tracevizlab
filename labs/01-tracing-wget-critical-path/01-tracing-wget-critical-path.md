@@ -1,6 +1,8 @@
 ### Tracing wget and showing the critical path
 
-In this lab, you will learn to view the critical path of a process, compare two executions of the same program and understand what is happening behind the scenes.
+In this lab, you will learn to view the critical path of a process, compare two executions of the same program and understand what is happening behind the scenes. In a program, a task may wait for the result of another task, these wait dependencies can be seen using the critical path analysis. This analysis highlights the active path from the trace and is displayed in the *Critical Flow View*.
+
+![KernelWaitAnalysisDjango](screenshots/kernelWaitAnalysisDjango.png "Trace Compass Kernel Wait Analysis")
 
 *Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](00-installing-tracecompass.md) lab or read the [TraceCompass web site](https://tracecompass.org) for more information. You also need to know how to record a trace and open it in Trace Compass. You can that learn by doing the [Record a kernel trace](00-record-kernel-trace.md) lab and the [Trace Navigation in Trace Compass](01-trace-nagivation-in-tracecompass.md).
 
@@ -54,7 +56,7 @@ Most of views are accessible in the *Project Explorer View* or by accessing *Win
 
 - The *Histogram View* displays the events distribution with respect to time.
 
-In this lab, you will use the critical path to analyze the differences between the two executions of wget. The critical path is the path of execution of a program that shows the tasks that are blocking its completion. To show the critical path you need to open the *Critical Flow View*: *Views > OS Execution Graph > Critical Flow View* and follow the process you want to analyze.
+In this lab, you will use the critical path to analyze the differences between the two executions of wget. To show the critical path you need to open the *Critical Flow View*: *Views > OS Execution Graph > Critical Flow View* and follow the process you want to analyze.
 
 
 - - -
