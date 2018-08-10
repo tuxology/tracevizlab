@@ -75,7 +75,7 @@ In the *Control Flow View*, to follow one process, you can search for the proces
 
 ![SearchProcessTrace](screenshots/searchProcessTrace.png "Trace Compass Search Process")
 
-Once you have done that, you can right-click on the wget line and select `Follow wget/12243`. Then, the critical path should appear in the corresponding critical flow view.
+Once you have done that, you can right-click on the wget line and select `Follow wget/<pid>` where pid is the Process ID of wget in your trace. As we can see, for this example, you would've selected `Follow wget/12243`. Then, the critical path should appear in the corresponding critical flow view.
 
 ![FollowProcess](screenshots/followProcess.png "Trace Compass Follow Process")
 
