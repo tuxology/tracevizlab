@@ -2,7 +2,7 @@
 
 In this lab, you will learn to trace a python application using lttng library `lttngust`, write an xml analysis file to create your own view, and visualize your application with your own tracepoints.
 
-*Pre-requisites*: Have Trace Compass installed and opened. Have git, lttng, Python 3.X and the callstack add-on on Trace Compass installed. You can follow the [Installing TraceCompass](../00-installing-tracecompass.md) lab or read the [TraceCompass website](https://tracecompass.org) for more information.
+*Pre-requisites*: Have Trace Compass installed and opened. Have git, lttng, Python 3.X, pip and the callstack add-on on Trace Compass installed. You can follow the [Installing TraceCompass](../00-installing-tracecompass.md) lab or read the [TraceCompass website](https://tracecompass.org) for more information.
 
 - - -
 
@@ -120,14 +120,27 @@ Here is the XML that defines the finite state machine (FSM). In this case a requ
 
 #### Sub-task 3: Tracing the python application
 
+To run the server script given in this lab you need to install the lttngust and flask libraries.
+```bash
+$ pip install lttngust flask
+# If you have ubuntu, it may be easier this way:
+$ python3 -m pip install lttngust flask
+```
+
 In order to record a trace with python events you need to create an lttng session and enable python events:
 
 ```bash
+# In console 1:
 $ lttng create python
 $ lttng enable-event --python -a
 $ lttng start
 $ python3 server.py
-[...]  # Do some requests then ctrl-c
+
+# In console 2:
+$ curl localhost:5000 && curl localhost:5000/resource1 && curl localhost:5000/resource2 && curl localhost:5000/resource3 && curl localhost:5000/resource4
+
+# In console 1:
+# ctrl-c to stop the server
 $ lttng stop
 $ lttng view # Optional, displays the events recorded
 $ lttng destroy
