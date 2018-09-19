@@ -32,7 +32,7 @@ The package installation will have created a group called **tracing**. This grou
 $ sudo usermod -a -G tracing <user>
 ```
 
-You are now ready to get a kernel trace. You may proceed to the [Record a kernel trace](00-record-kernel-trace.md) lab or install additional packages to get more tracing options. Most of them will be covered in later labs, so it is advised to install them now.
+You are now ready to get a kernel trace. You may proceed to the [Record a kernel trace](../00-record-kernel-trace/00-record-kernel-trace.md) lab or install additional packages to get more tracing options. Most of them will be covered in later labs, so it is advised to install them now.
 
 - - -
 
