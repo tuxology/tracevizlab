@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../org.eclipse.tracecompass.tmf.analysis.xml.core/src/org/eclipse/tracecompass/tmf/analysis/xml/core/module/xmlDefinition.xsd">
+<callstack id="lttng.ust.phpcallstacknew.analysis">
+    <callstackGroup name="PHP threads">
+        <level path="Threads/*" />
+        <thread cpu="cpu"/>
+    </callstackGroup>
+    <pattern version="1" id="ca.polymtl.phpcallstacknew">
+        <head>
+            <traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype" />
+            <traceType id="org.eclipse.linuxtools.tmf.core.experiment.generic" />
+            <label value="PHP Callstack View" />
+        </head>
+        
+        <location id="CurrentThread">
+            <stateAttribute type="constant" value="Threads" />
+            <stateAttribute type="query">
+                <stateAttribute type="constant" value="#CurrentScenario" />
+                <stateAttribute type="constant" value="threadID" />
+            </stateAttribute>
+        </location>
+
+        <!-- callstack process="Views/*" thread="Threads/*" callstack="callstack" / -->
+        <patternHandler>
+            <!-- CONDITIONS -->
+
+            <!-- Test if the current running thread is equal to the current scenario thread -->
+            <test id="same_thread">
+                <if>
+                    <condition>
+                        <stateValue type="eventField" value="context._vtid" forcedType="int"/>
+                        <stateValue type="query">
+                            <stateAttribute type="constant" value="#CurrentScenario" />
+                            <stateAttribute type="constant" value="threadID" />
+                        </stateValue>
+                    </condition>
+                </if>
+            </test>
+
+            <!-- ACTIONS -->
+
+            <!-- Actions and test for time graph view threads -->
+            <action id="entering_thread">
+                <!-- Initialize current scenario data: component, type of thread, queries and drawing event counts -->
+                <stateChange>
+                    <stateAttribute type="constant" value="#CurrentScenario" />
+                    <stateAttribute type="constant" value="threadID" />
+                    <stateValue type="eventField" value="context._vtid" forcedType="int"/>
+                </stateChange>
+                <stateChange>
+                    <stateAttribute type="constant" value="#CurrentScenario" />
+                    <stateAttribute type="constant" value="requestUri" />
+                    <stateValue type="eventField" value="uri" />
+                </stateChange>
+            </action>
+
+            <action id="thread_done">
+                <!-- Generate a segment for this thread -->
+                <segment>
+                    <segType>
+                        <segName>
+                            <stateValue type="query">
+                                <stateAttribute type="constant" value="#CurrentScenario" />
+                                <stateAttribute type="constant" value="type" />
+                            </stateValue>
+                        </segName>
+                    </segType>
+                    <segContent>
+                        <segField name="threadID" type="int">
+                            <stateValue type="query">
+                                <stateAttribute type="constant" value="#CurrentScenario" />
+                                <stateAttribute type="constant" value="threadID" />
+                            </stateValue>
+                        </segField>
+                        <segField name="component" type="string">
+                            <stateValue type="query">
+                                <stateAttribute type="constant" value="#CurrentScenario" />
+                                <stateAttribute type="constant" value="component" />
+                            </stateValue>
+                        </segField>
+                        <segField name="fullQuery" type="int">
+                            <stateValue type="query">
+                                <stateAttribute type="constant" value="#CurrentScenario" />
+                                <stateAttribute type="constant" value="fqCount" />
+                            </stateValue>
+                        </segField>
+                        <segField name="singleQuery" type="int">
+                            <stateValue type="query">
+                                <stateAttribute type="constant" value="#CurrentScenario" />
+                                <stateAttribute type="constant" value="sqCount" />
+                            </stateValue>
+                        </segField>
+                        <segField name="redraw" type="int">
+                            <stateValue type="query">
+                                <stateAttribute type="constant" value="#CurrentScenario" />
+                                <stateAttribute type="constant" value="redrawCount" />
+                            </stateValue>
+                        </segField>
+                        <segField name="refresh" type="int">
+                            <stateValue type="query">
+                                <stateAttribute type="constant" value="#CurrentScenario" />
+                                <stateAttribute type="constant" value="refreshCount" />
+                            </stateValue>
+                        </segField>
+                    </segContent>
+                </segment>
+            </action>
+
+            <action id="push_uri">
+                <!-- Push the current event to the thread's callstack -->
+                <stateChange>
+                    <stateAttribute type="location" value="CurrentThread" />
+                    <stateAttribute type="constant" value="CallStack" />
+                    <stateValue type="eventField" value="uri" stack="push"/>
+                </stateChange>
+                <stateChange>
+                    <stateAttribute type="location" value="CurrentThread" />
+                    <stateAttribute type="constant" value="cpu" />
+                    <stateValue type="eventField" value="cpu"/>
+                </stateChange>
+            </action>
+
+            <action id="pop_uri">
+                <!-- Pop the current event from the callstack -->
+                <stateChange>
+                    <stateAttribute type="location" value="CurrentThread" />
+                    <stateAttribute type="constant" value="CallStack" />
+                    <stateValue type="eventName" stack="pop"/>
+                </stateChange>
+            </action>
+
+            <action id="push_event_type">
+                <!-- Push the current event to the thread's callstack -->
+                <stateChange>
+                    <stateAttribute type="location" value="CurrentThread" />
+                    <stateAttribute type="constant" value="CallStack" />
+                    <stateValue type="eventField" value="funcname" stack="push"/>
+                </stateChange>
+            </action>
+
+            <action id="pop_event_type">
+                <!-- Pop the current event from the callstack -->
+                <stateChange>
+                    <stateAttribute type="location" value="CurrentThread" />
+                    <stateAttribute type="constant" value="CallStack" />
+                    <stateValue type="eventField" value="funcname" stack="pop"/>
+                </stateChange>
+            </action>
+
+            <!-- FSMs -->
+
+            <fsm id="phpFunctions" initial="Wait_start">
+                <state id="Wait_start">
+                    <!-- The state will stay here until we have a thread start event -->
+                    <transition event="ust_php:request_entry" target="in_thread" action="entering_thread:push_uri"/>
+                </state>
+                <state id="in_thread" >
+                    <!-- The state will loop on itself until the thread ends and increment the operations that happen during the execution -->
+                    <transition event="ust_php:php_function_entry" cond="same_thread" target="in_thread" action="push_event_type"/>
+                    <transition event="ust_php:php_function_exit" cond="same_thread" target="in_thread" action="pop_event_type"/>
+                    <transition event="ust_php:function_entry" cond="same_thread" target="in_thread" action="push_event_type"/>
+                    <transition event="ust_php:function_exit" cond="same_thread" target="in_thread" action="pop_event_type"/>
+                    <transition event="ust_php:request_exit" cond="same_thread" target="end_thread" action="pop_uri"/>
+                </state>
+                <final id="end_thread"/>
+            </fsm>
+        </patternHandler>
+    </pattern>
+</callstack>
+</tmfxml>
