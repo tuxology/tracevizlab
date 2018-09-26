@@ -1,0 +1,29 @@
+#!/bin/bash
+
+NAME=$1
+
+if [ -z "$NAME" ]
+then
+	NAME=trace_$(date +"%y%m%d_%H%M")
+fi
+
+lttng create --output ~/lttng-traces/$NAME
+lttng enable-channel --kernel --num-subbuf 8 --subbuf-size 1024K more-subbuf
+# scheduling
+lttng enable-event -k --channel more-subbuf sched_switch,sched_waking,sched_pi_setprio,sched_process_fork,sched_process_exit,sched_process_free,sched_wakeup
+lttng enable-event -k --channel more-subbuf irq_softirq_entry,irq_softirq_raise,irq_softirq_exit
+lttng enable-event -k --channel more-subbuf irq_handler_entry,irq_handler_exit
+lttng enable-event -k --channel more-subbuf --syscall --all
+lttng enable-event -k --channel more-subbuf lttng_statedump_process_state,lttng_statedump_start,lttng_statedump_end,lttng_statedump_network_interface,lttng_statedump_block_device
+# Block I/O
+lttng enable-event -k --channel more-subbuf block_rq_complete,block_rq_insert,block_rq_issue
+lttng enable-event -k --channel more-subbuf block_bio_frontmerge,sched_migrate,sched_migrate_task
+# cpu related
+lttng enable-event -k --channel more-subbuf power_cpu_frequency
+# network events
+lttng enable-event -k --channel more-subbuf net_dev_queue,netif_receive_skb,net_if_receive_skb
+# timer events
+lttng enable-event -k --channel more-subbuf timer_hrtimer_start,timer_hrtimer_cancel,timer_hrtimer_expire_entry,timer_hrtimer_expire_exit
+# Additional events for wifi
+#lttng enable-event -k --channel more-subbuf --function netif_receive_skb_internal netif_receive_skb_internal
+#lttng enable-event -k --channel more-subbuf --function do_IRQ do_IRQ
