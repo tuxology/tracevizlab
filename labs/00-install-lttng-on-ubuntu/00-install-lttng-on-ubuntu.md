@@ -31,6 +31,11 @@ The package installation will have created a group called **tracing**. This grou
 ```
 $ sudo usermod -a -G tracing <user>
 ```
+Make sure to log off and log in the user to apply the groups modification. You can also start a shell logged in the tracing group using:
+
+```
+newgrp tracing
+```
 
 You are now ready to get a kernel trace. You may proceed to the [Record a kernel trace](../00-record-kernel-trace/00-record-kernel-trace.md) lab or install additional packages to get more tracing options. Most of them will be covered in later labs, so it is advised to install them now.
 
