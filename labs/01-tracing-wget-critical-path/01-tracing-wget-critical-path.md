@@ -22,7 +22,6 @@ $ lttng create
 $ lttng enable-event -k -a
 $ lttng start
 $ wget http://www.dorsal.polymtl.ca
-$ lttng stop
 $ lttng destroy
 ```
 
