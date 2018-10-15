@@ -1,0 +1,7 @@
+#!/bin/bash
+
+SITE=http://www.polymtl.ca
+
+wget $SITE
+sleep 1
+wget $SITE

@@ -1,0 +1,25 @@
+#!/bin/bash
+
+USER=$1
+SERVER=$2
+if [ -z "$USER" -o -z "$SERVER" ]
+then
+	echo "Usage: ./traceClientServer <ServerUserName> <ServerHostOrIp>"
+	echo ""
+	echo "Example: ./traceClientServer myUser 5.5.5.2"
+	exit 0
+fi
+
+TRACE_NAME="serverTrace"
+
+# Start tracing on the server side through ssh
+ssh $USER@$SERVER ./setupKernelTrace $TRACE_NAME
+ssh $USER@$SERVER lttng start
+# Record the client payload
+lttng-record-trace ./payload
+# Stop tracing the server
+ssh $USER@$SERVER lttng stop
+ssh $USER@$SERVER lttng destroy
+
+# Get the trace from the server
+rsync -avz $USER@$SERVER:~/lttng-traces/$TRACE_NAME ./
