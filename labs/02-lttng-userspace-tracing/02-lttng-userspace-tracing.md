@@ -61,6 +61,8 @@ In the previous sub-task, you generated a trace of the `ls` command that contain
 
 ![FlameGraph](screenshots/flameGraph.png "Trace Compass Flame Graph View")
 
+`For a more complete understanding of the difference between Flame Charts and Flame Graphs`, see [this additional document](FlameChartsVsFlameGraphs.md)
+
 * The *Function Durations Distribution View* is a bar graph that shows the number of function calls with respect to their duration. The count is using a logarithmic scale. In this example it shows that very few functions takes longer than 0.5 seconds.
 
 ![FunctionDurationDistribution](screenshots/functionDurationDistribution.png "Trace Compass Function Duration Distribution View")
