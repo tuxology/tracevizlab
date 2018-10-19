@@ -27,7 +27,7 @@ $ make
 You can generate the trace using the following command in the `coreutils/` directory:
 
 ```bash
-$ lttng-record-trace -p cyg_profile,libc ./src/ls -lR
+$ lttng-record-trace -p cyg_profile,libc ./src/ls -l
 ```
 
 or to manually create the trace, the following commands can be run
@@ -98,6 +98,8 @@ If you do not have the full file system of the target, you can just add the file
 
 ![SymbolRootDirectory](screenshots/configureSymbolsNameMapping.png "Trace Compass Configure Symbols Name Mapping")
 
+For this lab, if you did not produce the trace yourself on the machine used for viewing, you can add the executable file provided in the `traces/` directory.
+
 - - -
 
 #### Sub-task 4: Memory usage
@@ -112,7 +114,7 @@ The trace was recorded using the lttng-ust libc wrapper, to trace calls to libc 
 
 ![UstMemoryPotentialLeaks](screenshots/ustMemoryPotentialLeaks.png "Trace Compass UST Memory Potential Leaks View")
 
-* The *Potential Leaks vs time* view showss the same information as the *Potential Leaks* view, but as a scatter chart, so it's possible to visually see in time when exactly the memory was allocated.
+* The *Potential Leaks vs time* view shows the same information as the *Potential Leaks* view, but as a scatter chart, so it's possible to visually see in time when exactly the memory was allocated.
 
 *Note* The potential leaks views are not meant to detect real memory leak. For that, tools like [Valgrind](http://valgrind.org/) are better suited and will tell you the exact line of code where the leak happened. But sometimes, knowing where the leaked memory was allocated does not help with the why it was not freed. In those cases, seeing it here with the full execution trace (callstacks, path to/from allocation), can help better put it in context. Also, adding a kernel trace to it, could add information, for instance show a failed system call around that time which may give a hint as to why it was not deallocated.
 
