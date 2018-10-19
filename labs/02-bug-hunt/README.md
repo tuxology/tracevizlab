@@ -61,4 +61,4 @@ You should now be able to use the notions learned in the previous labs to find t
 
 There are 4 separate issues in this example.
 
-When you think you have find them all, you can look [at the solution](BugHuntResults.md).
+When you think you have found them all, you can look [at the solution](BugHuntResults.md).
