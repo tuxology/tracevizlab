@@ -20,7 +20,7 @@ $ make
 $ sudo make install
 ```
 
-After installation you will need to add `extension=lttng.so` to your primary *php.ini* file. To do so, run php -m in the command line to check if lttng is among the installed php extensions. If it is not there, you should manually enable it. 
+After installation you will need to add `extension=lttng.so` to your primary *php.ini* file. To do so, run php -m in the command line to check if lttng is among the installed php extensions. If it is not there, you should manually enable it.
 
 ```bash
 $ php --ini
@@ -31,7 +31,7 @@ Open the php.ini with an editor, search for 'Exentions' (or 'Dynamic Extensions'
 extension=lttng.so
 ```
 
-Now run the php -m (or php -m | grep lttng) in the command line and this time you should see the lttng in the installed and enabled modules 
+Now run the php -m (or php -m | grep lttng) in the command line and this time you should see the lttng in the installed and enabled modules
 ```bash
 # To see if lttng extension is loaded
 $ php -m | grep lttng
@@ -68,7 +68,12 @@ The `trace-stop` should display the events recorded, here is a sample of what it
 #### Sub-task 3: Install the Generic Callstack add-on
 
 To visualize the call stack of an application in a flamegraph you need to install the *Generic Callstack (Incubation)* add-on from the *Tools > Add-ons* menu.
+
 ![Addons](screenshots/addons.png "Addons")
+
+In the *Install* wizard, you may check the *Generic Callstack (Incubator)* feature. Then click *Finish*
+
+![AddonsGenericCallstack](screenshots/genericCallStackAddons.png "Addons GenericCallstack")
 
 - - -
 
