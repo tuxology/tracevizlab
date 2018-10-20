@@ -37,8 +37,7 @@ $ lttng enable-channel u -u --subbuf-size 1024K --num-subbuf 8
 $ lttng enable-event -c u -u lttng_ust_cyg_profile*,lttng_ust_statedump*
 $ lttng add-context -c u -u -t vpid -t vtid
 $ lttng start
-$ LD_PRELOAD=liblttng-ust-cyg-profile.so,liblttng-ust-lib-wrapper.so ./src/ls -lR
-$ lttng stop
+$ LD_PRELOAD=liblttng-ust-cyg-profile.so,liblttng-ust-lib-wrapper.so ./src/ls -l
 $ lttng destroy
 ```
 

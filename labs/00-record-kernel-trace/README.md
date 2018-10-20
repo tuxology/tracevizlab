@@ -68,7 +68,6 @@ $ ls -alt
 Then stop and destroy the tracing session.
 
 ```
-$ lttng stop
 $ lttng destroy
 ```
 

@@ -70,9 +70,10 @@ TRACE_NAME = serverTrace
 ssh $USER@$SERVER ./setupKernelTrace $TRACE_NAME
 ssh $USER@$SERVER lttng start
 # Record the client payload
-[./]lttng-record-trace ./payload
+# If the client is a machine with wifi, replace this call to a full manual setup
+# of the kernel trace and uncomment the lines for the additional kernel --function lines
+lttng-record-trace ./payload
 # Stop tracing the server
-ssh $USER@$SERVER lttng stop
 ssh $USER@$SERVER lttng destroy
 
 # Get the trace from the server
