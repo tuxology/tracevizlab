@@ -8,7 +8,7 @@ In this lab, you will learn how to trace a php program and visualize the executi
 
 ### Task 1: Configure Lttng extension
 
-You can build and install the LTTng extension from source which is straightforward:
+Unlike python or Java, there is no agent in PHP that allows to insert tracepoints in php code and get events in lttng. But with an extension, it is possible to generate events for all php function entries and exits, just like the lttng-ust-cyg-profile for C/C++ applications. You can build and install this extension from source which is straightforward:
 
 ```bash
 $ git clone https://github.com/naser/LTTng-php-tracing-module.git
@@ -20,18 +20,18 @@ $ make
 $ sudo make install
 ```
 
-After installation you will need to add `extension=lttng.so` to your primary *php.ini* file. To do so, run php -m in the command line to check if lttng is among the installed php extensions. If it is not there, you should manually enable it.
+After installation you will need to add `extension=lttng.so` to your primary *php.ini* file. To do so, run `php -m` in the command line to check if lttng is among the installed php extensions. If it is not there, you should manually enable it.
 
 ```bash
 $ php --ini
 ```
 
-Open the php.ini with an editor, search for 'Exentions' (or 'Dynamic Extensions') within the ini file and add this line there:
+Open the `php.ini` with an editor, search for 'Exentions' (or 'Dynamic Extensions') within the ini file and add this line there:
 ```
 extension=lttng.so
 ```
 
-Now run the php -m (or php -m | grep lttng) in the command line and this time you should see the lttng in the installed and enabled modules
+Now run the `php -m` (or `php -m | grep lttng`) in the command line and this time you should see the lttng in the installed and enabled modules
 ```bash
 # To see if lttng extension is loaded
 $ php -m | grep lttng
@@ -42,11 +42,13 @@ lttng
 
 ### Task 2: Record a php trace
 
-There are two scripts called `trace-start` and `trace-stop` that make the process of recording a trace much easier. You can record a trace by running the `trace-start` script, running your php code and then running `trace-stop`:
+We provided a simple PHP script with this lab called `simplePhpScript.php` which contains an implementation of quicksort and sorts arrays in average or worst case. We can trace this php code with the following script:
+
 ```bash
-$ lttng-record-trace -p php php script.php
+$ lttng-record-trace -p php php simplePhpScript.php
 ```
-The `trace-stop` should display the events recorded, here is a sample of what it should look like:
+
+If you use `babeltrace` to read the trace, the output should look like this:
 ```
 [15:52:23.512328851] (+0.001567556) naserez-desktop ust_php:request_entry: { cpu_id = 4 }, { vtid = 26387 }, { path = "/usr/local/apache2/htdocs/simple.php", uri = "-", method = "-", querystring = "(null)" }
 [15:52:23.512378022] (+0.000049171) naserez-desktop ust_php:compile_file_entry: { cpu_id = 4 }, { vtid = 26387 }, { filename = "simple.php", type = 8 }
@@ -63,6 +65,7 @@ The `trace-stop` should display the events recorded, here is a sample of what it
 [15:52:23.512442803] (+0.000000347) naserez-desktop ust_php:execute_exit: { cpu_id = 4 }, { vtid = 26387 }, { filename = "/usr/local/apache2/htdocs/simple.php", lineno = 3 }
 [15:52:23.512444673] (+0.000001870) naserez-desktop ust_php:request_exit: { cpu_id = 4 }, { vtid = 26387 }, { path = "/usr/local/apache2/htdocs/simple.php", uri = "-", method = "-", querystring = "(null)" }
 ```
+
 - - -
 
 ### Task 3: Install the Generic Callstack add-on
@@ -103,3 +106,10 @@ In the trace it can easily be seen that the second execution is much faster and 
 ### Conclusion
 
 In the lab you learned how to trace a php program, and how to setup *Trace Compass* to visualize this PHP User space trace in a Flame Chart. You should now be able to use these tools to better understand the execution of an application, and visualize what units of code have to be refactored to obtain better performance.
+
+- - -
+
+### References
+
+* [PHP extension for lttng tracing](https://github.com/naser/LTTng-php-tracing-module.git)
+* [More documentation on XML analyses](http://archive.eclipse.org/tracecompass/doc/stable/org.eclipse.tracecompass.doc.user/Data-driven-analysis.html#Data_driven_analysis)

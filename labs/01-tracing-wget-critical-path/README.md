@@ -104,4 +104,4 @@ With the critical path analysis, you can see that the second execution was much 
 
 ### Conclusion
 
-In the lab, you've recorded two traces of two executions of wget, opened them in Trace Compass, showed the critical path of the wget process and compared the executions.
+In the lab, you've learned how to use Trace Compass to find and compare the critical path of some wget process executions. The critical path can help find the root cause of why a process is particularly slow, why it was blocked.

@@ -47,7 +47,8 @@ An empty file, with no content yet would look like this:
     [...]
 </tmfxml>
 ```
-In our case we want a callstack which has two elements:
+
+In our case we want a `callstack` which has two elements:
 * The `callstackGroup` have metadata telling where in the state system, the callstack state will be stored.
 * The `pattern` is the xml element telling Trace Compass how to parse a pattern of trace events in order to build one or multiple state machines. These state machines are used to gain state information of a process, thread or program, from the events.
 
@@ -64,8 +65,8 @@ In our case we want a callstack which has two elements:
 ```
 
 In the pattern element we have 3 elements:
-* The `head` which contains the traceType that tells Trace Compass which trace type this analysis apply to, in this case this analysis applies to ust traces. The label indicates the name under which the views will be displayed in the project explorer.
-* The `location` indicates how each thread state is displayed in the views.
+* The `head` which contains the traceType that tells Trace Compass which trace type this analysis applies to, in this case this analysis applies to ust traces. The label indicates the name under which the views will be displayed in the project explorer.
+* The `location` elements are shortcuts indicates how each thread state is displayed in the views. Locations can be referenced by state attributes or state values.
 * The `patternHandler` is where `test`, `action` and `fsm` elements will be defined.
 ```XML
 <head>
@@ -157,13 +158,13 @@ After importing the trace into Trace Compass, you need to apply an XML analysis 
 
 ![ApplyAndClose](screenshots/applyClose.png "Trace Compass Apply and Close XML")
 
-Once these actions are done, you can open the *Flame Graph View*, under the `Python Views`, to visualize the different queries that have been executed on the python server.
+Once these actions are done, you can open the `Flame Chart` View, under the `Python Views`, to visualize the different queries that have been executed on the python server.
 
 - - -
 
 ### Task 5 (optional): Debugging the state system
 
-Sometimes, when working with XML analysis, things don't work out the way you want them to. One very useful tool to use in this case is the *State System Explorer View*. This view displays the state internal values with respect to time for each opened trace in Trace Compass. It can be opened via the *Window* > *Show View* menu and searching for *State System Explorer*.
+Sometimes, when working with XML analysis, things don't work out the way you want them to. One very useful tool to use in this case is the `State System Explorer` View. This view displays the internal values of the state system, the backend used to store the data of the analyses. It shows how the values of the states change in time, and you can thus relate it with events. Did an event trigger the expected state change? What value is really stored at a certain time. It can be opened via the *Window* > *Show View* menu and searching for `State System Explorer`.
 
 ![StateSystemExplorer](screenshots/stateSystemExplorer.png "Trace Compass State System Explorer")
 
@@ -171,10 +172,11 @@ Sometimes, when working with XML analysis, things don't work out the way you wan
 
 ### Conclusion
 
-In this tutorial, you wrote some python code to create LTTng events, then you traced that application to analyze its behaviour. You also wrote an XML analysis file to make Trace Compass able to parse correctly your python events. Finally you used Trace Compass in order to display the state of your applicaton with respect to time.
+In this tutorial, you wrote some simple python code that creates LTTng events, then you traced that application to analyze its behaviour. We've seen that even though the events recorded in the application are not builtin events, it is still possible to analyze them in Trace Compass with the help of some data driven analyses, to create your own states and show your own views. This is very useful because most userspace applications, unless traced with one of the provided lttng-ust preloaded libraries, will define their own events, following their own logic. XML analyses can be defined for your specific application, and then used for all traces of this application.
 
 - - -
 
-References
+### References
 
-[More documentation on XML analyses](http://archive.eclipse.org/tracecompass/doc/stable/org.eclipse.tracecompass.doc.user/Data-driven-analysis.html#Data_driven_analysis)
+* [More documentation on XML analyses](http://archive.eclipse.org/tracecompass/doc/stable/org.eclipse.tracecompass.doc.user/Data-driven-analysis.html#Data_driven_analysis)
+* [Documentation on tracing python applications](https://lttng.org/docs/v2.10/#doc-python-application)
