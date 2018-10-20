@@ -1,4 +1,4 @@
-### Tracing php in userspace
+## Tracing php in userspace
 
 In this lab, you will learn how to trace a php program and visualize the execution of a program in a flame graph.
 
@@ -6,7 +6,7 @@ In this lab, you will learn how to trace a php program and visualize the executi
 
 - - -
 
-#### Sub-task 1: Configure Lttng extension
+### Task 1: Configure Lttng extension
 
 You can build and install the LTTng extension from source which is straightforward:
 
@@ -40,7 +40,7 @@ lttng
 
 - - -
 
-#### Sub-task 2: Record a php trace
+### Task 2: Record a php trace
 
 There are two scripts called `trace-start` and `trace-stop` that make the process of recording a trace much easier. You can record a trace by running the `trace-start` script, running your php code and then running `trace-stop`:
 ```bash
@@ -65,7 +65,7 @@ The `trace-stop` should display the events recorded, here is a sample of what it
 ```
 - - -
 
-#### Sub-task 3: Install the Generic Callstack add-on
+### Task 3: Install the Generic Callstack add-on
 
 To visualize the call stack of an application in a flamegraph you need to install the *Generic Callstack (Incubation)* add-on from the *Tools > Add-ons* menu.
 
@@ -77,7 +77,7 @@ In the *Install* wizard, you may check the *Generic Callstack (Incubator)* featu
 
 - - -
 
-#### Sub-task 4: Import the trace into Trace Compass
+### Task 4: Import the trace into Trace Compass
 
 After importing the trace (the [following tutorial](../01-trace-navigation-in-tracecompass.md) explains how to do that and how to navigate in the trace), you need to add an analysis XML file to enable php callstack analysis on TraceCompass.
 
@@ -89,7 +89,7 @@ After opening the *Manage XML analyses files* window you need to click on the `I
 
 - - -
 
-#### Sub-task 5: Opening the Flame Chart
+### Task 5: Opening the Flame Chart
 
 Now that everything is setup you should be able to open the *Flame Chart* in the *Project Explorer View* in *Views > PHP Callstack View > Flame Chart (incubator)*. If you ran the script.php or opened the trace given in this lab, it should look like this:
 
@@ -100,6 +100,6 @@ In the trace it can easily be seen that the second execution is much faster and 
 
 - - -
 
-#### Conclusion
+### Conclusion
 
 In the lab you learned how to trace a php program, and how to setup *Trace Compass* to visualize this PHP User space trace in a Flame Chart. You should now be able to use these tools to better understand the execution of an application, and visualize what units of code have to be refactored to obtain better performance.

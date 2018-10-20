@@ -1,4 +1,4 @@
-### LTTng Userspace Tracing
+## LTTng Userspace Tracing
 
 In this lab, you will learn to compile for tracing and analyze C/C++ programs, using LTTng UST. We will see the various analyzes available with the builtin lttng userspace libraries.
 
@@ -6,7 +6,7 @@ In this lab, you will learn to compile for tracing and analyze C/C++ programs, u
 
 - - -
 
-#### Sub-task 1: Compiling and tracing `ls` from coreutils
+### Task 1: Compiling and tracing `ls` from coreutils
 
 In this lab you will use the coreutils package to compile and trace the `ls` command. In order to do that we need the source code for this package which can be download with git:
 
@@ -48,9 +48,9 @@ These tracing commands will trace 2 types of events:
 
 - - -
 
-#### Sub-task 2: Visualizing cyg profile traces
+### Task 2: Visualizing cyg profile traces
 
-In the previous sub-task, you generated a trace of the `ls` command that contains all the function calls. You can open this trace on Trace Compass and you should see in the *Project Explorer View*, under Views, the *LTTng-UST CallStack* tree view. Under this, four views are present:
+In the previous task, you generated a trace of the `ls` command that contains all the function calls. You can open this trace on Trace Compass and you should see in the *Project Explorer View*, under Views, the *LTTng-UST CallStack* tree view. Under this, four views are present:
 
 * The *Flame Chart View* shows the state of the stack at all moments during the trace. That view shows for all threads of the application, the functions that were called, so it's easy to see who called who and when. If you do not see human-readable names for the functions, see the next section of this lab.
 
@@ -72,7 +72,7 @@ In the previous sub-task, you generated a trace of the `ls` command that contain
 
 - - -
 
-#### Sub-task 3: Understanding the symbols
+### Task 3: Understanding the symbols
 
 The events used to populate this view are lttng_ust_cyg_profile[\_fast]:func_entry and lttng_ust_cyg_profile[\_fast]:func_exit. In the events fields, there's the 'addr' field that is used to identify the function being called. Depending on which machine you are now viewing this trace, the one where the trace was taken or not, the flame chart view will display the human readable name of the function or the cryptic 'addr' field.
 
@@ -101,7 +101,7 @@ For this lab, if you did not produce the trace yourself on the machine used for 
 
 - - -
 
-#### Sub-task 4: Memory usage
+### Task 4: Memory usage
 
 The trace was recorded using the lttng-ust libc wrapper, to trace calls to libc functions for memory allocation/deallocation. With the trace opened in Trace Compass, under *Views*, you may expand the *Ust Memory* analysis and see the views for this analysis.
 
@@ -119,6 +119,6 @@ The trace was recorded using the lttng-ust libc wrapper, to trace calls to libc 
 
 - - -
 
-#### Conclusion
+### Conclusion
 
 In the lab, you have compiled a program with tracing helpers, traced the `ls` command and saw the builtin views available for `LTTng UST` traces, ie the *LTTng-UST CallStack* and the *UST memory* views. You should now be able to analyze the execution of an application in details in terms of memory usage and function calls.

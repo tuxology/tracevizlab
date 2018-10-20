@@ -1,4 +1,4 @@
-### Trace Navigation in Trace Compass
+## Trace Navigation in Trace Compass
 
 In this lab, you will learn to open a trace in Trace Compass and navigate the various views available. We will see in future labs what each of those views mean and what we can make of it.
 
@@ -6,7 +6,7 @@ In this lab, you will learn to open a trace in Trace Compass and navigate the va
 
 - - -
 
-#### Sub-task 1: Opening a trace
+### Task 1: Opening a trace
 
 Upon opening Trace Compass, there is a default project named *Tracing* in the ``Project Explorer``, expand it and right-click on the *Traces* folder. Select *Import...* to open the *Trace Import* wizard.
 
@@ -22,7 +22,7 @@ A trace named kernel will show up under the *Traces* folder. You can double-clic
 
 - - -
 
-#### Sub-task 2: Navigate in time graph views
+### Task 2: Navigate in time graph views
 
 The main view that shows when opening a kernel trace is the ``Resources`` view, showing CPUs and interrupts on the left table and statuses on the right. The scale at the top shows the time in the trace. This type of view is called a *time graph view*. Make sure this view is the one with focus by clicking on the title tab.
 
@@ -40,7 +40,7 @@ Time selection is done with the mouse, by ``left-clicking`` on a timestamp to se
 
 - - -
 
-#### Sub-task 3: Filter out some entries in time graph views
+### Task 3: Filter out some entries in time graph views
 
 The ``Resources`` view shows for each CPU 3 lines: the running thread, the CPU state and its frequency. Let's say we want to hide the frequency lines from the view.
 
@@ -50,7 +50,7 @@ Click on the ``Show View Filters`` icon at the left of the toolbar and uncheck t
 
 - - -
 
-#### Sub-task 4: Change the color of the states
+### Task 4: Change the color of the states
 
 Views like the ``Resources`` view have built-in colors for some of the states that are displayed. For instance, the **Running** state is green, **System call** is blue, **Idle** is green and the line is thinner.
 
@@ -62,7 +62,7 @@ In the following screenshot, we've changed the color and width of the **System c
 
 - - -
 
-#### Sub-task 5: Use the histogram to navigate the trace
+### Task 5: Use the histogram to navigate the trace
 
 There's a view at the bottom of the window called ``Histogram``. This view shows the density of events in time, so you can see in one glance where in the trace the most events occurred. At the bottom is the full time range of the trace and above is the window range, ie the visible range in the other views. This view can be used to navigate the trace, as you can change selection and visible range in both sections of the view.
 
@@ -74,7 +74,7 @@ You can play with the visible and selection ranges with this view and observe ho
 
 - - -
 
-#### Sub-task 6: Open more analyses and views
+### Task 6: Open more analyses and views
 
 In the ``Project Explorer`` view, the trace we are analyzing can be expanded. Under it are 3 elements: ``Views``, ``External Analyses`` and ``Reports``. The analyses we will be using in this tutorial are under the ``Views`` element, so let's expand it.
 
@@ -90,7 +90,7 @@ We have previously seen the *time graph views*. With the new views just opened, 
 
 - - -
 
-#### Sub-task 7: Explore the statistics views
+### Task 7: Explore the statistics views
 
 Let's now look at the ``System Call Latency Statistics`` view. It shows statistics on the times taken to execute system calls by the various processes in the trace, for each system call. We have the minimum and maximum time taken, the average time and the standard deviation, the number of calls and the total spent in that kind of system call.
 
@@ -102,7 +102,7 @@ Now that you have a time range selected, you can scroll up (or down depending on
 
 - - -
 
-#### Sub-task 8: Navigate in XY Views
+### Task 8: Navigate in XY Views
 
 Let's now look at one the XY views, say the ``CPU Usage`` view. Click on the tab of the view to put it into focus. This view is split in two, with a checkbox tree on the left side and an XY chart on the right side. If the view is too small, you can ``double-click on the tab`` of the view to make it full window size.
 
@@ -118,6 +118,6 @@ Double-clicking on the tab again will reduce the view to its original size.
 
 - - -
 
-#### Conclusion
+### Conclusion
 
 In the lab, you've opened a trace in Trace Compass and should now know what types of views are available and some basic functionnalities and navigation options with each type. You should also be able to find the various views available for a trace and navigate through those views' ranges.

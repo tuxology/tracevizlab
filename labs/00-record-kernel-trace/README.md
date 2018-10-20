@@ -1,4 +1,4 @@
-### Record a kernel trace of package update
+## Record a kernel trace of package update
 
 In this lab, you will obtain a kernel trace that can then be analyzed by various visualization tools. This task
 
@@ -6,7 +6,7 @@ In this lab, you will obtain a kernel trace that can then be analyzed by various
 
 - - -
 
-#### Sub-task 1: Tracing session daemon
+### Task 1: Tracing session daemon
 
 In order to trace with lttng, one first needs to have the tracing session daemon running as root. If you installed from packages, it should already be running. You can verify by running
 
@@ -28,7 +28,7 @@ $ sudo lttng-sessiond -d
 
 - - -
 
-#### Sub-task 2: Get a kernel trace
+### Task 2: Get a kernel trace
 
 First, you need to create a tracing session. This session can be configured with various events.
 
@@ -73,15 +73,15 @@ $ lttng destroy
 
 - - -
 
-#### Sub-task 3: Use a utility script to trace
+### Task 3: Use a utility script to trace
 
-The [lttng-utils](https://github.com/tahini/lttng-utils) script can be used to trace instead of the commands of the previous sub-task. First, get and install the script
+The [lttng-utils](https://github.com/tahini/lttng-utils) script can be used to trace instead of the commands of the previous task. First, get and install the script
 
 ```
 $ sudo pip3 install --upgrade git+git://github.com/tahini/lttng-utils.git@master
 ```
 
-See the README for more install options. Once installed, you can just run the trace record script with the command to run. For instance, to reproduce the same result as the previous sub-task, simply do
+See the README for more install options. Once installed, you can just run the trace record script with the command to run. For instance, to reproduce the same result as the previous task, simply do
 
 ```
 $ lttng-record-trace ls -alt
@@ -91,7 +91,7 @@ The trace will be saved in the current directory, unless you specify an ``--outp
 
 - - -
 
-#### Sub-task 4: Retrieve the trace
+### Task 4: Retrieve the trace
 
 If the trace was not taken on the machine on which trace visualization will happen (for example, in a VM provided by the instructors), then the trace needs to be brought on the trace viewing machine. An LTTng trace consists in a directory with a metadata files, one tracing file and one index file for each CPU traced. To retrieve this, rsync is the best command
 
@@ -101,6 +101,6 @@ $ rsync -avz <user>@<traced.host>:</path/to/trace/dir> traces/
 
 - - -
 
-#### References
+### References
 
 [LTTng user documentation](http://lttng.org/docs)

@@ -1,4 +1,4 @@
-### Installing LTTng on Ubuntu
+## Installing LTTng on Ubuntu
 
 In this lab, you will install lttng on an Ubuntu machine
 
@@ -6,7 +6,7 @@ In this lab, you will install lttng on an Ubuntu machine
 
 - - -
 
-#### Task 1: Install lttng for kernel tracing
+### Task 1: Install lttng for kernel tracing
 
 First install the lttng PPA repository:
 
@@ -41,7 +41,7 @@ You are now ready to get a kernel trace. You may proceed to the [Record a kernel
 
 - - -
 
-#### Task 2: Install LTTng's additional packages for different purposes
+### Task 2: Install LTTng's additional packages for different purposes
 
 To trace userspace applications with some builtin features, for example function entry and exit, application memory allocations and other calls to the libc library:
 
@@ -69,7 +69,7 @@ $ sudo apt-get install python3-lttngust
 
 - - -
 
-#### References
+### References
 
 * [LTTng website](http://lttng.org)
 * [Installation instructions for Ubuntu](https://lttng.org/docs/v2.10/#doc-ubuntu)

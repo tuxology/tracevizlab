@@ -1,4 +1,4 @@
-### Bug Hunt
+## Bug Hunt
 
 In this lab, you'll be invited to find issues that have been purposefully introduced in an otherwise quite simple and straightforward program: `cat`.
 
@@ -6,7 +6,7 @@ In this lab, you'll be invited to find issues that have been purposefully introd
 
 - - -
 
-#### Sub-task 1: Set Up and Run the Experiment
+### Task 1: Set Up and Run the Experiment
 
 The `files/` directory of this lab contains a file named `cat.c`, which has been modified from coreutils to introduce some issues visible with tracing. **Do not look at the file!**. It is small enough that the issues will be obvious.
 
@@ -41,7 +41,7 @@ The resulting trace will be in a `cat-k-u-(*)` directory.
 
 - - -
 
-#### Sub-task 2: Import in TraceCompass
+### Task 2: Import in TraceCompass
 
 To import traces in TraceCompass, you can right-click or your project's `Traces` folder, or click on the *File* menu, and select *Import...*. This will open the import wizard. You must select the directory where the traces are located, so the `cat-k-u-(*)` directory.
 
@@ -55,7 +55,7 @@ The traces will be imported. Then expand the *Experiments* folder to see the exp
 
 - - -
 
-#### Sub-task 3: Analyze the trace
+### Task 3: Analyze the trace
 
 You should now be able to use the notions learned in the previous labs to find the issues with the `cat` process. You can use all the kernel or userspace views available.
 

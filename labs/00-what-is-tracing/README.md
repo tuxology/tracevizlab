@@ -1,10 +1,10 @@
-### What/When/Why Tracing
+## What/When/Why Tracing
 
 Before going further in this tutorial and starting with the labs, let's define tracing: what it is, when to use it and how it compares with other tools.
 
 - - -
 
-#### What Is Tracing?
+### What Is Tracing?
 
 `Tracing` consists in recording specific information during a program's or operating system's execution to better understand what is happening on the system. The simplest form of tracing is what we all learn in programming 101: printf!
 
@@ -42,7 +42,7 @@ The `tracing` we're discussing here is high speed, low overhead tracing. With su
 
 - - -
 
-#### When To Trace?
+### When To Trace?
 
 Tracing is just another tool in the developer or sysadmin's toolbox. It is most often not the first one to use. But in some situations, in can be very useful, regardless of if the application to trace is instrumented or not (see next section).
 
@@ -66,7 +66,7 @@ When these tools fails though, `tracing` is there:
 
 - - -
 
-#### What To Trace? Application Vs System Tracing
+### What To Trace? Application Vs System Tracing
 
 So, what do we trace? Typically, applications have log statements in various locations, associated with a log level. Statements with high verbosity can be considered tracing statements. Log verbosity can be modified, either at system start or at runtime. Sometimes, various log handlers can be hooked to the application, per verbosity level. While file handlers are very current, other type of logging can be done. Sometimes, it can be defined at compile-time, `qemu` for instance, can compile some statements with various backends: `systemtap`, `lttng UST`, `simple` or `stderr`.
 
@@ -82,6 +82,6 @@ In this tutorial, we will focus only on linux, but Windows also has its tracing 
 
 - - -
 
-#### How To Trace?
+### How To Trace?
 
 The rest of this tutorial will answer that question and more!

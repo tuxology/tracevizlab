@@ -1,4 +1,4 @@
-### Installing Trace Compass
+## Installing Trace Compass
 
 In this lab, you will install Trace Compass on the machine you'll use to view the traces.
 
@@ -6,7 +6,7 @@ In this lab, you will install Trace Compass on the machine you'll use to view th
 
 - - -
 
-Sub-task 1: Install Java > 8
+### Task 1: Install Java > 8
 
 Trace Compass is an Eclipse-based application and needs at least Java 8 to run. Make sure you have the correct version.
 
@@ -44,7 +44,7 @@ Press <enter> to keep the current choice[*], or type selection number: **2**
 
 - - -
 
-Sub-task 2: Get Trace Compass
+### Task 2: Get Trace Compass
 
 Go to the [Trace Compass web site](http://tracecompass.org) and click on the big green button to download the latest release of Trace Compass. Then extract the content of the downloaded archive and simply start trace-compass from the extracted folder
 
@@ -52,10 +52,9 @@ Go to the [Trace Compass web site](http://tracecompass.org) and click on the big
 $ cd ~/Downloads
 $ tar xf trace-compass-3.3.0-20180307-1910-linux.gtk.x86_64.tar.gz
 $ cd trace-compass
-$ ./tracecompass 
+$ ./tracecompass
 ```
 
 You should reach an empty workspace. And voilà! You are now ready to import and analyze traces with Trace Compass. Proceed to other labs.
 
 ![empty workspace](screenshots/emptyWorkspace.png "Trace Compass empty workspace")
-

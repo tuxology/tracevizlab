@@ -1,4 +1,4 @@
-### Tracing wget and showing the critical path
+## Tracing wget and showing the critical path
 
 In this lab, you will learn to view the critical path of a process, compare two executions of the same program and understand what is happening behind the scenes. In a program, a task may wait for the result of another task, these wait dependencies can be seen using the critical path analysis. This analysis highlights the active path from the trace and is displayed in the *Critical Flow View*.
 
@@ -8,7 +8,7 @@ In this lab, you will learn to view the critical path of a process, compare two 
 
 - - -
 
-#### Sub-task 1: Recording two executions of wget
+### Task 1: Recording two executions of wget
 
 You need to save two traces of the same wget instruction. You can either use [lttng-record-trace](https://github.com/tahini/lttng-utils)
 or use lttng directly to trace the command:
@@ -27,15 +27,15 @@ $ lttng destroy
 
 - - -
 
-#### Sub-task 2: Open two traces in the same project
+### Task 2: Open two traces in the same project
 
-Open the two traces created in the previous sub-task. You can add both by simply selecting the parent folder of both traces when importing trace files.
+Open the two traces created in the previous task. You can add both by simply selecting the parent folder of both traces when importing trace files.
 
 ![ImportMultipleTrace](screenshots/importMultipleTrace.png "Trace Compass Import Multiple Traces")
 
 - - -
 
-#### Sub-task 3: An Overview of Trace Compass
+### Task 3: An Overview of Trace Compass
 
 After opening the *Kernel* perspective of one of the trace, you can see the *Control Flow View* by clicking on the Control Flow tab beside the *Resources* tab.
 
@@ -60,7 +60,7 @@ In this lab, you will use the critical path to analyze the differences between t
 
 - - -
 
-#### Sub-task 4: Comparing two views
+### Task 4: Comparing two views
 
 To compare two critical paths, you need two *Critical Flow View* from the two traces you have. You need to pin the view to one trace then in the view menu (shown in the screenshot) select `new view, pinned to <second trace>`.
 
@@ -70,7 +70,7 @@ To compare two critical paths, you need two *Critical Flow View* from the two tr
 
 - - -
 
-#### Sub-task 5: Search for a process in the control flow and show critical path
+### Task 5: Search for a process in the control flow and show critical path
 
 In the *Control Flow View*, to follow one process, you can search for the process wget by hitting the shortcut `ctrl-f` and then typing the name of the process.
 
@@ -86,7 +86,7 @@ You should then replicate this for the other trace and move one of the views to 
 
 - - -
 
-#### Sub-task 6: Critical path analysis
+### Task 6: Critical path analysis
 
 ![CriticalPaths](screenshots/criticalPaths.png "Trace Compass Critical Paths")
 
@@ -102,6 +102,6 @@ With the critical path analysis, you can see that the second execution was much 
 
 - - -
 
-#### Conclusion
+### Conclusion
 
 In the lab, you've recorded two traces of two executions of wget, opened them in Trace Compass, showed the critical path of the wget process and compared the executions.

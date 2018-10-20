@@ -1,4 +1,4 @@
-### Python XML analysis
+## Python XML analysis
 
 In this lab, you will learn to trace a python application using lttng library `lttngust`, write an xml analysis file to create your own view, and visualize your application with your own tracepoints.
 
@@ -6,7 +6,7 @@ In this lab, you will learn to trace a python application using lttng library `l
 
 - - -
 
-#### Sub-task 1: Writing the code
+### Task 1: Writing the code
 
 For this lab, you will be using a web server example using Flask. This server makes use of the `lttngust` library. To use the lttng ust agent you have to import the LTTng-UST Python agent:
 
@@ -34,9 +34,9 @@ if __name__ == "__main__":
 
 - - -
 
-#### Sub-task 2: Writing the XML analysis
+### Task 2: Writing the XML analysis
 
-A small explanation on how to write a stack trace xml analysis will be provided here however the documentation on how to write an XML analysis is available in the [Trace Compass user documentation](http://archive.eclipse.org/tracecompass/doc/stable/org.eclipse.tracecompass.doc.user/Data-driven-analysis.html#Data_driven_analysis). 
+A small explanation on how to write a stack trace xml analysis will be provided here however the documentation on how to write an XML analysis is available in the [Trace Compass user documentation](http://archive.eclipse.org/tracecompass/doc/stable/org.eclipse.tracecompass.doc.user/Data-driven-analysis.html#Data_driven_analysis).
 
 The XML analysis is used to generate a state system which can track the states of different elements over the duration of a trace using the different events and their properties.
 An empty file, with no content yet would look like this:
@@ -118,7 +118,7 @@ Here is the XML that defines the finite state machine (FSM). In this case a requ
 
 - - -
 
-#### Sub-task 3: Tracing the python application
+### Task 3: Tracing the python application
 
 To run the server script given in this lab you need to install the lttngust and flask libraries.
 ```bash
@@ -149,7 +149,7 @@ If the server takes too long (5 seconds or more), it is possible that the LTTng 
 
 - - -
 
-#### Sub-task 4: Running the XML analysis
+### Task 4: Running the XML analysis
 
 After importing the trace into Trace Compass, you need to apply an XML analysis on a ust trace to enable certain views to display the state you want to analyze. To enable the XML analysis in your tracing project, you need to right click on the folder above your trace in the project explorer. Then select `Manage XML analyses...`, import your xml file, apply and close the window.
 
@@ -161,7 +161,7 @@ Once these actions are done, you can open the *Flame Graph View*, under the `Pyt
 
 - - -
 
-#### Sub-task 5 (optional): Debugging the state system
+### Task 5 (optional): Debugging the state system
 
 Sometimes, when working with XML analysis, things don't work out the way you want them to. One very useful tool to use in this case is the *State System Explorer View*. This view displays the state internal values with respect to time for each opened trace in Trace Compass. It can be opened via the *Window* > *Show View* menu and searching for *State System Explorer*.
 
@@ -169,6 +169,12 @@ Sometimes, when working with XML analysis, things don't work out the way you wan
 
 - - -
 
-#### Conclusion
+### Conclusion
 
 In this tutorial, you wrote some python code to create LTTng events, then you traced that application to analyze its behaviour. You also wrote an XML analysis file to make Trace Compass able to parse correctly your python events. Finally you used Trace Compass in order to display the state of your applicaton with respect to time.
+
+- - -
+
+References
+
+[More documentation on XML analyses](http://archive.eclipse.org/tracecompass/doc/stable/org.eclipse.tracecompass.doc.user/Data-driven-analysis.html#Data_driven_analysis)
