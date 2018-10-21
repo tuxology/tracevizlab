@@ -1,10 +1,10 @@
-### Record a Kernel Trace With Ftrace
+## Record a Kernel Trace With Ftrace
 
 While this tutorial will mainly use LTTng for tracing, as it can provide both kernel and userspace traces, synchronized on the same time reference, it is also possible to get the same results for kernel tracing using ftrace. Ftrace has the advantage that it is builtin the linux kernel and many people are used to it. In this lab, you will obtain a kernel trace that can then be analyzed by the visualization tools, using ftrace and trace-cmd.
 
 - - -
 
-#### Sub-Task 1: Install trace-cmd
+### Task 1: Install trace-cmd
 
 `trace-cmd` is a helper application for ftrace that does not require to directly set values in debugfs in order to trace. It is available as a package in most linux distributions, so to install, just ask your preferred package manager, for instance
 
@@ -14,7 +14,7 @@ sudo apt-get install trace-cmd
 
 - - -
 
-#### Sub-Task 2: Record a trace with trace-cmd
+### Task 2: Record a trace with trace-cmd
 
 The following commands will enable the events necessary to take advantage of a maximum of analyses in Trace Compass, without generating a trace too large. It is the equivalent of the trace generated in the lttng tutorial.
 
@@ -32,7 +32,7 @@ ls -al
 
 - - -
 
-#### Sub-Task 3: Get the Trace For TraceCompass
+### Task 3: Get the Trace For TraceCompass
 
 TraceCompass supports ftrace traces in textual raw format. To obtain a file that can be imported in Trace Compass, you execute the following command:
 
@@ -46,7 +46,7 @@ You can also import the binary trace directly, but only if `trace-cmd` is availa
 
 - - -
 
-#### Sub-Task 4: Record a Trace With DebugFS
+### Task 4: Record a Trace With DebugFS
 
 If `trace-cmd` cannot be installed, it is possible to use ftrace directly in the debugfs. Here is how to obtain the same result as above:
 

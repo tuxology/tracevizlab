@@ -1,4 +1,4 @@
-### Tracing multiple machines across a network
+## Tracing multiple machines across a network
 
 In this lab, you will learn to take traces from multiple machines that communicate through the network and how Trace Compass can analyze those traces from different machines, with different time clocks.
 
@@ -6,7 +6,7 @@ In this lab, you will learn to take traces from multiple machines that communica
 
 - - -
 
-#### Sub-task 1: Getting the trace
+### Task 1: Getting the trace
 
 While it is easy to just start an lttng session on one machine and obtain a local trace, tracing multiple machines requires more operations to control tracing and collect traces afterwards. There is no blessed way of doing this unfortunately; everyone develops their own techniques and writes their script.
 
@@ -70,9 +70,10 @@ TRACE_NAME = serverTrace
 ssh $USER@$SERVER ./setupKernelTrace $TRACE_NAME
 ssh $USER@$SERVER lttng start
 # Record the client payload
-[./]lttng-record-trace ./payload
+# If the client is a machine with wifi, replace this call to a full manual setup
+# of the kernel trace and uncomment the lines for the additional kernel --function lines
+lttng-record-trace ./payload
 # Stop tracing the server
-ssh $USER@$SERVER lttng stop
 ssh $USER@$SERVER lttng destroy
 
 # Get the trace from the server
@@ -99,7 +100,7 @@ After execution of those traces, you should have 2 traces on your working direct
 
 - - -
 
-#### Sub-task 2: Importing the traces in an experiment
+### Task 2: Importing the traces in an experiment
 
 In Trace Compass, under the project on which to import the traces, right-click on the *Traces* folder. Select *Import...* to open the *Trace Import* wizard.
 
@@ -113,7 +114,7 @@ The traces will be imported. Then expand the *Experiments* folder to see the exp
 
 - - -
 
-#### Sub-task 3: Synchronizing the traces
+### Task 3: Synchronizing the traces
 
 The 2 traces were taken on different machines that communicated together using HTTP to get the web page. This means there will be events in the traces representing the exchange of TCP/IP packets, namely ``net_dev_queue`` and ``net[_]if_receive_skb`` for sending and receiving packets. The data in those events allow to match the event corresponding to the sending from one machine with the event corresponding to the reception on the other machine.
 
@@ -143,7 +144,7 @@ All the analyzes for this experiment will be re-run now that the traces are sync
 
 - - -
 
-#### Sub-task 4: Analyze the requests
+### Task 4: Analyze the requests
 
 When analyzing experiments with traces from different machines, most views of Trace Compass will simply show data from both traces. For example, the ``Control Flow`` view will show all threads under an element corresponding to the trace name. The 2 traced machines being independent, there is little else to do for most views than to just aggregate the data of both traces.
 
@@ -164,7 +165,7 @@ Now in the ``Control Flow`` view, select the second *wget* process and right-cli
 Now, this analysis was done only with kernel traces from the client and server. We can clearly see the network and disk accesses on the critical path. What a simple kernel trace does not say is whether the time improvement of the second request is only due to in-memory request data, or if the web application also did something to help increase the speed of the second query. Is there some mechanism in the application that improved the query time or is it just simply OS-related. Another lab will show how to also trace the userspace on the server side to get more information from these requests.
 
 - - -
-References:
+### References:
 
 [Trace synchronization algorithm](http://dmct.dorsal.polymtl.ca/sites/dmct.dorsal.polymtl.ca/files/Jabbarifar-Dec6.pdf)
 

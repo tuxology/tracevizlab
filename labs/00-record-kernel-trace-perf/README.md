@@ -1,4 +1,4 @@
-### Record a Kernel Trace With Ftrace
+## Record a Kernel Trace With Ftrace
 
 While this tutorial will mainly use LTTng for tracing, as it can provide both kernel and userspace traces, synchronized on the same time reference, it is also possible to get the same results for kernel tracing using perf. Like ftrace, perf has the advantage that it is builtin the linux kernel and many people are used to it. It can do both sampling or tracing, it is a very flexible tracer. In this lab, you will obtain a kernel trace that can then be analyzed by the visualization tools, perf.
 
@@ -6,7 +6,7 @@ While this tutorial will mainly use LTTng for tracing, as it can provide both ke
 
 - - -
 
-#### Sub-task 1: Record a Trace With Perf
+### Task 1: Record a Trace With Perf
 
 `perf` is a tool that can be used either for sampling, tracing or gathering performance counters. It is very flexible and can provide a lot of useful information. The [perf documentation](https://perf.wiki.kernel.org/index.php/Main_Page) contains exhaustive information on the various perf commands and option.
 
@@ -28,7 +28,7 @@ ls -al
 
 - - -
 
-#### Sub-task 2: Convert the Trace to CTF
+### Task 2: Convert the Trace to CTF
 
 To open it in TraceCompass, the trace has to be converted to CTF. To do so, use the following command.
 
