@@ -8,7 +8,7 @@ In this lab, we will use kernel tracing to compare the behaviors of common utili
 
 ### Task 1: Obtain the Traces
 
-Since most people have only one distro around them (though people reading this may be the type to have more), we have provided with this lab the necessary traces for some common package managers installing the `tree` package: `apt` (debian-flavor), `yum` (Red Hat flavor) and `pacman` (Arch Linux).
+Since most people have only one distro around them (though people reading this may be the type to have more), we have provided with this lab the necessary traces for some common package managers installing the `tree` package: `apt` (debian-flavor), `yum` (Red Hat flavor), `pacman` (Arch Linux) and `zypper` (OpenSuse).
 
 In TraceCompass, you can import the trace directly as an archive file.
 
@@ -194,6 +194,28 @@ We observe that `pacman` starts a few threads, some of which are related with `g
 As for what comes after the download, the dependencies on `gpg` processes shows the phase that corresponds to *checking keys in keyring*, the `ldconfig` is probably part of the *Processing package changes...*. The part with disk writes is the *installing tree* part and the rest would be the *Running post-transaction hooks...* part.
 
 ![PacmanResults](screenshots/pacman.png "Pacman Results")
+
+- - -
+
+### Task 5: Observe zypper
+
+Now let's look at the `zypper` trace. It was obtained through the following command:
+
+```
+$ sudo zypper install tree
+```
+
+```
+Spoiler alert: you may pause here and look at the trace for yourself
+```
+
+We observe that `zypper` spawns a few threads, all named `zypper`. The critical path again shows the obvious download phase, waiting for the  network.
+
+Before that, the main process is running, but preceded by a long timer period. But unlike `yum` and `pacman`, we do not see any other of the `zypper` thread running concurrently. Let's zoom in that time range and see if anything else was running at that time. We can look in the `Resources` view, which does not show a particularly high CPU usage. We could also take a look at the `Cpu Usage` view and sort by % of utilization to see which threads were more active during that period. There's nothing related to `zypper`, so it must have been waiting for something that didn't happen. Maybe a timeout for network? Let's tag this phase as the *preparation* phase.
+
+Now looking at what comes after the download phase, we can look for disk accesses to identify the *install* phase We can get help by looking for the `/usr/bin/tree` file in the *Contents* column of the `Events table`, like we did for `yum`. That phase looks very short and involves the `rpm` process.
+
+![ZypperResults](screenshots/zypper.png "Zypper Results")
 
 - - -
 
