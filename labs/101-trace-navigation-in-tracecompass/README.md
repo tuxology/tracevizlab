@@ -2,7 +2,7 @@
 
 In this lab, you will learn to open a trace in Trace Compass and navigate the various views available. We will see in future labs what each of those views mean and what we can make of it.
 
-*Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](../006-installing-tracecompass) lab or read the [TraceCompass web site](http://tracecompass.org) for more information. You also need a trace to open. You can take the trace you did in the [Record a kernel trace](../003-record-kernel-trace-lttng) lab or take one of the traces coming with this tutorial.
+*Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](../006-installing-tracecompass) lab or read the [TraceCompass web site](http://tracecompass.org) for more information. You also need a trace to open. You can take the trace you did in the [Record a kernel trace](../003-record-kernel-trace-lttng) lab or take the trace that comes with this tutorial.
 
 - - -
 
@@ -37,6 +37,8 @@ You can zoom in and out in time and pan the view left and right by using the ``'
 The ``up`` and ``down`` arrows, and the ``mouse scroll`` moves the view up and down, while the ``left`` and ``right`` arrows will go to the next and previous events of the currently selected entry.
 
 Time selection is done with the mouse, by ``left-clicking`` on a timestamp to select a single time, or ``left-drag`` to select a time range. Zooming in to a time range is done by ``right-drag``ging the mouse to that time range. All the opened views, as well as the events table will synchronize with the time selection and/or visible time ranges.
+
+Another interesting time graph view for kernel traces is the `Control Flow` view. The corresponding tab should be right next to the `Resources` view in the perspective. This view shows every thread in the system and their status at different time. While the `Resources` view shows a quick overview of the whole system, the `Control Flow` view is interesting to follow a specific process or thread that we are interested in. For instance, for this lab, the process of interest would be `ls` and we can find it in the `Control Flow` view.
 
 - - -
 
@@ -118,6 +120,20 @@ Double-clicking on the tab again will reduce the view to its original size.
 
 - - -
 
+### Task 9: So what? This is such a simple trace!
+
+If you took the trace from the record lab, or the trace that comes with this lab, it traced the `ls -al` command, and it should be a very small trace. But even the simplest command such as `ls` can hide some interesting issues...
+
+The following screenshot for instance was taken from a trace of `ls -al`, on a shared disk. The `ls` command lasted 3 seconds! And we see it was blocked most of the time.
+
+![SlowLsView](screenshots/slowLs.png "Slow ls")
+
+The view at the bottom is called the `Critical Flow` view and will be the subject of the [next lab](../102-tracing-wget-critical-path).
+
+For now, let's just say that in this case, it shows that `ls` was waiting on `sssd` to resolve the user/group of the files to display them. With an Active Directory of more than 100K users, that took a lot of time. Once that was brought to the attention of the system administrators, a simple configuration option was sufficient to bring the `ls` performance to expected values.
+
+- - -
+
 ### Conclusion
 
-In the lab, you've opened a trace in Trace Compass and should now know what types of views are available and some basic functionnalities and navigation options with each type. You should also be able to find the various views available for a trace and navigate through those views' ranges.
+In the lab, you've opened a trace in Trace Compass and should now know what types of views are available and some basic functionnalities and navigation options with each type. You should also be able to find the various views available for a trace and navigate through those views' ranges. Those skills will be very handy for the rest of this tutorial.
