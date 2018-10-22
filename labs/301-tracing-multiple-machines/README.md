@@ -174,3 +174,11 @@ Now, this analysis was done only with kernel traces from the client and server. 
 Note that the trace synchronization algorithm used in Trace Compass computes a linear formula to transform the timestamps. It is only an approximation, sufficient for the analyzes, as computer clocks do not have this linear correlation and after a while, a drift may appear between the clocks that will invalidate the linear formula. It means that at some point, it will be impossible to compute a linear formula covering the whole duration of the traces and the synchronization will be marked as ``failed``. Depending on the hardware, the approximation here can be valid for trace durations varying from minutes to hours.
 
 When dealing with virtual machines, the synchronization approach described here is rarely successful even for traces of a few seconds. The drift factors enters in very soon. Luckily in those cases, other approaches are available. See [this blog post](http://versatic.net/tracecompass/synchronization/2018/01/15/synchronization-and-ntp.html) for more details.
+
+- - -
+
+#### Next
+
+* [Tracing Containers](../302-system-tracing-containers)
+or
+* [Back](../) for more options

@@ -45,3 +45,11 @@ No conversion support compiled in. perf should be compiled with environment vari
 ```
 
 You may use LTTng or ftrace to obtain a kernel trace to visualize.
+
+- - -
+
+#### Next
+
+* [Installing Trace Compass](../006-installing-tracecompass) to install the visualization tool
+or
+* [Back](../) for more options

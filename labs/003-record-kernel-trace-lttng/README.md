@@ -104,3 +104,13 @@ $ rsync -avz <user>@<traced.host>:</path/to/trace/dir> traces/
 ### References
 
 [LTTng user documentation](http://lttng.org/docs)
+
+- - -
+
+#### Next
+
+* [Record kernel trace with ftrace](../004-record-kernel-trace-ftrace) to record a kernel trace with ftrace
+or
+* [Installing Trace Compass](../006-installing-tracecompass) to install the visualization tool
+or
+* [Back](../) for more options
