@@ -47,10 +47,11 @@ When you open an Open Tracing trace (double click on any imported trace), you sh
 ![Perspective](screenshots/perspective.png "Trace Compass Open Tracing Perspective")
 
 Open Tracing perspective contains:
-- Project Explorer: List of your experiments as well as your traces
-- Spans Life View: Time graph representation of the span's relationships
-- Spans List: Information on every span in the trace
-- Histogram: Overview of the spans occurences on a time basis
+
+- Project Explorer: List of your experiments as well as your traces.
+- Spans Life View: Time graph representation of the span's relationships.
+- Events Table: Information of every every event as well as every span in the trace. Equivalent of the Jaeger "Spans List".
+- Histogram: Overview of the spans occurences on a time basis.
 
 - - -
 
