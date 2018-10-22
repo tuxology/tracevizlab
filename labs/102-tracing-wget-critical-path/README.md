@@ -105,3 +105,11 @@ With the critical path analysis, you can see that the second execution was much 
 ### Conclusion
 
 In the lab, you've learned how to use Trace Compass to find and compare the critical path of some wget process executions. The critical path can help find the root cause of why a process is particularly slow, why it was blocked.
+
+- - -
+
+#### Next
+
+* [Compare Package Managers](../103-compare-package-managers)
+or
+* [Back](../) for more options

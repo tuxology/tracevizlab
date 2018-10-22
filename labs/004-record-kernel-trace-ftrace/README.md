@@ -89,3 +89,13 @@ Then, to obtain the trace to import in TraceCompass:
 ```
 $ sudo cat /sys/kernel/debug/tracing/trace > myFtraceFile.txt
 ```
+
+- - -
+
+#### Next
+
+* [Record kernel trace with perf](../005-record-kernel-trace-perf) to record a kernel trace with perf
+or
+* [Installing Trace Compass](../006-installing-tracecompass) to install the visualization tool
+or
+* [Back](../) for more options

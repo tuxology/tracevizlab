@@ -113,3 +113,11 @@ In the lab you learned how to trace a php program, and how to setup *Trace Compa
 
 * [PHP extension for lttng tracing](https://github.com/naser/LTTng-php-tracing-module.git)
 * [More documentation on XML analyses](http://archive.eclipse.org/tracecompass/doc/stable/org.eclipse.tracecompass.doc.user/Data-driven-analysis.html#Data_driven_analysis)
+
+- - -
+
+#### Next
+
+* [Exercice: Bug Hunt](../204-bug-hunt)
+or
+* [Back](../) for more options

@@ -158,3 +158,11 @@ For now, let's just say that in this case, it shows that `ls` was waiting on `ss
 ### Conclusion
 
 In the lab, you've opened a trace in Trace Compass and should now know what types of views are available and some basic functionnalities and navigation options with each type. You should also be able to find the various views available for a trace and navigate through those views' ranges. Those skills will be very handy for the rest of this tutorial.
+
+- - -
+
+#### Next
+
+* [Getting the Critical Path of Wget](../102-tracing-wget-critical-path)
+or
+* [Back](../) for more options

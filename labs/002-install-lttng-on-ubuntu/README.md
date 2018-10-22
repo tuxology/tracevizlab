@@ -74,3 +74,11 @@ $ sudo apt-get install python3-lttngust
 * [LTTng website](http://lttng.org)
 * [Installation instructions for Ubuntu](https://lttng.org/docs/v2.10/#doc-ubuntu)
 * [Instructions for other distributions](https://lttng.org/download/)
+
+- - -
+
+#### Next
+
+* [Record kernel trace with LTTng](../003-record-kernel-trace-lttng) to record a kernel trace
+or
+* [Back](../) for more options

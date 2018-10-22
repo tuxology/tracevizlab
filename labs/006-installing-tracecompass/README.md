@@ -60,3 +60,11 @@ $ ./tracecompass
 You should reach an empty workspace. And voilà! You are now ready to import and analyze traces with Trace Compass. Proceed to other labs.
 
 ![empty workspace](screenshots/emptyWorkspace.png "Trace Compass empty workspace")
+
+- - -
+
+#### Next
+
+* [Trace Navigation in Trace Compass](../101-trace-navigation-in-tracecompass)
+or
+* [Back](../) for more options
