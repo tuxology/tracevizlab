@@ -16,7 +16,7 @@ Prefix number code:
 
 Expected flow of a lab:
 
- 		
+
 	001 what-is-tracing
 	<optional> 002 install-lttng-on-ubuntu
 	<optional> 003 record-kernel-trace-lttng
@@ -27,7 +27,8 @@ Expected flow of a lab:
 	102 tracing-wget-critical-path
 	103 compare-package-managers
 	201 lttng-userspace-tracing
-	202 python-xml-analysis-lab
-	203 tracing-php-userspace
+	<optional> 202 python-xml-analysis-lab
+	<optional> 203 tracing-php-userspace
 	204 bug-hunt
 	301 tracing-multiple-machines
+  302 system-tracing-containers
