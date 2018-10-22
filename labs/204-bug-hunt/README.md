@@ -2,7 +2,7 @@
 
 In this lab, you'll be invited to find issues that have been purposefully introduced in an otherwise quite simple and straightforward program: `cat`.
 
-*Pre-requisites*: This lab supposes that you are now familiar with kernel and some userspace trace visualization. You should have done the [kernel trace navigation](../01-trace-navigation-in-tracecompass), [kernel critical path](../01-tracing.wget-critical-path) and [userspace tracing](../02-lttng-userspace-tracing) labs.
+*Pre-requisites*: This lab supposes that you are now familiar with kernel and some userspace trace visualization. You should have done the [kernel trace navigation](../101-trace-navigation-in-tracecompass), [kernel critical path](../102-tracing-wget-critical-path) and [userspace tracing](../201-lttng-userspace-tracing) labs.
 
 - - -
 
@@ -10,7 +10,7 @@ In this lab, you'll be invited to find issues that have been purposefully introd
 
 The `files/` directory of this lab contains a file named `cat.c`, which has been modified from coreutils to introduce some issues visible with tracing. **Do not look at the file!**. It is small enough that the issues will be obvious.
 
-First, we'll need to install coreutils to add our cat.c file to it. If you did the [userspace tracing](../02-lttng-userspace-tracing) lab and compiled coreutils, skip this step:
+First, we'll need to install coreutils to add our cat.c file to it. If you did the [userspace tracing](../201-lttng-userspace-tracing) lab and compiled coreutils, skip this step:
 
 ```bash
 $ git clone git://git.sv.gnu.org/coreutils

@@ -2,7 +2,7 @@
 
 In this lab, you will learn to open a trace in Trace Compass and navigate the various views available. We will see in future labs what each of those views mean and what we can make of it.
 
-*Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](00-installing-tracecompass.md) lab or read the [TraceCompass web site](https://tracecompass.org) for more information. You also need a trace to open. You can take the trace you did in the [Record a kernel trace](00-record-kernel-trace.md) lab or take one of the traces coming with this tutorial.
+*Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](../006-installing-tracecompass) lab or read the [TraceCompass web site](http://tracecompass.org) for more information. You also need a trace to open. You can take the trace you did in the [Record a kernel trace](../003-record-kernel-trace-lttng) lab or take one of the traces coming with this tutorial.
 
 - - -
 

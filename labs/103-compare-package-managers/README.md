@@ -2,7 +2,7 @@
 
 In this lab, we will use kernel tracing to compare the behaviors of common utility that varies from linux distro to linux distro: package managers. They all do the same thing: install a package on the system, but they are quite different. You will also learn to search and filter in time graph views and make bookmarks to identify regions of interest in the trace.
 
-*Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](00-installing-tracecompass.md) lab or read the [TraceCompass web site](https://tracecompass.org) for more information. You should have done the [Trace Navigation in Trace Compass](../01-trace-nagivation-in-tracecompass) and the [Wget Critical Path](../01-tracing-wget-critical-path) labs.
+*Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](../006-installing-tracecompass/) lab or read the [TraceCompass web site](http://tracecompass.org) for more information. You should have done the [Trace Navigation in Trace Compass](../101-trace-navigation-in-tracecompass) and the [Wget Critical Path](../102-tracing-wget-critical-path) labs.
 
 - - -
 

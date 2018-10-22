@@ -4,7 +4,7 @@ In this lab, you will learn to view the critical path of a process, compare two 
 
 ![KernelWaitAnalysisDjango](screenshots/kernelWaitAnalysisDjango.png "Trace Compass Kernel Wait Analysis")
 
-*Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](00-installing-tracecompass.md) lab or read the [TraceCompass web site](https://tracecompass.org) for more information. You also need to know how to record a trace and open it in Trace Compass. You can that learn by doing the [Record a kernel trace](00-record-kernel-trace.md) lab and the [Trace Navigation in Trace Compass](01-trace-nagivation-in-tracecompass.md).
+*Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](../006-installing-tracecompass/) lab or read the [TraceCompass web site](http://tracecompass.org) for more information. You also need to know how to record a trace and open it in Trace Compass. You can that learn by doing the [Record a kernel trace](../003-record-kernel-trace-lttng/) lab and the [Trace Navigation in Trace Compass](../101-trace-navigation-in-tracecompass/).
 
 - - -
 
