@@ -4,10 +4,10 @@ This directory contains the labs that are part of this tutorial
 
 Prefix number code:
 
-**00** - Environment preparation and simple kernel trace collection
+**0xx** - Environment preparation and simple kernel trace collection
 
-**01** - Kernel trace analysis
+**1xx** - Kernel trace analysis (system tracing)
 
-**02** - Simple userspace use cases
+**2xx** - Simple userspace use cases (application tracing) [along with kernel]
 
-**03** - Advanced use cases
+**3xx** - Advanced use cases
