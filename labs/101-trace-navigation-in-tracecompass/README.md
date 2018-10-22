@@ -50,6 +50,27 @@ Click on the ``Show View Filters`` icon at the left of the toolbar and uncheck t
 
 ![TimeGraphViewFilter](screenshots/timeGraphViewFilter.png "Time Graph View Filter")
 
+#### Task 3.1: Filter and search in time graph views
+
+It is also possible to search and filter in time graph views. Using the `Resources` view again, with the view in focus, press the `/` key. It will open a small dialog with a looking glass at the bottom of the view. Whatever string you enter in this textbox will be searched for in the states and alpha out the other states.
+
+For instance, let's write `ls` in the textbox and it will highlight the states that contain that string, that's the `ls` process we traced, along with some `alsa` and `pulseaudio`-related threads ;-)
+
+![TimeGraphViewSearch](screenshots/timeGraphViewSearch.png "Time Graph View Search")
+
+Pressing `Enter` on the textbox will completely hide all states that do not correspond to the filter. The filter will be removed by clicking the red X.
+
+![TimeGraphViewRemoveFilter](screenshots/timeGraphViewRemoveFilter.png "Time Graph View Remove Filter")
+
+This search & filter feature looks at the content of the tooltip of the states. A simple string will try to match with the content of any key of the tooltip, but one can also search for a key/value pair. The syntax of the filters is similar to that of `wireshark`. Here are some search strings that will work on the trace:
+
+* `ls|lttng` will highligh threads containing `ls` or `lttng`
+* `TID contains 20` will highlight all threads whose TID contains `20`
+* `TID matches 2072` will highlight the thread with ID `2072`
+* `System_call matches .*` will highlight all state with system calls (they are visible only when zoomed)
+
+As of this writing, this feature works well only on the `Resources` view. More information on this filtering can be found [here](http://archive.eclipse.org/tracecompass/doc/stable/org.eclipse.tracecompass.doc.user/Trace-Compass-Main-Features.html#Filtering_Time_Events_in_Time_Graph_Views).
+
 - - -
 
 ### Task 4: Change the color of the states
