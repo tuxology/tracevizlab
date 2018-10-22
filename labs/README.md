@@ -16,18 +16,19 @@ Prefix number code:
 
 Expected flow of a lab:
 
- 		
-	001 what-is-tracing
-	<optional> 002 install-lttng-on-ubuntu
-	<optional> 003 record-kernel-trace-lttng
-	<optional> 004 record-kernel-trace-ftrace
-	<optional> 005 record-kernel-trace-perf
-	006 installing-tracecompass
-	101 trace-navigation-in-tracecompass
-	102 tracing-wget-critical-path
-	103 compare-package-managers
-	201 lttng-userspace-tracing
-	202 python-xml-analysis-lab
-	203 tracing-php-userspace
-	204 bug-hunt
-	301 tracing-multiple-machines
+
+* [001 what-is-tracing](001-what-is-tracing)
+* `optional` [002 install-lttng-on-ubuntu](002-install-lttng-on-ubuntu)
+* `optional` [003 record-kernel-trace-lttng](003-record-kernel-trace-lttng)
+* `optional` [004 record-kernel-trace-ftrace](004-record-kernel-trace-ftrace)
+* `optional` [005 record-kernel-trace-perf](005-record-kernel-trace-perf)
+* [006 installing-tracecompass](006-installing-tracecompass)
+* [101 trace-navigation-in-tracecompass](101-trace-navigation-in-tracecompass)
+* [102 tracing-wget-critical-path](102-tracing-wget-critical-path)
+* [103 compare-package-managers](103-compare-package-managers)
+* [201 lttng-userspace-tracing](201-lttng-userspace-tracing)
+* `optional` [202 python-xml-analysis-lab](202-python-xml-analysis-lab)
+* `optional` [203 tracing-php-userspace](203-tracing-php-userspace)
+* [204 bug-hunt](204-bug-hunt)
+* [301 tracing-multiple-machines](301-tracing-multiple-machines)
+* [302 system-tracing-containers](302-system-tracing-containers)

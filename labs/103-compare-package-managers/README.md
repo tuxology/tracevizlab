@@ -2,7 +2,7 @@
 
 In this lab, we will use kernel tracing to compare the behaviors of common utility that varies from linux distro to linux distro: package managers. They all do the same thing: install a package on the system, but they are quite different. You will also learn to search and filter in time graph views and make bookmarks to identify regions of interest in the trace.
 
-*Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](00-installing-tracecompass.md) lab or read the [TraceCompass web site](https://tracecompass.org) for more information. You should have done the [Trace Navigation in Trace Compass](../01-trace-nagivation-in-tracecompass) and the [Wget Critical Path](../01-tracing-wget-critical-path) labs.
+*Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](../006-installing-tracecompass/) lab or read the [TraceCompass web site](http://tracecompass.org) for more information. You should have done the [Trace Navigation in Trace Compass](../101-trace-navigation-in-tracecompass) and the [Wget Critical Path](../102-tracing-wget-critical-path) labs.
 
 - - -
 
@@ -203,6 +203,23 @@ Now let's look at the `zypper` trace. It was obtained through the following comm
 
 ```
 $ sudo zypper install tree
+Retrieving repository 'monitoring' metadata ...............................[done]
+Building repository 'monitoring' cache.....................................[done]
+Retrieving repository 'openSUSE-Leap-15.0-Update' metadata.................[done]
+Building repository 'openSUSE-Leap-15.0-Update' cache......................[done]
+Loading repository data...
+Reading installed packages...
+Resolving package dependencies...
+
+The following NEW package is going to be installed:
+  tree
+
+1 new package to install.
+Overall download size: 55.8 KiB. Already cached: 0 B. After the operation, additional 109.8 KiB will be used.
+Retrieving package tree-1.7.0-lp150.1.8.x86_64                     (1/1),  55.8 KiB (109.8 KiB unpacked)
+Retrieving: tree-1.7.0-lp150.1.8.x86_64.rpm................................[done (3.6 KiB/s)]
+Checking for file conflicts:...............................................[done]
+(1/1) Installing: tree-1.7.0-lp150.1.8.x86_64..............................[done]
 ```
 
 ```
@@ -211,7 +228,7 @@ Spoiler alert: you may pause here and look at the trace for yourself
 
 We observe that `zypper` spawns a few threads, all named `zypper`. The critical path again shows the obvious download phase, waiting for the  network.
 
-Before that, the main process is running, but preceded by a long timer period. But unlike `yum` and `pacman`, we do not see any other of the `zypper` thread running concurrently. Let's zoom in that time range and see if anything else was running at that time. We can look in the `Resources` view, which does not show a particularly high CPU usage. We could also take a look at the `Cpu Usage` view and sort by % of utilization to see which threads were more active during that period. There's nothing related to `zypper`, so it must have been waiting for something that didn't happen. Maybe a timeout for network? Let's tag this phase as the *preparation* phase.
+Before that, the main process is running, but preceded by a long timer period. But unlike `yum` and `pacman`, we do not see any other of the `zypper` thread running concurrently. Let's zoom in that time range and see if anything else was running at that time. We can look in the `Resources` view, which does not show a particularly high CPU usage. We could also take a look at the `Cpu Usage` view and sort by % of utilization to see which threads were more active during that period. There's nothing related to `zypper`, so it must have been waiting for something that didn't happen. Maybe a timeout for network? Or did the user not put the `-n` option and it was waiting of user input before installing? Let's tag this phase as the *preparation* phase.
 
 Now looking at what comes after the download phase, we can look for disk accesses to identify the *install* phase We can get help by looking for the `/usr/bin/tree` file in the *Contents* column of the `Events table`, like we did for `yum`. That phase looks very short and involves the `rpm` process.
 

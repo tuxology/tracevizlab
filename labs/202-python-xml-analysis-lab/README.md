@@ -2,7 +2,7 @@
 
 In this lab, you will learn to trace a python application using lttng library `lttngust`, write an xml analysis file to create your own view, and visualize your application with your own tracepoints.
 
-*Pre-requisites*: Have Trace Compass installed and opened. Have git, lttng, Python 3.X, pip and the callstack add-on on Trace Compass installed. You can follow the [Installing TraceCompass](../00-installing-tracecompass.md) lab or read the [TraceCompass website](https://tracecompass.org) for more information.
+*Pre-requisites*: Have Trace Compass installed and opened. Have git, lttng, Python 3.X, pip and the callstack add-on on Trace Compass installed. You can follow the [Installing TraceCompass](../006-installing-tracecompass) lab or read the [TraceCompass website](http://tracecompass.org) for more information.
 
 - - -
 

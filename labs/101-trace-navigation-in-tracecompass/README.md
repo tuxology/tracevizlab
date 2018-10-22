@@ -2,7 +2,7 @@
 
 In this lab, you will learn to open a trace in Trace Compass and navigate the various views available. We will see in future labs what each of those views mean and what we can make of it.
 
-*Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](00-installing-tracecompass.md) lab or read the [TraceCompass web site](https://tracecompass.org) for more information. You also need a trace to open. You can take the trace you did in the [Record a kernel trace](00-record-kernel-trace.md) lab or take one of the traces coming with this tutorial.
+*Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](../006-installing-tracecompass) lab or read the [TraceCompass web site](http://tracecompass.org) for more information. You also need a trace to open. You can take the trace you did in the [Record a kernel trace](../003-record-kernel-trace-lttng) lab or take the trace that comes with this tutorial.
 
 - - -
 
@@ -38,6 +38,8 @@ The ``up`` and ``down`` arrows, and the ``mouse scroll`` moves the view up and d
 
 Time selection is done with the mouse, by ``left-clicking`` on a timestamp to select a single time, or ``left-drag`` to select a time range. Zooming in to a time range is done by ``right-drag``ging the mouse to that time range. All the opened views, as well as the events table will synchronize with the time selection and/or visible time ranges.
 
+Another interesting time graph view for kernel traces is the `Control Flow` view. The corresponding tab should be right next to the `Resources` view in the perspective. This view shows every thread in the system and their status at different time. While the `Resources` view shows a quick overview of the whole system, the `Control Flow` view is interesting to follow a specific process or thread that we are interested in. For instance, for this lab, the process of interest would be `ls` and we can find it in the `Control Flow` view.
+
 - - -
 
 ### Task 3: Filter out some entries in time graph views
@@ -47,6 +49,27 @@ The ``Resources`` view shows for each CPU 3 lines: the running thread, the CPU s
 Click on the ``Show View Filters`` icon at the left of the toolbar and uncheck the CPU X Frequency lines. The filter and the result are shown in the following screenshot:
 
 ![TimeGraphViewFilter](screenshots/timeGraphViewFilter.png "Time Graph View Filter")
+
+#### Task 3.1: Filter and search in time graph views
+
+It is also possible to search and filter in time graph views. Using the `Resources` view again, with the view in focus, press the `/` key. It will open a small dialog with a looking glass at the bottom of the view. Whatever string you enter in this textbox will be searched for in the states and alpha out the other states.
+
+For instance, let's write `ls` in the textbox and it will highlight the states that contain that string, that's the `ls` process we traced, along with some `alsa` and `pulseaudio`-related threads ;-)
+
+![TimeGraphViewSearch](screenshots/timeGraphViewSearch.png "Time Graph View Search")
+
+Pressing `Enter` on the textbox will completely hide all states that do not correspond to the filter. The filter will be removed by clicking the red X.
+
+![TimeGraphViewRemoveFilter](screenshots/timeGraphViewRemoveFilter.png "Time Graph View Remove Filter")
+
+This search & filter feature looks at the content of the tooltip of the states. A simple string will try to match with the content of any key of the tooltip, but one can also search for a key/value pair. The syntax of the filters is similar to that of `wireshark`. Here are some search strings that will work on the trace:
+
+* `ls|lttng` will highligh threads containing `ls` or `lttng`
+* `TID contains 20` will highlight all threads whose TID contains `20`
+* `TID matches 2072` will highlight the thread with ID `2072`
+* `System_call matches .*` will highlight all state with system calls (they are visible only when zoomed)
+
+As of this writing, this feature works well only on the `Resources` view. More information on this filtering can be found [here](http://archive.eclipse.org/tracecompass/doc/stable/org.eclipse.tracecompass.doc.user/Trace-Compass-Main-Features.html#Filtering_Time_Events_in_Time_Graph_Views).
 
 - - -
 
@@ -118,6 +141,20 @@ Double-clicking on the tab again will reduce the view to its original size.
 
 - - -
 
+### Task 9: So what? This is such a simple trace!
+
+If you took the trace from the record lab, or the trace that comes with this lab, it traced the `ls -al` command, and it should be a very small trace. But even the simplest command such as `ls` can hide some interesting issues...
+
+The following screenshot for instance was taken from a trace of `ls -al`, on a shared disk. The `ls` command lasted 3 seconds! And we see it was blocked most of the time.
+
+![SlowLsView](screenshots/slowLs.png "Slow ls")
+
+The view at the bottom is called the `Critical Flow` view and will be the subject of the [next lab](../102-tracing-wget-critical-path).
+
+For now, let's just say that in this case, it shows that `ls` was waiting on `sssd` to resolve the user/group of the files to display them. With an Active Directory of more than 100K users, that took a lot of time. Once that was brought to the attention of the system administrators, a simple configuration option was sufficient to bring the `ls` performance to expected values.
+
+- - -
+
 ### Conclusion
 
-In the lab, you've opened a trace in Trace Compass and should now know what types of views are available and some basic functionnalities and navigation options with each type. You should also be able to find the various views available for a trace and navigate through those views' ranges.
+In the lab, you've opened a trace in Trace Compass and should now know what types of views are available and some basic functionnalities and navigation options with each type. You should also be able to find the various views available for a trace and navigate through those views' ranges. Those skills will be very handy for the rest of this tutorial.

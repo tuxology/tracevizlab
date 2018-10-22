@@ -2,7 +2,7 @@
 
 In this lab, you will learn to take traces from multiple machines that communicate through the network and how Trace Compass can analyze those traces from different machines, with different time clocks.
 
-*Pre-requisites*: This lab is a followup of the *[Tracing wget](../01-tracing-wget-critical-path/01-tracing-wget-critical-path.md)* lab: we obtained 2 traces of wgetting a same web page twice. We saw that the 2 requests had 2 very different durations. Now, we will also trace the website that is being fetched to see what happens there during this request on the server side. For this lab, you can use the traces provided in this repository. The lab explains how to generate your own traces, but to do so, you would need to have 2 machines, preferably physical machines, as clocks on virtual machine are a bit trickier and are the subject of their own lab later.
+*Pre-requisites*: This lab is a followup of the [Tracing wget](../102-tracing-wget-critical-path) lab: we obtained 2 traces of wgetting a same web page twice. We saw that the 2 requests had 2 very different durations. Now, we will also trace the website that is being fetched to see what happens there during this request on the server side. For this lab, you can use the traces provided in this repository. The lab explains how to generate your own traces, but to do so, you would need to have 2 machines, preferably physical machines, as clocks on virtual machine are a bit trickier and are the subject of their own lab later.
 
 - - -
 

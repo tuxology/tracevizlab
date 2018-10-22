@@ -2,7 +2,7 @@
 
 In this lab, you will learn how to trace a php program and visualize the execution of a program in a flame graph.
 
-*Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](00-installing-tracecompass.md) lab or read the [TraceCompass web site](https://tracecompass.org) for more information. Have Php 7.x and Lttng >= 2.8 installed.
+*Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](../006-installing-tracecompass/) lab or read the [TraceCompass web site](http://tracecompass.org) for more information. You should have followed [the basic navigation lab](../101-trace-navigation-in-tracecompass/). Have Php 7.x and Lttng >= 2.8 installed.
 
 - - -
 
@@ -82,7 +82,7 @@ In the *Install* wizard, you may check the *Generic Callstack (Incubator)* featu
 
 ### Task 4: Import the trace into Trace Compass
 
-After importing the trace (the [following tutorial](../01-trace-navigation-in-tracecompass.md) explains how to do that and how to navigate in the trace), you need to add an analysis XML file to enable php callstack analysis on TraceCompass.
+After importing the trace, you need to add an analysis XML file to enable php callstack analysis on TraceCompass.
 
 ![ManageXML](screenshots/manageXML.png "Manage XML")
 
