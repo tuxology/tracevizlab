@@ -1,10 +1,10 @@
 ## Tracing wget and showing the critical path
 
-In this lab, you will learn to view the critical path of a process, compare two executions of the same program and understand what is happening behind the scenes. In a program, a task may wait for the result of another task, these wait dependencies can be seen using the critical path analysis. This analysis highlights the active path from the trace and is displayed in the *Critical Flow View*.
+In this lab, you will learn to view the critical path of a process, compare two executions of the same program and understand what is happening behind the scenes. In a program, a task may wait for something, for instance, the result of another task or the network. These wait dependencies can be seen using the critical path analysis. This analysis highlights the active path from the trace and is displayed in the *Critical Flow View*. The critical path is the path that, if decreased, can decreased the duration of the application.
 
 ![KernelWaitAnalysisDjango](screenshots/kernelWaitAnalysisDjango.png "Trace Compass Kernel Wait Analysis")
 
-*Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](../006-installing-tracecompass/) lab or read the [TraceCompass web site](http://tracecompass.org) for more information. You also need to know how to record a trace and open it in Trace Compass. You can that learn by doing the [Record a kernel trace](../003-record-kernel-trace-lttng/) lab and the [Trace Navigation in Trace Compass](../101-trace-navigation-in-tracecompass/).
+*Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](../006-installing-tracecompass/) lab or read the [TraceCompass web site](http://tracecompass.org) for more information. You also need to know how to record a trace and open it in Trace Compass. You can learn that by doing the [Record a kernel trace](../003-record-kernel-trace-lttng/) lab and the [Trace Navigation in Trace Compass](../101-trace-navigation-in-tracecompass/).
 
 - - -
 
@@ -24,6 +24,8 @@ $ lttng start
 $ wget http://www.dorsal.polymtl.ca
 $ lttng destroy
 ```
+
+Or you can use the 2 traces provided with this lab.
 
 - - -
 

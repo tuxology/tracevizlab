@@ -12,7 +12,7 @@ Upon opening Trace Compass, there is a default project named *Tracing* in the ``
 
 ![ImportTraceMenu](screenshots/importTraceMenu.png "Trace Compass Import Trace Menu")
 
-Browse for the folder containing the trace, then check that folder in the left textbox as shown in the screenshot below and click *Finish*.
+Browse for the folder containing the trace, then check that folder in the left textbox as shown in the screenshot below and click *Finish*. If you are using the traces provided as archive with the labs, you may directly import the archive by selecting the *Select archive file* radio button and browsing to the trace `.tar.gz` file.
 
 ![ImportTraceDialog](screenshots/importTraceDialog.png "Trace Compass Import Trace Dialog")
 
@@ -36,9 +36,11 @@ You can zoom in and out in time and pan the view left and right by using the ``'
 
 The ``up`` and ``down`` arrows, and the ``mouse scroll`` moves the view up and down, while the ``left`` and ``right`` arrows will go to the next and previous events of the currently selected entry.
 
-Time selection is done with the mouse, by ``left-clicking`` on a timestamp to select a single time, or ``left-drag`` to select a time range. Zooming in to a time range is done by ``right-drag``ging the mouse to that time range. All the opened views, as well as the events table will synchronize with the time selection and/or visible time ranges.
+Time selection is done with the mouse, by ``left-clicking`` on a timestamp to select a single time, or ``left-drag`` to select a time range. Zooming in to a time range is done by ``right-dragging`` the mouse to that time range. All the opened views, as well as the events table will synchronize with the time selection and/or visible time ranges.
 
 Another interesting time graph view for kernel traces is the `Control Flow` view. The corresponding tab should be right next to the `Resources` view in the perspective. This view shows every thread in the system and their status at different time. While the `Resources` view shows a quick overview of the whole system, the `Control Flow` view is interesting to follow a specific process or thread that we are interested in. For instance, for this lab, the process of interest would be `ls` and we can find it in the `Control Flow` view.
+
+![ControlFlowView](screenshots/controlFlowView.png "Control Flow View")
 
 - - -
 
@@ -52,7 +54,7 @@ Click on the ``Show View Filters`` icon at the left of the toolbar and uncheck t
 
 #### Task 3.1: Filter and search in time graph views
 
-It is also possible to search and filter in time graph views. Using the `Resources` view again, with the view in focus, press the `/` key. It will open a small dialog with a looking glass at the bottom of the view. Whatever string you enter in this textbox will be searched for in the states and alpha out the other states.
+It is also possible to search and filter in time graph views. Using the `Resources` view again, with the view in focus, press the `/` key. It will open a small dialog with a looking glass at the bottom of the view. Whatever string you enter in this textbox will be searched for in the states and dim the other states.
 
 For instance, let's write `ls` in the textbox and it will highlight the states that contain that string, that's the `ls` process we traced, along with some `alsa` and `pulseaudio`-related threads ;-)
 
@@ -75,7 +77,7 @@ As of this writing, this feature works well only on the `Resources` view. More i
 
 ### Task 4: Change the color of the states
 
-Views like the ``Resources`` view have built-in colors for some of the states that are displayed. For instance, the **Running** state is green, **System call** is blue, **Idle** is green and the line is thinner.
+Views like the ``Resources`` view have built-in colors for some of the states that are displayed. For instance, the **Running** state is green, **System call** is blue, **Idle** is grey and the line is thinner.
 
 To get the meaning of the colored states and change their style (color, width), you can click on the ``Legend`` icon. The window that opens shows the legend of the current view and allows to change the colors by cliking on the color rectangle, or the width by using the gradient line right of the name. The arrow button at the end of each line will reset to defaults.
 
@@ -99,25 +101,27 @@ You can play with the visible and selection ranges with this view and observe ho
 
 ### Task 6: Open more analyses and views
 
+One of the central concepts of Trace Compass is the concept of *analysis*. An analysis can be defined as a function of events, or function of other analyses, that transforms the trace's data into something meaningful. Typically, analyses will focus on some aspects of a system, look at subsets of events and store results in on-disk data structures made for this purpose. Depending on the events contained in the trace, not all analyses may be available for all traces.
+
+*Views* are then used to display the analysis results to the user in an easily understandable way.
+
 In the ``Project Explorer`` view, the trace we are analyzing can be expanded. Under it are 3 elements: ``Views``, ``External Analyses`` and ``Reports``. The analyses we will be using in this tutorial are under the ``Views`` element, so let's expand it.
 
 It shows a list of available analyses for this trace. Under each analyses are the views that can be opened to analyze the trace.
 
-Let's open the ``CPU Usage`` view under the ``CPU usage`` analysis, the ``Disk I/O Activity`` view under the ``Input/Output`` analysis, and the ``System Call Latency Statistics`` under the ``System Call Latency`` analysis.
+Here is an expanded view of the trace in the `Project Explorer`.
 
-Your workspace should look like this
+![projectExplorerExpanded](screenshots/projectExplorerExpanded.png "Project Explorer Expanded")
 
-![KernelWorkspaceViewsOpened](screenshots/kernelWorkspaceViewsOpened.png "Workspace after opening some views")
-
-We have previously seen the *time graph views*. With the new views just opened, we have 2 new types of views: statistics views and XY views
+We have previously seen the *time graph views*. In the next tasks, we will introduce 2 new types of views: statistics views and XY views.
 
 - - -
 
 ### Task 7: Explore the statistics views
 
-Let's now look at the ``System Call Latency Statistics`` view. It shows statistics on the times taken to execute system calls by the various processes in the trace, for each system call. We have the minimum and maximum time taken, the average time and the standard deviation, the number of calls and the total spent in that kind of system call.
+Let's now open the ``System Call Latency Statistics`` under the ``System Call Latency`` analysis. It shows statistics on the times taken to execute system calls by the various processes in the trace, for each system call. We have the minimum and maximum time taken, the average time and the standard deviation, the number of calls and the total spent in that kind of system call.
 
-Now click on the column headers to sort the results by this column. For each line of system call, if you right-click on it, you can navigate to the time range of minimum and maximum value, as shown in the figure below
+Now click on the column headers to sort the results by this column. For each line of system call, if you right-click on it, you can navigate to the time range of minimum and maximum duration, as shown in the figure below, where we selected the maximum range.
 
 ![TraceCompassStatisticsView](screenshots/traceCompassStatisticsView.png "Statistics View Go To Maximum")
 
@@ -127,7 +131,7 @@ Now that you have a time range selected, you can scroll up (or down depending on
 
 ### Task 8: Navigate in XY Views
 
-Let's now look at one the XY views, say the ``CPU Usage`` view. Click on the tab of the view to put it into focus. This view is split in two, with a checkbox tree on the left side and an XY chart on the right side. If the view is too small, you can ``double-click on the tab`` of the view to make it full window size.
+Let's now look at one the XY views, for example we can open the ``CPU Usage`` view under the `CPU usage`. Click on the tab of the view to put it into focus. This view is split in two, with a checkbox tree on the left side and an XY chart on the right side. If the view is too small, you can ``double-click on the tab`` of the view to make it full window size.
 
 By default, this view shows the total CPU usage in time. The checkbox tree on the left shows the list of threads that were active on the CPU during the current window range (ie the visible time).
 
