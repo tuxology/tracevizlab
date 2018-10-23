@@ -14,7 +14,7 @@ First install the lttng PPA repository:
 $ sudo apt-add-repository ppa:lttng/stable-2.10
 ```
 
-This should automatically fetch the updates for all repos. If not, you may need manually update your repositories
+This should automatically fetch the updates for all repos. If not, you may need to manually update your repositories
 
 ```
 $ sudo apt-get update

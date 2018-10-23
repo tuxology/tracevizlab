@@ -46,7 +46,7 @@ The `tracing` we're discussing here is high speed, low overhead tracing. With su
 
 Tracing is just another tool in the developer or sysadmin's toolbox. It is most often not the first one to use. But in some situations, in can be very useful, regardless of if the application to trace is instrumented or not (see next section).
 
-Tracing is best use to understand very complex system, or even simple ones, but the real added value comes when trying to understand complexity and all else fails.
+Tracing is best used to understand very complex system, or even simple ones, but the real added value comes when trying to understand complexity and all else fails.
 
 First, let's see what else is in the toolbox and when to best use each of those tools.
 

@@ -16,6 +16,8 @@ Prefix number code:
 
 Expected flow of a lab:
 
+Each lab contains instructions on how to obtain a trace, so if you have the infrastructure available, you can get a trace yourself for the lab. But each lab also comes with a sample trace, that can be used to do the lab.
+
 
 * [001 what-is-tracing](001-what-is-tracing)
 * `optional` [002 install-lttng-on-ubuntu](002-install-lttng-on-ubuntu)
