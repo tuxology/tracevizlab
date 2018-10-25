@@ -63,6 +63,46 @@ You should reach an empty workspace. And voilà! You are now ready to import and
 
 - - -
 
+### Task 3: Install the Required Add-Ons For This Tutorial
+
+Some labs in this tutorial require additional plugins that are not part of the main Trace Compass tool, but are available through the Trace Compass Incubator repo.  We will add those required plugins now.
+
+To install the plugins, go to the *Tools* -> *Add-ons*
+
+![Addons](screenshots/addons.png "Addons")
+
+A dialog will open with a list of plugins that can be installed. For this tutorial, we will needs the following:
+
+* Generic Callstack (Incubator): For various labs
+* Virtual Machine And Container Analysis (Incubator): For advanced topics with containers and virtual machine
+* Trace Compass opentracing (Incubation): For advanced topic with opentracing
+
+Check those plugins in the *Install* wizard, as shown below. Then click *Finish* and follow the instructions on screen. Trace Compass will have to be restarted at the end of the process.
+
+![AddonsGenericCallstack](screenshots/genericCallStackAddons.png "Addons GenericCallstack")
+
+- - -
+
+### Task 4: Import the Traces For The Tutorial
+
+Each lab comes with the instructions to produce the traces yourself, so *if you plan on making your own traces, you may skip this step*. Otherwise, there is an [archive](../TraceCompassTutorialTraces.tgz) that contains all the traces for the labs. You may import it now.
+
+Upon opening Trace Compass, there is a default project named *Tracing* in the ``Project Explorer``, expand it and right-click on the *Traces* folder. Select *Import...* to open the *Trace Import* wizard.
+
+![ImportTraceMenu](screenshots/importTraceMenu.png "Trace Compass Import Trace Menu")
+
+Check the *Select archive file* radio-button and find the archive you want to import.
+
+![ImportTraceDialog](screenshots/importTraceDialog.png "Trace Compass Import Trace Dialog")
+
+The list on the left will show the folder structure inside that archive, you can select the top-level element and click *Finish*. Make sure the options are as shown above, ie the *Preserve folder structure* is **checked** and *Create experiment* is **unchecked**.
+
+All the traces should be available, each under a folder named for the lab that uses them.
+
+![AllTracesJustImported](screenshots/tutorialTracesImported.png "Tutorial Traces Imported")
+
+- - -
+
 #### Next
 
 * [Trace Navigation in Trace Compass](../101-trace-navigation-in-tracecompass)
