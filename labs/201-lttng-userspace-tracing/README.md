@@ -127,6 +127,6 @@ In the lab, you have compiled a program with tracing helpers, traced the `ls` co
 
 #### Next
 
-* [Python Tracing and Data-Driven Analyses](../202-python-xml-analysis-lab)
+* [Exercice: Bug Hunt](../202-bug-hunt)
 or
 * [Back](../) for more options

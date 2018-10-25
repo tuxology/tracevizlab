@@ -118,6 +118,6 @@ In the lab you learned how to trace a php program, and how to setup *Trace Compa
 
 #### Next
 
-* [Exercice: Bug Hunt](../204-bug-hunt)
+* [Advanced topic: Tracing multiple machine](../301-tracing-multiple-machine)
 or
 * [Back](../) for more options

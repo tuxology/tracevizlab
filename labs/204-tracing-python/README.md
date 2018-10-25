@@ -34,92 +34,7 @@ if __name__ == "__main__":
 
 - - -
 
-### Task 2: Writing the XML analysis
-
-A small explanation on how to write a stack trace xml analysis will be provided here however the documentation on how to write an XML analysis is available in the [Trace Compass user documentation](http://archive.eclipse.org/tracecompass/doc/stable/org.eclipse.tracecompass.doc.user/Data-driven-analysis.html#Data_driven_analysis).
-
-The XML analysis is used to generate a state system which can track the states of different elements over the duration of a trace using the different events and their properties.
-An empty file, with no content yet would look like this:
-```XML
-<?xml version="1.0" encoding="UTF-8"?>
-<tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="xmlDefinition.xsd">
-    [...]
-</tmfxml>
-```
-
-In our case we want a `callstack` which has two elements:
-* The `callstackGroup` have metadata telling where in the state system, the callstack state will be stored.
-* The `pattern` is the xml element telling Trace Compass how to parse a pattern of trace events in order to build one or multiple state machines. These state machines are used to gain state information of a process, thread or program, from the events.
-
-```XML
-<callstack id="lttng.ust.pythonRequest.analysis">
-    <callstackGroup name="Python threads">
-        <level path="Threads/*"/>
-        <thread cpu="cpu"/>
-    </callstackGroup>
-    <pattern version="1" id="ca.polymtl.pythonrequest">
-        [...]
-    </pattern>
-</callstack>
-```
-
-In the pattern element we have 3 elements:
-* The `head` which contains the traceType that tells Trace Compass which trace type this analysis applies to, in this case this analysis applies to ust traces. The label indicates the name under which the views will be displayed in the project explorer.
-* The `location` elements are shortcuts indicates how each thread state is displayed in the views. Locations can be referenced by state attributes or state values.
-* The `patternHandler` is where `test`, `action` and `fsm` elements will be defined.
-```XML
-<head>
-    <traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype"/>
-    <label value="Python Requests View"/>
-</head>
-
-<location id="CurrentThread">
-    <stateAttribute type="constant" value="Threads"/>
-    <stateAttribute type="query">
-        <stateAttribute type="constant" value="#CurrentScenario"/>
-        <stateAttribute type="constant" value="threadName"/>
-    </stateAttribute>
-</location>
-
-<patternHandler>
-    [...]
-</patternHandler>
-```
-The `patternHandler` element is where the core of the logic is defined, details about each element are available in [Writing the XML pattern provider](http://archive.eclipse.org/tracecompass/doc/stable/org.eclipse.tracecompass.doc.user/Data-driven-analysis.html#Writing_the_XML_pattern_provider).
-
-* The `test` element defines a condition used in the state machine to execute a transition.
-* The `action` element defines a change in the state or a segment generation to apply when there is a transition.
-* The `fsm` element defines the states and their transitions.
-
-```XML
-<test id="same_thread"> [...] </test>
-<test id="new_request"> [...] </test>
-<test id="end_request"> [...] </test>
-
-<action id="entering_thread"> [...] </action>
-<action id="push_event_type"> [...] </action>
-<action id="pop_event_type"> [...] </action>
-
-<fsm id="pythonRequest" initial="Wait_start"> [...] </fsm>
-```
-
-Here is the XML that defines the finite state machine (FSM). In this case a request has three states for a server processing it: not started, being processed, finished. These states are respectively `Wait_start`, `in_thread` and `end_thread`. Each state can have transitions to other states and these transitions have conditions in order to parse the trace adequately. They also have an action to execute when the transition happen.
-```XML
-<fsm id="pythonRequest" initial="Wait_start">
-    <state id="Wait_start">
-        <transition event="*" cond="new_request" target="in_thread" action="entering_thread:push_event_type"/>
-    </state>
-    <state id="in_thread" >
-        <transition event="*" cond="same_thread:end_request" target="end_thread" action="pop_event_type"/>
-    </state>
-    <final id="end_thread"/>
-</fsm>
-```
-
-- - -
-
-### Task 3: Tracing the python application
+### Task 2: Tracing the python application
 
 To run the server script given in this lab you need to install the lttngust and flask libraries.
 ```bash
@@ -147,6 +62,12 @@ $ lttng view # Optional, displays the events recorded
 $ lttng destroy
 ```
 If the server takes too long (5 seconds or more), it is possible that the LTTng agent could not register with the session daemon and in that case, the trace will not contain any event. If you run python in a virtual environment, it could prevent the agent from connecting to the session daemon.
+
+- - -
+
+### Task 3: Writing the XML analysis
+
+This python application is very simple and have router entry and exit tracepoints. The XML file for this analysis is available [in this lab's directory](python-analysis.xml). You may download it and import it in Trace Compass.
 
 - - -
 
@@ -185,6 +106,6 @@ In this tutorial, you wrote some simple python code that creates LTTng events, t
 
 #### Next
 
-* [PHP Userspace Tracing](../203-tracing-php-userspace)
+* [PHP Userspace Tracing](../205-tracing-php-userspace)
 or
 * [Back](../) for more options
