@@ -1,6 +1,6 @@
 ## Tracing wget and showing the critical path
 
-In this lab, you will learn to view the critical path of a process, compare two executions of the same program and understand what is happening behind the scenes. In a program, a task may wait for something, for instance, the result of another task or the network. These wait dependencies can be seen using the critical path analysis. This analysis highlights the active path from the trace and is displayed in the *Critical Flow View*. The critical path is the path that, if decreased, can decreased the duration of the application.
+In this lab, you will learn to view the critical path of a thread from the system's point of view, compare two executions of the same program and understand what is happening behind the scenes. In a program, a task may wait for something, for instance, the result of another task or the network. These wait dependencies are computed by the *OS Execution Graph* and can be seen using the critical path analysis. The critical path is the path that, if decreased, can decrease the duration of the application.
 
 ![KernelWaitAnalysisDjango](screenshots/kernelWaitAnalysisDjango.png "Trace Compass Kernel Wait Analysis")
 
@@ -10,8 +10,8 @@ In this lab, you will learn to view the critical path of a process, compare two 
 
 ### Task 1: Recording two executions of wget
 
-You need to save two traces of the same wget instruction. You can either use [lttng-record-trace](https://github.com/tahini/lttng-utils)
-or use lttng directly to trace the command:
+For this lab, we will look at 2 executions of the `wget` command. The traces can be recorded using [lttng-record-trace](https://github.com/tahini/lttng-utils)
+or lttng directly to trace the command:
 
 ```
 $ lttng-record-trace wget http://www.dorsal.polymtl.ca
@@ -25,82 +25,72 @@ $ wget http://www.dorsal.polymtl.ca
 $ lttng destroy
 ```
 
-Or you can use the 2 traces provided with this lab.
+The 2 traces provided with this lab did the exact same query. The first one, in the `wget-first-call` trace took 230 ms to complete, while the second one in `wget-second-call` took 10 times less.
+
+:question: What hypotheses can we make to explain the differences in the execution time of wget?
 
 - - -
 
-### Task 2: Open two traces in the same project
+### Task 2: Get the Critical Path Of The Trace
 
-Open the two traces created in the previous task. You can add both by simply selecting the parent folder of both traces when importing trace files.
+We first need to open the critical path view, either by pressing `ctrl-3` and searching for `Critical Flow` view, or in the `Project Explorer` it would be under the `Views` element under the trace, `OS Execution Graph` -> `Critical Flow View`.
 
-![ImportMultipleTrace](screenshots/importMultipleTrace.png "Trace Compass Import Multiple Traces")
+Since we know which process we are interested in, we can search for it in the `Control Flow` view. We can hit the `ctrl-f` shortcut and type wget.
+
+![SearchProcessTrace](screenshots/searchProcessTrace.png "Trace Compass Search Process")
+
+Once you have done that, you can right-click on the `wget` line and select `Follow wget/<tid>` where tid is the Thread ID of wget in your trace. As we can see, for this example, you would've selected `Follow wget/12243`. The `Follow <thread>` means we are interested in additional information on this thread and it will trigger all analyses and actions that concerns a single thread. The *Critical Path* analysis is one of them. After executing, the result of the critical path should appear in the `Critical Flow` view.
+
+![FollowProcess](screenshots/followProcess.png "Trace Compass Follow Process")
 
 - - -
 
-### Task 3: An Overview of Trace Compass
+### Task 3: Understanding the Critical Path
 
-After opening the *Kernel* perspective of one of the trace, you can see the *Control Flow View* by clicking on the Control Flow tab beside the *Resources* tab.
+The `OS Execution Graph` analysis that is the base of the critical path computes the dependencies between the threads only from the kernel events. It will try to explain the causes of a thread being blocked by following what triggered the wakeup of the thread. For example, the reception of a network packet will cause a wakeup event for the thread that was waiting for this packet. So we can infer that the thread was blocked waiting for network.
 
-![DefautlView](screenshots/defaultView.png "Trace Compass Default View")
+The `Critical Path` analysis starts from the end of the thread and moves back through the dependency chain to get the longest path of waiting for resources. It would find out if a process was waiting for a semaphore owned by another thread or if it was waiting on disk, etc.
 
-This is what you should see:
+In the case of the `wget` critical path we have it, there is no dependency with any other thread on the machine, as should be expected from such an application, so it looks like the line of the process of the `Control Flow` view, only that the **blocked** states are replaced by the reasons of the blocking. The following screenshot shows the legend of the `Critical Path` view.
 
-![ControlFlowView](screenshots/controlFlowView.png "Trace Compass Control Flow View")
+![CriticalPathLegend](screenshots/criticalPathLegend.png "Critical Path Legend")
 
-Most of views are accessible in the *Project Explorer View* or by accessing *Window > Show View*. Here is a description of what is shown in the previous screenshot:
-
-- The *Project Explorer View* is the standard Eclipse project explorer.
-
-- The *Control Flow View* is a LTTng-specific view and is accessible under the Linux Kernel element in the *Project Explorer View*. It is useful to see the state of each process state with respect to time.
-
-- The *Events Editor View* shows the basic trace data elements parsed into a table. It is possible to filter elements by writing into the first row of this table. Most of the views are generated using these events.
-
-- The *Histogram View* displays the events distribution with respect to time.
-
-In this lab, you will use the critical path to analyze the differences between the two executions of wget. To show the critical path you need to open the *Critical Flow View*: *Views > OS Execution Graph > Critical Flow View* and follow the process you want to analyze.
-
+We can understand from this that our `wget` thread was mostly waiting for disk in the beginning and network at the end.
 
 - - -
 
 ### Task 4: Comparing two views
 
-To compare two critical paths, you need two *Critical Flow View* from the two traces you have. You need to pin the view to one trace then in the view menu (shown in the screenshot) select `new view, pinned to <second trace>`.
+To compare two critical paths together, you need two `Critical Flow View` from the two traces. First, let's pin the view to one trace by clicking the down arrow next to the pin icon in the view.
 
 ![PinToFirstTrace](screenshots/pinToFirstTrace.png "Trace Compass Pin to First Trace")
 
+Then in the view menu, at the right of the toolbar, select `new view, pinned to <second trace>`.
+
 ![NewViewPinnedToSecond](screenshots/newViewPinnedToSecond.png "Trace Compass New View Pinned to Second")
 
-- - -
-
-### Task 5: Search for a process in the control flow and show critical path
-
-In the *Control Flow View*, to follow one process, you can search for the process wget by hitting the shortcut `ctrl-f` and then typing the name of the process.
-
-![SearchProcessTrace](screenshots/searchProcessTrace.png "Trace Compass Search Process")
-
-Once you have done that, you can right-click on the wget line and select `Follow wget/<pid>` where pid is the Process ID of wget in your trace. As we can see, for this example, you would've selected `Follow wget/12243`. Then, the critical path should appear in the corresponding critical flow view.
-
-![FollowProcess](screenshots/followProcess.png "Trace Compass Follow Process")
-
-You should then replicate this for the other trace and move one of the views to see both at the same time, it should look like this:
-
-![CompareCriticalPaths](screenshots/compareCriticalPaths.png "Trace Compass Compare Critical Paths")
+To display the critical path of the second trace, you can repeat task 2 for the second trace. Now both `Critical Flow` views should be populated with their respective `wget` critical paths.
 
 - - -
 
-### Task 6: Critical path analysis
+### Task 5: Critical path analysis
+
+You should now have the 2 critical paths side by side to compare their execution.
 
 ![CriticalPaths](screenshots/criticalPaths.png "Trace Compass Critical Paths")
 
-After navigating in the *Critical Flow View*, you can see the two critical paths in their entirety. In the first call to wget (bottom graph) the purple indicates that the process is waiting for a device. In this case it is waiting for the disk to load the program wget into memory. The green indicates that the process is running and pink shows that the process is waiting for the network.
+We can see the time difference between the two executions by simply selecting the range of the process activity for each critical path. The time span will be displayed at the bottom of the window.
 
 ![MeasureTimeDifference](screenshots/measureTimeDifference.png "Trace Compass Measure Time Difference")
 
-We can see the time difference between the two executions by simply selecting the range of the process activity for each critical path. The time span will be displayed at the bottom of the window.
+We clearly see that the second critical path does not have the access to disk that we see in the beginning of the first one. The network phase is also much longer the first time than the next one.
 
-With the critical path analysis, you can see that the second execution was much faster for two reasons:
- 1) The program was already in memory
- 2) The request was better routed the second time
+We can thus answer our hypothesis from the beginning as to why there was a 10X time difference between the 2 executions:
+
+ 1) For the first trace, the `wget` binary was fetched from disk, while it was already in memory the next time.
+ 2) On the first query to the web page, the server probably had some setting up to do: Wake up a virtual machine on server? Fetch the page from disk? Cache the page?
+
+If we had a trace of the server side, we would be able to better understand the network latency. We will do that in an [advanced lab](../301-tracing-multiple-machines) later in this tutorial.
 
 - - -
 
