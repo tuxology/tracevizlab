@@ -16,7 +16,7 @@ Prefix number code:
 
 Expected flow of a lab:
 
-Each lab contains instructions on how to obtain a trace, so if you have the infrastructure available, you can get a trace yourself for the lab. But each lab also comes with a sample trace, that can be used to do the lab.
+Each lab contains instructions on how to obtain a trace, so if you have the infrastructure available, you can get a trace yourself for the lab. But we also provide an [archive](TraceCompassTutorialTraces.tgz) with demo traces for all the labs, so you can import it in Trace Compass at the beginning and open them when necessary.
 
 
 * [001 what-is-tracing](001-what-is-tracing)
