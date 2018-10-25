@@ -16,7 +16,7 @@ Prefix number code:
 
 Expected flow of a lab:
 
-Each lab contains instructions on how to obtain a trace, so if you have the infrastructure available, you can get a trace yourself for the lab. But each lab also comes with a sample trace, that can be used to do the lab.
+Each lab contains instructions on how to obtain a trace, so if you have the infrastructure available, you can get a trace yourself for the lab. But we also provide an [archive](TraceCompassTutorialTraces.tgz) with demo traces for all the labs, so you can import it in Trace Compass at the beginning and open them when necessary.
 
 
 * [001 what-is-tracing](001-what-is-tracing)
@@ -29,8 +29,9 @@ Each lab contains instructions on how to obtain a trace, so if you have the infr
 * [102 tracing-wget-critical-path](102-tracing-wget-critical-path)
 * [103 compare-package-managers](103-compare-package-managers)
 * [201 lttng-userspace-tracing](201-lttng-userspace-tracing)
-* `optional` [202 python-xml-analysis-lab](202-python-xml-analysis-lab)
-* `optional` [203 tracing-php-userspace](203-tracing-php-userspace)
-* [204 bug-hunt](204-bug-hunt)
+* [202 bug-hunt](202-bug-hunt)
+* `optional` [203 intro to language specific tracing](203-intro-to-language-specific-tracing)
+* `optional` [204 python-tracing](204-python-tracing)
+* `optional` [205 tracing-php-userspace](205-tracing-php-userspace)
 * [301 tracing-multiple-machines](301-tracing-multiple-machines)
 * [302 system-tracing-containers](302-system-tracing-containers)

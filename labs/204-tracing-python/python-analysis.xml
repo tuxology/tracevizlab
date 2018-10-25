@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tmfxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../org.eclipse.tracecompass.tmf.analysis.xml.core/src/org/eclipse/tracecompass/tmf/analysis/xml/core/module/xmlDefinition.xsd">
+<callstack id="lttng.ust.pythonRequest.analysis">
+    <callstackGroup name="Python threads">
+        <level path="Threads/*"/>
+        <thread cpu="cpu"/>
+    </callstackGroup>
+    <pattern version="1" id="ca.polymtl.pythonrequest">
+        <head>
+            <traceType id="org.eclipse.linuxtools.lttng2.ust.tracetype"/>
+            <label value="Python Requests View"/>
+        </head>
+
+        <location id="CurrentThread">
+            <stateAttribute type="constant" value="Threads"/>
+            <stateAttribute type="query">
+                <stateAttribute type="constant" value="#CurrentScenario"/>
+                <stateAttribute type="constant" value="threadName"/>
+            </stateAttribute>
+        </location>
+
+        <patternHandler>
+            <!-- CONDITIONS -->
+
+            <!-- Test if the current running thread is equal to the current scenario thread -->
+            <test id="same_thread">
+                <if>
+                    <condition>
+                        <stateValue type="eventField" value="threadName"/>
+                        <stateValue type="query">
+                            <stateAttribute type="constant" value="#CurrentScenario"/>
+                            <stateAttribute type="constant" value="threadName"/>
+                        </stateValue>
+                    </condition>
+                </if>
+            </test>
+
+            <test id="new_request">
+                <if>
+                    <condition>
+                        <stateValue type="eventField" value="funcName"/>
+                        <stateValue type="string" value="tracing_entry"/>
+                    </condition>
+                </if>
+            </test>
+
+            <test id="end_request">
+                <if>
+                    <condition>
+                        <stateValue type="eventField" value="funcName"/>
+                        <stateValue type="string" value="tracing_exit"/>
+                    </condition>
+                </if>
+            </test>
+
+            <!-- ACTIONS -->
+
+            <!-- Actions and test for time graph view threads -->
+            <action id="entering_thread">
+                <!-- Initialize current scenario data: component, type of thread, queries and drawing event counts -->
+                <stateChange>
+                    <stateAttribute type="constant" value="#CurrentScenario"/>
+                    <stateAttribute type="constant" value="threadName"/>
+                    <stateValue type="eventField" value="threadName"/>
+                </stateChange>
+            </action>
+
+            <action id="push_event_type">
+                <!-- Push the current event to the thread's callstack -->
+                <stateChange>
+                    <stateAttribute type="location" value="CurrentThread"/>
+                    <stateAttribute type="constant" value="CallStack"/>
+                    <stateValue type="eventField" value="msg" stack="push"/>
+                </stateChange>
+            </action>
+
+            <action id="pop_event_type">
+                <!-- Pop the current event from the callstack -->
+                <stateChange>
+                    <stateAttribute type="location" value="CurrentThread"/>
+                    <stateAttribute type="constant" value="CallStack"/>
+                    <stateValue type="eventField" value="msg" stack="pop"/>
+                </stateChange>
+            </action>
+
+            <!-- FSMs -->
+
+            <fsm id="pythonRequest" initial="Wait_start">
+                <state id="Wait_start">
+                    <!-- The state will stay here until we have a thread start event -->
+                    <transition event="*" cond="new_request" target="in_thread" action="entering_thread:push_event_type"/>
+                </state>
+                <state id="in_thread">
+                    <!-- The state will loop on itself until the thread ends and increment the operations that happen during the execution -->
+                    <transition event="*" cond="same_thread:end_request" target="end_thread" action="pop_event_type"/>
+                </state>
+                <final id="end_thread"/>
+            </fsm>
+        </patternHandler>
+    </pattern>
+</callstack>
+</tmfxml>
