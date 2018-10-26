@@ -44,6 +44,8 @@ Press <enter> to keep the current choice[*], or type selection number: **2**
 
 - - -
 
+In Windows and MacOs, download the jdk [here](https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)
+
 ### Task 2: Get Trace Compass
 
 Go to the [Trace Compass web site](http://tracecompass.org) and click on the big green button to download the latest release of Trace Compass. For these labs, you may rather want to download the latest development snapshot, that can be found [here](https://www.eclipse.org/tracecompass/download.html), by following the *Development snapshots* link and selecting the proper version for your system.
