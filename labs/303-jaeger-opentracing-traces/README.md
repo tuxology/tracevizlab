@@ -2,7 +2,7 @@
 
 In this lab, you will learn to use Trace Compass to upload and analyse Jaeger traces, obtained from distributed applications instrumented with OpenTracing API. Jaeger already provides a very good visualization of those traces, but with TraceCompass, those traces can be analyzed along with other system and application traces.
 
-*Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](00-installing-tracecompass.md) lab or read the [TraceCompass web site](https://tracecompass.org) for more information. This lab is not a tutorial about OpenTracing or Jaeger. It supposes that you know about these, but it provides all the necessary material to use Trace Compass with example traces, without having access to a Jaeger infrastructure.
+*Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](../006-installing-tracecompass) lab or read the [TraceCompass web site](https://tracecompass.org) for more information. This lab is not a tutorial about OpenTracing or Jaeger. It supposes that you know about these, but it provides all the necessary material to use Trace Compass with example traces, without having access to a Jaeger infrastructure.
 
 **Note** at the time of this presentation, Trace Compass v4.2 has not yet been released. For the best experience with trace compass 4.1 follow these steps:
 
