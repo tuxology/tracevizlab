@@ -156,7 +156,7 @@ With focus on the ``Control Flow`` view, find the *wget* processes: press ``Ctrl
 
 ![CriticalPathWgetCold](screenshots/criticalPathWgetCold.png "Critical Path Wget Cold")
 
-In the *[Tracing wget](../01-tracing-wget-critical-path/01-tracing-wget-critical-path.md)*, we saw that most of the *wget* critical path was spent waiting on the network. Now with this experiment, that *waiting for network* part is replaced by the server side critical path, where the apache/mariadb processes each play a role. We see a lot of disk access. This request has not been made in a long time and its data, php code, as well as database, needs to be fetched from disk.
+In the *[Tracing wget](../102-tracing-wget-critical-path)*, we saw that most of the *wget* critical path was spent waiting on the network. Now with this experiment, that *waiting for network* part is replaced by the server side critical path, where the apache/mariadb processes each play a role. We see a lot of disk access. This request has not been made in a long time and its data, php code, as well as database, needs to be fetched from disk.
 
 Now in the ``Control Flow`` view, select the second *wget* process and right-click it to follow the process and calculate its critical path. This time, we see a lot less disk accesses on the server side, and thus a much shorter request than the first time. The data for the request was already on memory, which improves the query time.
 
