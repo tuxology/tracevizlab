@@ -2,8 +2,7 @@
 
 This repository contains a series of labs and guides for collecting traces from the operating system or userspace applications or cloud environments, and visualizing them with trace visualization tools. While most of the labs will use [LTTng](http://lttng.org) for trace collection and [Trace Compass](http://tracecompass.org/) for visualization, some labs may use other tools.
 
-Each lab has specific goals and objectives. The labs are composed of various tasks to achieve the goal and in the process. Each lab has a README, which contains suggestions for navigation of the tasks. 
-There will also be sample traces and screenshots for each lab to help you guide through the UI and visualizations.
+Each lab has specific goals and objectives. The main text is present in the README of each lab's directory and contains  various tasks outlined chronologically, to achieve the goal and complete the lab. The text also contains suggestions for navigation of the tasks. There will also be screenshots for each lab to help you guide through the UI and visualizations. Sample traces for all the labs are saved in a compressed file named [TraceCompassTutorialTraces.tgz](https://github.com/tuxology/tracevizlab/blob/master/labs/TraceCompassTutorialTraces.tgz) which can allow the user to skip reproducing the experiment and generating traces.
 
 ### Goals
 
@@ -21,5 +20,5 @@ There will also be sample traces and screenshots for each lab to help you guide 
 ## Lab developers
   - [Matthew Khouzam](https://twitter.com/DavisTurlis)
   - [Geneviève Bastien](https://twitter.com/genbastien)
-  - [Mohamad Gebai](https://twitter.com/genbastien)
+  - [Mohamad Gebai](https://twitter.com/mogeb88)
   - [Suchakra Sharma](https://twitter.com/tuxology)
