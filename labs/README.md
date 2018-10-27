@@ -9,9 +9,7 @@ This directory contains the labs that are part of this tutorial. The labs are or
 | **2xx** | Simple userspace use cases (application tracing) [along with kernel] |
 | **3xx** | Advanced use cases (multi-machine and distributed traces) |
 
----
-
-### Expected Lab Flow
+## Expected Lab Flow
 
 Each lab contains instructions on how to obtain a trace, so if you have the infrastructure available, you can get a trace yourself for the lab. But we also provide an [archive](TraceCompassTutorialTraces.tgz) with demo traces for all the labs, so you can import it in Trace Compass at the beginning and open them when necessary.
 
