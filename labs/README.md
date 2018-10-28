@@ -25,5 +25,8 @@ Each lab contains instructions on how to obtain a trace, so if you have the infr
 * [103 compare-package-managers](103-compare-package-managers)
 * [201 lttng-userspace-tracing](201-lttng-userspace-tracing)
 * [202 bug-hunt](202-bug-hunt)
+* `optional` [203 intro to language specific tracing](203-intro-to-language-specific-tracing)
+* `optional` [204 python-tracing](204-python-tracing)
+* `optional` [205 tracing-php-userspace](205-tracing-php-userspace)
 * [301 tracing-multiple-machines](301-tracing-multiple-machines)
 * [302 system-tracing-containers](302-system-tracing-containers)
