@@ -22,3 +22,4 @@ Each lab has specific goals and objectives. The main text is present in the READ
   - [Geneviève Bastien](https://twitter.com/genbastien)
   - [Mohamad Gebai](https://twitter.com/mogeb88)
   - [Suchakra Sharma](https://twitter.com/tuxology)
+  - Arnaud Fiorini
