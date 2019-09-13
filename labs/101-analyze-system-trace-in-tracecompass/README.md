@@ -1,6 +1,6 @@
-## Trace Navigation in Trace Compass
+## Analyze System Trace in Trace Compass
 
-In this lab, you will learn to open a trace in Trace Compass and navigate the various views available. We will see in future labs what each of those views mean and what we can make of it.
+In this lab, you will learn to open a system trace in Trace Compass and navigate the various views available. We will look at a simple system trace when running the `wget` command and see what kind of information we can get from it.
 
 *Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](../006-installing-tracecompass) lab or read the [TraceCompass web site](http://tracecompass.org) for more information. You also need a trace to open. You can take the trace you did in the [Record a kernel trace](../003-record-kernel-trace-lttng) lab or take the trace from the tutorial's archive.
 
@@ -26,13 +26,15 @@ A trace named kernel will show up under the *Traces* folder. You can double-clic
 
 The main view that shows when opening a kernel trace is the ``Resources`` view, showing CPUs and interrupts on the left table and their statuses on the right. The scale at the top shows the time in the trace. This type of view is called a *time graph view*. Make sure this view is the one with focus by clicking on the title tab.
 
-:exclamation: The `Resources` view gives an overview of what is happening in the system. It is a good starting point if you are looking at a system's problem, or investigating some unexplainable latencies. It can give you in one glance a feeling of how busy the system was, how long were the processes on the CPU, how much interrupts happened, etc. It can help figure out what to do next when you are not sure what to look at. The first line, named *CPU X Threads* shows the thread on CPU, each of different color, the second line, *CPU X States* shows the state of the thread, whether userspace, kernel, or interrupted. The third line, *CPU X Frequency*, shows the frequency of the CPU.
+:exclamation: The `Resources` view gives an overview of what is happening in the system. It is a good starting point if you are looking at a system's problem, or investigating some unexplainable latencies. It can give you in one glance a feeling of how busy the system was, how long were the processes on the CPU, how many interrupts happened, etc. It can help figure out what to do next when you are not sure what to look at. The first line, named *CPU X Threads* shows the thread on CPU, each of different color, the second line, *CPU X States* shows the state of the thread, whether userspace, kernel, or interrupted. The third line, *CPU X Frequency*, shows the frequency of the CPU.
 
 When the trace first opens, it shows the first 100 milliseconds of the trace.
 
 You can **zoom out to see the complete trace** by double-clicking on the time graph scale or click on the house icon:
 
 ![FullTimeScale](screenshots/fullTimeScale.png "Time Graph View Reset Time Scale")
+
+:small_red_triangle_down:
 
 You can zoom in and out in time and pan the view left and right by using the ``w``, ``a``, ``s``, ``d`` keyboard shortcuts or ``ctrl-scroll`` and ``middle-click + mouse move``, this last one can also pan the view up and down.
 
@@ -42,17 +44,21 @@ The ``up`` and ``down`` arrows, and the ``mouse scroll`` moves the view up and d
 
 Time selection is done with the mouse, by ``left-clicking`` on a timestamp to select a single time, or ``left-drag`` to select a time range. Zooming in to a time range is done by ``right-dragging`` the mouse to that time range. All the opened views, as well as the events table will synchronize with the time selection and/or visible time ranges.
 
+:small_red_triangle:
+
 Another interesting time graph view for kernel traces is the `Control Flow` view. The corresponding tab should be right next to the `Resources` view in the perspective.
 
 :exclamation: The `Control Flow` view shows the state of every thread in the system during the trace. When you know or have identified a thread of interest, you can find it in this view, see its hierachy and what it has been doing during tracing.
 
-For this lab, the process of interest would be `ls` and we can find it in the `Control Flow` view by doing `ctrl-f` with the view in focus and typing `ls`.
+For this lab, the process of interest would be `wget` and we can find it in the `Control Flow` view by doing `ctrl-f` with the view in focus and typing `ls`.
 
 ![ControlFlowView](screenshots/controlFlowView.png "Control Flow View")
 
 - - -
 
 ### Task 3: Filter out some entries in time graph views
+
+*TODO: instead filter out the non active entries of the CFV*
 
 The ``Resources`` view shows for each CPU 3 lines: the running thread, the CPU state and its frequency. Let's say we want to hide the frequency lines from the view.
 
@@ -85,6 +91,8 @@ As of this writing, this feature works well only on the `Resources` view. More i
 
 ### Task 4: Change the color of the states
 
+:small_red_triangle_down:
+
 Views like the ``Resources`` view have built-in colors for some of the states that are displayed. For instance, the **Running** state is green, **System call** is blue, **Idle** is grey and the line is thinner.
 
 To get the meaning of the colored states and change their style (color, width), you can click on the ``Legend`` icon. The window that opens shows the legend of the current view and allows to change the colors by cliking on the color rectangle, or the width by using the gradient line right of the name. The arrow button at the end of each line will reset to defaults.
@@ -92,6 +100,8 @@ To get the meaning of the colored states and change their style (color, width), 
 In the following screenshot, we've changed the color and width of the **System call** state.
 
 ![TimeGraphViewLegend](screenshots/timeGraphViewLegend.png "Time Graph View Legend")
+
+:small_red_triangle:
 
 - - -
 
@@ -101,9 +111,13 @@ There's a view at the bottom of the window called ``Histogram``.
 
 :exclamation: The `Histogram` shows the density of events in time, so you can see in one glance where in the trace the most events occurred. At the bottom is the full time range of the trace and above is the window range, ie the visible range in the other views. This view can be used to navigate the trace, as you can change selection and visible range in both sections of the view.
 
+:small_red_triangle_down:
+
 In any of those 2 histogram boxes, ``left-click + drag`` will change the selection range, while ``right-click + drag`` will change the visible range. You may also manually change the selection range or the zoom level by editing the text boxes on the left.
 
 You can play with the visible and selection ranges with this view and observe how the other views are updated. The following screenshot summarizes those concept.
+
+:small_red_triangle:
 
 ![HistogramTimeRanges](screenshots/histogramTimeRanges.png "Time Ranges With The Histogram View")
 
@@ -128,6 +142,8 @@ We have previously seen the *time graph views*. In the next tasks, we will intro
 - - -
 
 ### Task 7: Explore the Latencies Views
+
+*TODO: Filter the latency views with global filters to only see those of wget and tell something about it*
 
 Let's now open the ``System Call Latency Statistics`` under the ``System Call Latency`` analysis.
 
@@ -173,7 +189,9 @@ Double-clicking on the tab again will reduce the view to its original size.
 
 Another similar view is the `Disk I/O Activity` view, under the `Input/Output` analysis.
 
-:exclamation: The `Disk I/O Activity` view show the read and write operation on the disk, so can be used to see how busy the disks were. The reads and writes cannot be matched with a specific thread. A thread's reads and writes are done on files that are often in memory, but they may sometimes need to go to the disk, in which case a system call will typically wait for the result from the disk thread. Only those disk accesses would be visible here.
+:exclamation: The `Disk I/O Activity` view shows the read and write operations on the disk, so can be used to see how busy the disks were. The reads and writes cannot be matched with a specific thread. A thread's reads and writes are done on files that are often in memory, but they may sometimes need to go to the disk, in which case a system call will typically wait for the result from the disk thread. Only those disk accesses would be visible here.
+
+![TraceCompassDiskActivity](screenshots/traceCompassDiskActivity.png "Disk I/O Activity view")
 
 - - -
 

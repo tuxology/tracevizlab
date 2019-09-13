@@ -48,9 +48,7 @@ In Windows and MacOs, download the jdk [here](https://www.oracle.com/technetwork
 
 ### Task 2: Get Trace Compass
 
-*[For LISA 2018, download the TraceCompass development snapshot](http://download.eclipse.org/tracecompass/master/rcp/)*
-
-Go to the [Trace Compass web site](http://tracecompass.org) and click on the big green button to download the latest release of Trace Compass. For these labs, you may rather want to download the latest development snapshot, that can be found [here](https://www.eclipse.org/tracecompass/download.html), by following the *Development snapshots* link and selecting the proper version for your system.
+Go to the [Trace Compass web site](http://tracecompass.org) and click on the big green button to download the latest release of Trace Compass.
 
 Then extract the content of the downloaded archive and simply start trace-compass from the extracted folder
 
@@ -77,9 +75,13 @@ To install the plugins, go to the *Tools* -> *Add-ons*
 
 A dialog will open with a list of plugins that can be installed. For this tutorial, we will needs the following:
 
-* Generic Callstack (Incubator): For various labs
-* Virtual Machine And Container Analysis (Incubator): For advanced topics with containers and virtual machine
-* Trace Compass opentracing (Incubation): For advanced topic with opentracing
+* **Generic Callstack (Incubator)**: For various labs
+* **Global Filters (Incubator)**: For various labs
+* **Trace Compass Scripting Javascript (Incubation)**: For application tracing labs
+* **Trace Compass ftrace (Incubation)**: If you have system traces with ftrace
+* **Trace Compass uftrace (Incubation)**: Some application traces provided in this tutorial are made by uftrace
+* **Virtual Machine And Container Analysis (Incubator)**: For advanced topics with containers and virtual machine
+* **Trace Compass opentracing (Incubation)**: For advanced topic with opentracing
 
 Check those plugins in the *Install* wizard, as shown below. Then click *Finish* and follow the instructions on screen. Trace Compass will have to be restarted at the end of the process.
 
@@ -109,6 +111,6 @@ All the traces should be available, each under a folder named for the lab that u
 
 #### Next
 
-* [Trace Navigation in Trace Compass](../101-trace-navigation-in-tracecompass)
+* [Trace Navigation in Trace Compass](../101-analyze-system-trace-in-tracecompass)
 or
 * [Back](../) for more options

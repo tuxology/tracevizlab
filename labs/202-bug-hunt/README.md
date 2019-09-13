@@ -2,7 +2,7 @@
 
 In this lab, you'll be invited to find issues that have been purposefully introduced in an otherwise quite simple and straightforward program: `cat`.
 
-*Pre-requisites*: This lab supposes that you are now familiar with kernel and some userspace trace visualization. You should have done the [kernel trace navigation](../101-trace-navigation-in-tracecompass), [kernel critical path](../102-tracing-wget-critical-path) and [userspace tracing](../201-lttng-userspace-tracing) labs.
+*Pre-requisites*: This lab supposes that you are now familiar with kernel and some userspace trace visualization. You should have done the [kernel trace navigation](../101-analyze-system-trace-in-tracecompass), [kernel critical path](../102-tracing-wget-critical-path) and [userspace tracing](../201-lttng-userspace-tracing) labs.
 
 - - -
 

@@ -4,18 +4,6 @@ In this lab, you will learn to use Trace Compass to upload and analyse Jaeger tr
 
 *Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](../006-installing-tracecompass) lab or read the [TraceCompass web site](https://tracecompass.org) for more information. This lab is not a tutorial about OpenTracing or Jaeger. It supposes that you know about these, but it provides all the necessary material to use Trace Compass with example traces, without having access to a Jaeger infrastructure.
 
-**Note** at the time of this presentation, Trace Compass v4.2 has not yet been released. For the best experience with trace compass 4.1 follow these steps:
-
-1. Go to Help->Install New Software->Manage...
-2. Select the Trace Compass RCP entry
-3. Click on Edit
-4. Change the word "stable" for "master" in the url
-5. Close the windows clicking "on "close"
-6. Close the "Available Software" window.
-7. click on Help->Check for Updates
-8. Follow the instructions.
-
-
 - - -
 
 ### Task 1: Tracing with Jaeger

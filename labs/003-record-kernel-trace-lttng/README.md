@@ -103,7 +103,8 @@ $ rsync -avz <user>@<traced.host>:</path/to/trace/dir> traces/
 
 ### References
 
-[LTTng user documentation](http://lttng.org/docs)
+* [LTTng user documentation](http://lttng.org/docs)
+* [lttng-utils](https://github.com/tahini/lttng-utils) tracing helper documentation
 
 - - -
 

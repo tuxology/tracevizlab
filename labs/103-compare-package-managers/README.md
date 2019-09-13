@@ -2,7 +2,7 @@
 
 In this lab, we will use kernel tracing to compare the behaviors of common utility that varies from linux distro to linux distro: package managers. They all do the same thing: install a package on the system, but they are quite different. You will also learn to search and filter in time graph views and make bookmarks to identify regions of interest in the trace.
 
-*Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](../006-installing-tracecompass/) lab or read the [TraceCompass web site](http://tracecompass.org) for more information. You should have done the [Trace Navigation in Trace Compass](../101-trace-navigation-in-tracecompass) and the [Wget Critical Path](../102-tracing-wget-critical-path) labs.
+*Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](../006-installing-tracecompass/) lab or read the [TraceCompass web site](http://tracecompass.org) for more information. You should have done the [Trace Navigation in Trace Compass](../101-analyze-system-trace-in-tracecompass) and the [Wget Critical Path](../102-tracing-wget-critical-path) labs.
 
 - - -
 
@@ -77,7 +77,7 @@ Now let's try to identify the various phases of the process. Once we identify a 
 We can then easily come back to a bookmark by selecting it in any view that supports bookmarks. It will automatically select the proper time range and the status bar at the bottom will show the duration of the phase.
 
 ```
-Spoiler alert: you may pause here and look at the trace for yourself
+**Spoiler alert: you may pause here and look at the trace for yourself**
 ```
 
 Looking at the critical path, we see a zone where it waits for the network. That must be the *Download*, that we can bookmark. Which would make the time before, the *preparation* phase.

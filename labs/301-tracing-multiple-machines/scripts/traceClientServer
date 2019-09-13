@@ -2,15 +2,16 @@
 
 USER=$1
 SERVER=$2
-if [ -z "$USER" -o -z "$SERVER" ]
+URL=$3
+if [ -z "$USER" || -z "$SERVER" || -z "$URL" ]
 then
-	echo "Usage: ./traceClientServer <ServerUserName> <ServerHostOrIp>"
+	echo "Usage: ./traceClientServer <ServerUserName> <ServerHostOrIp> <serverURL>"
 	echo ""
-	echo "Example: ./traceClientServer myUser 5.5.5.2"
+	echo "Example: ./traceClientServer myUser 5.5.5.2 http://www.polymtl.ca
 	exit 0
 fi
 
-TRACE_NAME="serverTrace"
+TRACE_NAME = serverTrace
 
 # Start tracing on the server side through ssh
 ssh $USER@$SERVER ./setupKernelTrace $TRACE_NAME
@@ -18,7 +19,7 @@ ssh $USER@$SERVER lttng start
 # Record the client payload
 # If the client is a machine with wifi, replace this call to a full manual setup
 # of the kernel trace and uncomment the lines for the additional kernel --function lines
-lttng-record-trace ./payload
+lttng-record-trace ./payload $URL
 # Stop tracing the server
 ssh $USER@$SERVER lttng destroy
 

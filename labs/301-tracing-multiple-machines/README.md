@@ -1,4 +1,4 @@
-## Tracing multiple machines across a network
+## Tracing System On Multiple Machines Across a Network
 
 In this lab, you will learn to take traces from multiple machines that communicate through the network and how Trace Compass can analyze those traces from different machines, with different time clocks.
 
@@ -56,11 +56,12 @@ On the **client machine** the following script will start the tracing on the ser
 
 USER=$1
 SERVER=$2
-if [ -z "$USER" || -z "$SERVER" ]
+URL=$3
+if [ -z "$USER" || -z "$SERVER" || -z "$URL" ]
 then
-	echo "Usage: ./traceClientServer <ServerUserName> <ServerHostOrIp>"
+	echo "Usage: ./traceClientServer <ServerUserName> <ServerHostOrIp> <serverURL>"
 	echo ""
-	echo "Example: ./traceClientServer myUser 5.5.5.2
+	echo "Example: ./traceClientServer myUser 5.5.5.2 http://www.polymtl.ca
 	exit 0
 fi
 
@@ -72,7 +73,7 @@ ssh $USER@$SERVER lttng start
 # Record the client payload
 # If the client is a machine with wifi, replace this call to a full manual setup
 # of the kernel trace and uncomment the lines for the additional kernel --function lines
-lttng-record-trace ./payload
+lttng-record-trace ./payload $URL
 # Stop tracing the server
 ssh $USER@$SERVER lttng destroy
 
@@ -85,9 +86,12 @@ Finally, the following script on the **client machine** will contain the payload
 ```
 #!/bin/bash
 
-wget http://www2.dorsal.polymtl.ca
+SITE=$1
+
+wget $SITE
 sleep 1
-wget http://www2.dorsal.polymtl.ca
+wget $SITE
+
 ```
 
 After execution of those traces, you should have 2 traces on your working directory: one called ``payLoad-<date>`` and one called ``serverTrace``, from respectively the client and the server. These 2 traces will be imported in Trace Compass in the next step.

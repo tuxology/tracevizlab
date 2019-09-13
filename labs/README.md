@@ -20,7 +20,7 @@ Each lab contains instructions on how to obtain a trace, so if you have the infr
 * `optional` [004 record-kernel-trace-ftrace](004-record-kernel-trace-ftrace)
 * `optional` [005 record-kernel-trace-perf](005-record-kernel-trace-perf)
 * [006 installing-tracecompass](006-installing-tracecompass)
-* [101 trace-navigation-in-tracecompass](101-trace-navigation-in-tracecompass)
+* [101 trace-navigation-in-tracecompass](101-analyze-system-trace-in-tracecompass)
 * [102 tracing-wget-critical-path](102-tracing-wget-critical-path)
 * [103 compare-package-managers](103-compare-package-managers)
 * [201 lttng-userspace-tracing](201-lttng-userspace-tracing)
