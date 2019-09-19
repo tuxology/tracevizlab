@@ -33,7 +33,7 @@ lttng enable-event -k --channel more-subbuf sched_switch,sched_waking,sched_pi_s
 lttng enable-event -k --channel more-subbuf irq_softirq_entry,irq_softirq_raise,irq_softirq_exit
 lttng enable-event -k --channel more-subbuf irq_handler_entry,irq_handler_exit
 lttng enable-event -k --channel more-subbuf --syscall --all
-lttng enable-event -k --channel more-subbuf lttng_statedump_process_state,lttng_statedump_start,lttng_statedump_end,lttng_statedump_network_interface,lttng_statedump_block_device
+lttng enable-event -k --channel more-subbuf lttng_statedump_process_state,lttng_statedump_start,lttng_statedump_end,lttng_statedump_network_interface,lttng_statedump_block_device,lttng_statedump_interrupt
 # Block I/O
 lttng enable-event -k --channel more-subbuf block_rq_complete,block_rq_insert,block_rq_issue
 lttng enable-event -k --channel more-subbuf block_bio_frontmerge,sched_migrate,sched_migrate_task
@@ -61,11 +61,11 @@ if [ -z "$USER" || -z "$SERVER" || -z "$URL" ]
 then
 	echo "Usage: ./traceClientServer <ServerUserName> <ServerHostOrIp> <serverURL>"
 	echo ""
-	echo "Example: ./traceClientServer myUser 5.5.5.2 http://www.polymtl.ca
+	echo "Example: ./traceClientServer myUser 5.5.5.2 http://www.polymtl.ca"
 	exit 0
 fi
 
-TRACE_NAME = serverTrace
+TRACE_NAME=serverTrace
 
 # Start tracing on the server side through ssh
 ssh $USER@$SERVER ./setupKernelTrace $TRACE_NAME
