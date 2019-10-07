@@ -77,9 +77,8 @@ A dialog will open with a list of plugins that can be installed. For this tutori
 
 * **Generic Callstack (Incubator)**: For various labs
 * **Global Filters (Incubator)**: For various labs
-* **Trace Compass Scripting Javascript (Incubation)**: For application tracing labs
+* **Trace Compass Scripting Javascript (Incubation)**: For scripting labs
 * **Trace Compass ftrace (Incubation)**: If you have system traces with ftrace
-* **Trace Compass uftrace (Incubation)**: Some application traces provided in this tutorial are made by uftrace
 * **Virtual Machine And Container Analysis (Incubator)**: For advanced topics with containers and virtual machine
 * **Trace Compass opentracing (Incubation)**: For advanced topic with opentracing
 

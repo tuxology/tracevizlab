@@ -23,7 +23,7 @@ $ sudo perf record -a -e sched:sched_switch -e sched:sched_waking \
 -e net:net_dev_queue -e net:netif_receive_skb \
 -e timer:hrtimer_start -e timer:hrtimer_cancel -e timer:hrtimer_expire_entry -e timer:hrtimer_expire_exit \
 -e syscalls:sys_enter_* -e syscalls:sys_exit_* \
-ls -al
+wget https://lttng.org
 ```
 
 - - -

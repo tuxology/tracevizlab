@@ -27,7 +27,7 @@ $ sudo trace-cmd record -e sched_switch -e sched_waking -e sched_pi_setprio -e s
 -e net_dev_queue -e netif_receive_skb \
 -e hrtimer_start -e hrtimer_cancel -e hrtimer_expire_entry -e hrtimer_expire_exit \
 -e sys* \
-ls -al
+wget https://lttng.org
 ```
 
 - - -
@@ -79,7 +79,7 @@ sudo echo 1 > /sys/kernel/debug/tracing/events/syscalls/enable
 sudo echo 1 > /sys/kernel/debug/tracing/tracing_on
 
 # Something to trace
-ls -al
+wget https://lttng.org
 
 sudo echo 0 > /sys/kernel/debug/tracing/tracing_on
 ```
