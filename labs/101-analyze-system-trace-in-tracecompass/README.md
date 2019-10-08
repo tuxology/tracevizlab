@@ -149,11 +149,15 @@ Let's now open the ``System Call Latency Statistics`` under the ``System Call La
 
 :exclamation: It shows statistics on the times taken to execute system calls by the various processes in the trace, for each system call. There is the minimum and maximum time taken, the average and standard deviation, the number of calls and the total spent in that kind of system call. It can be used to see if there are any abnormal latencies in the kernel space wrt system calls, and investigate the said latencies.
 
+:small_red_triangle_down:
+
 Now click on the column headers to sort the results by this column. For each line of system call, if you right-click on it, you can navigate to the time range of minimum and maximum duration, as shown in the figure below, where we selected the maximum range.
 
-![TraceCompassStatisticsView](screenshots/traceCompassStatisticsView.png "Statistics View Go To Maximum")
-
 Now that you have a time range selected, you can scroll up (or down depending on current sorting) the statistics view and notice that the statistics are shown both for the total duration of the trace and for the current time selection. So whenever you select a new time range in the trace, the selection statistics will be updated.
+
+:small_red_triangle:
+
+![TraceCompassStatisticsView](screenshots/traceCompassStatisticsView.png "Statistics View Go To Maximum")
 
 There are other types of latencies views with latency analyses. There are `System Call Density`, `System Call Latencies` and `System Call Latency vs Time`. They all show different views of the same data.
 
