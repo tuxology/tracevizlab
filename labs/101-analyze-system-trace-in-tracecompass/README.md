@@ -2,7 +2,7 @@
 
 In this lab, you will learn to open a system trace in Trace Compass and navigate the various views available. We will look at a simple system trace when running the `wget` command and see what kind of information we can get from it.
 
-*Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](../006-installing-tracecompass) lab or read the [TraceCompass web site](http://tracecompass.org) for more information. You also need a trace to open. You can take the trace you did in the [Record a kernel trace](../003-record-kernel-trace-lttng) lab or take the `network-experiment/clientKernel` trace from the tutorial's archive.
+*Pre-requisites*: Have Trace Compass installed and opened. You can follow the [Installing TraceCompass](../006-installing-tracecompass) lab or read the [TraceCompass web site](http://tracecompass.org) for more information. You also need a trace to open. You can take the trace you did in the [Record a kernel trace](../003-record-kernel-trace-lttng) lab or take the `tracing-wget/wget-first-call` trace from the tutorial's archive.
 
 - - -
 
@@ -81,8 +81,8 @@ Pressing `Enter` on the textbox will completely hide all states that do not corr
 This search & filter feature looks at the content of the tooltip of the states. A simple string will try to match with the content of any key of the tooltip, but one can also search for a key/value pair. The syntax of the filters is similar to that of `wireshark`. Here are some search strings that will work on the trace:
 
 * `wget|lttng` will highligh threads containing `wget` or `lttng`
-* `TID contains 53` will highlight all threads whose TID contains `53`
-* `TID matches 5336` will highlight the thread with ID `5336`
+* `TID contains 44` will highlight all threads whose TID contains `44`
+* `TID matches 4470` will highlight the thread with ID `4470`
 * `System_call matches .*` will highlight all state with system calls (they are visible only when zoomed)
 
 More information on this filtering can be found [here](http://archive.eclipse.org/tracecompass/doc/stable/org.eclipse.tracecompass.doc.user/Trace-Compass-Main-Features.html#Filtering_Time_Events_in_Time_Graph_Views).
@@ -163,9 +163,21 @@ There are other types of latencies views with latency analyses. There are `Syste
 
 :exclamation: The `System Call Latencies` view lists all the system call with their duration, calling thread and return value. I can be used to query individual system call latencies, selecting any row will select the time range.
 
-:exclamation: The `System Call Latency vs Time` will display the system calls as a scatter chart, with time as X axis. It is useful to see when in the trace, our elements of interest had the highest latency. In the following screenshot, we see that a **connect** system call took 20 ms aroudn 3/4 of the range. We could explore that range further if that is problematic for us.
+:exclamation: The `System Call Latency vs Time` will display the system calls as a scatter chart, with time as X axis. It is useful to see when in the trace, our elements of interest had the highest latency. In the following screenshot, we see that a **connect** system call took 20 ms around 3/4 of the range. We could explore that range further if that is problematic for us.
 
 :exclamation: The `System Call Density` view shows the number of system that took a certain duration within the visible range. The table on the left shows the various elements. We can sort them by duration to see the information on the longest system call of that range.
+
+:small_red_triangle_down:
+
+It is possible to filter the system calls in those view by any of the visible columns of the `latency table`, through the `Global Filters` view. To open this view, select `Window` -> `Show View`, then select the `Global Filters` view. Or you can press `ctrl-3` and enter `Global Filters` in the textbox that appears.
+
+For instance, if we want to see the system calls only the `wget` process, we could add the `TID == 4470` filter in the `Global Filters` view and the system calls will be filtered accordingly:
+
+* The `latency table` will show only the system calls for this process
+* The `latency vs time` view will display in different color the system calls that are not selected
+* The `density` view is not affected
+
+:small_red_triangle:
 
 ![TraceCompassLatencyViews](screenshots/traceCompassLatencyViews.png "System Call Latency Views")
 
