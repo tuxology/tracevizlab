@@ -40,7 +40,7 @@ We'll try to identify a few common phases in each trace:
 
 ### Task 2: Observe apt
 
-First let's open the apt-get trace. We'll go into details for this first trace analysis. Then the subsequent traces will show mostly the results.
+First let's open the `apt` trace. We'll go into details for this first trace analysis. Then the subsequent traces will show mostly the results.
 
 The command that allowed to get this trace:
 
@@ -66,7 +66,7 @@ Processing triggers for man-db (2.8.4-2+b1) ...
 
 Since we're interested in a single process, the `Control Flow` view would be the first place to look for it. Let's first find it, by pressing `ctrl-f` with focus on the view. A search dialog will appear and enter `apt`, then click *Finish* or press `Enter`. The view should focus on the first entry with that name, which should be our process.
 
-We notice the process has quite a few children process and threads. The main thread is often in the blocked state, waiting for some other event to complete.
+We notice the process has quite a few children processes and threads. The main thread is often in the blocked state, waiting for some other event to complete.
 
 To understand the intricacies of the relation between the threads/processes and see what it's waiting on, let's do the critical path of our main process: Open the `Critical Flow` view, right-click on the `apt` process in the `Control Flow` view and click `Follow apt`.
 
@@ -189,7 +189,7 @@ Total Installed Size:  0.09 MiB
 Spoiler alert: you may pause here and look at the trace for yourself
 ```
 
-We observe that `pacman` starts a few threads, some of which are related with `gpg`. The critical path again shows the obvious download phase, waiting for the  network. Like `yum` it is preceded by a long period of timers, with another thread being blocked. Let's look at its critical path to see if it is also waiting for network like `yum`'s. But no, it looks like internal message exchanges... It's the same thread pattern as `yum`, but not the same critical path. Not knowing too much about package managers, it's hard to determine what exactly this phase should be.
+We observe that `pacman` starts a few threads, some of which are related with `gpg`. The critical path again shows the obvious download phase, waiting for the  network. Like `yum` it is preceded by a long period of timers, with another thread being blocked. Let's look at its critical path to see if it is also waiting for network like `yum`'s. Indeed, the other blocked thread is waiting for network, maybe resolving the address to get the package, so that too is part of the download phase.
 
 As for what comes after the download, the dependencies on `gpg` processes shows the phase that corresponds to *checking keys in keyring*, the `ldconfig` is probably part of the *Processing package changes...*. The part with disk writes is the *installing tree* part and the rest would be the *Running post-transaction hooks...* part.
 
@@ -228,7 +228,7 @@ Spoiler alert: you may pause here and look at the trace for yourself
 
 We observe that `zypper` spawns a few threads, all named `zypper`. The critical path again shows the obvious download phase, waiting for the  network.
 
-Before that, the main process is running, but preceded by a long timer period. But unlike `yum` and `pacman`, we do not see any other of the `zypper` thread running concurrently. Let's zoom in that time range and see if anything else was running at that time. We can look in the `Resources` view, which does not show a particularly high CPU usage. We could also take a look at the `Cpu Usage` view and sort by % of utilization to see which threads were more active during that period. There's nothing related to `zypper`, so it must have been waiting for something that didn't happen. Maybe a timeout for network? Or did the user not put the `-n` option and it was waiting of user input before installing? Let's tag this phase as the *preparation* phase.
+Before that, the main process is running, but preceded by a long timer period. But unlike `yum` and `pacman`, we do not see any other of the `zypper` thread running concurrently. Let's zoom in that time range and see if anything else was running at that time. We can look in the `Resources` view, which does not show a particularly high CPU usage. We could also take a look at the `Cpu Usage` view and sort by % of utilization to see which threads were more active during that period. There's nothing related to `zypper`, so it must have been waiting for something that didn't happen. Maybe a timeout for network? Or did the user not put the `-n` option and it was waiting on user input before installing? Let's tag this phase as the *preparation* phase.
 
 Now looking at what comes after the download phase, we can look for disk accesses to identify the *install* phase We can get help by looking for the `/usr/bin/tree` file in the *Contents* column of the `Events table`, like we did for `yum`. That phase looks very short and involves the `rpm` process.
 
