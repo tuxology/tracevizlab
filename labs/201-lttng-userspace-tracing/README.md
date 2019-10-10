@@ -37,14 +37,14 @@ $ lttng enable-channel u -u --subbuf-size 1024K --num-subbuf 8
 $ lttng enable-event -c u -u lttng_ust_cyg_profile*,lttng_ust_statedump*
 $ lttng add-context -c u -u -t vpid -t vtid
 $ lttng start
-$ LD_PRELOAD=liblttng-ust-cyg-profile.so,liblttng-ust-lib-wrapper.so ./src/ls -l
+$ LD_PRELOAD="liblttng-ust-cyg-profile.so liblttng-ust-libc-wrapper.so" ./src/ls -l
 $ lttng destroy
 ```
 
 These tracing commands will trace 2 types of events:
 
 * The function entry/exits because the program was compiled with the proper instrumentation and the `liglttng-ust-cyg-profile.so` library was LD_PRELOADed.
-* The libc function calls, like malloc and free, done by the application, simply by LD_PRELOADing the `liblttng-ust-libc-wrapper.so` library.
+* The libc function calls, like calloc, malloc and free, done by the application, simply by LD_PRELOADing the `liblttng-ust-libc-wrapper.so` library.
 
 - - -
 
@@ -56,7 +56,7 @@ In the previous task, you generated a trace of the `ls` command that contains al
 
 ![FlameChart](screenshots/flameChart.png "Trace Compass Flame Chart View")
 
-* The *Flame Graph View* looks similar to the *Flame Chart View* but it is different. Each box represents a function in the stack but the horizontal axis show the total aggregated duration of all calls to this function at a particular level. A more complete explaination is available [here](http://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html#Description).
+* The *Flame Graph View* looks similar to the *Flame Chart View* but it is different. Each box represents a function in the stack but the horizontal axis show the total aggregated duration of all calls to this function at a particular level. A more complete explanation is available [here](http://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html#Description).
 
 ![FlameGraph](screenshots/flameGraph.png "Trace Compass Flame Graph View")
 
@@ -116,6 +116,10 @@ The trace was recorded using the lttng-ust libc wrapper, to trace calls to libc 
 * The *Potential Leaks vs time* view shows the same information as the *Potential Leaks* view, but as a scatter chart, so it's possible to visually see in time when exactly the memory was allocated.
 
 *Note* The potential leaks views are not meant to detect real memory leak. For that, tools like [Valgrind](http://valgrind.org/) are better suited and will tell you the exact line of code where the leak happened. But sometimes, knowing where the leaked memory was allocated does not help with the why it was not freed. In those cases, seeing it here with the full execution trace (callstacks, path to/from allocation), can help better put it in context. Also, adding a kernel trace to it, could add information, for instance show a failed system call around that time which may give a hint as to why it was not deallocated.
+
+- - -
+
+### Task 5: Kernel + UST experiment
 
 - - -
 
