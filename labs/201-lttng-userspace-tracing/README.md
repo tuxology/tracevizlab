@@ -119,13 +119,78 @@ The trace was recorded using the lttng-ust libc wrapper, to trace calls to libc 
 
 - - -
 
-### Task 5: Kernel + UST experiment
+### Task 5: Tracing Userspace and Kernel
+
+Even better than tracing userspace only is to observe both a userspace and kernel space traces together! You can skip to the next task if you are using the traces provided by this tutorial.
+
+To trace both kernel and userspace, once you have compiled an application with the `-finstrument-functions` flag, you can do one of the following
+
+```bash
+$ lttng-record-trace -p cyg_profile,libc,kernel <my/executable command>
+```
+
+or to manually create the trace:
+```bash
+$ lttng create
+$ lttng enable-event -u lttng_ust_cyg_profile*,lttng_ust_statedump*
+$ lttng enable-event -k sched_switch,sched_waking,sched_pi_setprio,sched_process_fork,sched_process_exit,sched_process_free,sched_wakeup,\
+irq_softirq_entry,irq_softirq_raise,irq_softirq_exit,irq_handler_entry,irq_handler_exit,\
+lttng_statedump_process_state,lttng_statedump_start,lttng_statedump_end,lttng_statedump_network_interface,lttng_statedump_block_device,\
+block_rq_complete,block_rq_insert,block_rq_issue,\
+block_bio_frontmerge,sched_migrate,sched_migrate_task,power_cpu_frequency,\
+net_dev_queue,netif_receive_skb,net_if_receive_skb,\
+timer_hrtimer_start,timer_hrtimer_cancel,timer_hrtimer_expire_entry,timer_hrtimer_expire_exit
+$ lttng enable-event -k --syscall --all
+$ lttng start
+$ LD_PRELOAD="liblttng-ust-cyg-profile.so liblttng-ust-libc-wrapper.so" <my/executable command>
+$ lttng destroy
+```
+
+Notice that unlike the commands above for tracing userspace application only, we do not need the `vtid` and `vpid` contexts, as the kernel trace will provide this information.
+
+You may now import the traces in Trace Compass.
+
+- - -
+
+### Task 6:
+
+In the `network-experiment`, we traced `wget` instrumented with `-finstrument-functions`, as well as the kernel. Let's open those 2 traces in an *experiment*, ie multiple traces opened as one, all events together. First, select the `clientKernel` and `clientUst` traces under the `network-experiment` folder. Right-click on the selected traces, then select `Open As Experiment...` -> `Generic Experiment`. It will create an experiment under the `Experiments` folder and open it.
+
+![OpenKernelUstExperiment](screenshots/openKernelUstExperiment.png "Open As Experiment")
+
+The kernel views like `Control Flow` and `Resources` will get populated, as well as the userspace views described above.
+
+To have a more direct view of the `Flame Chart` with the kernel, if you have installed the `Generic Callstack (Incubator)` add-ons (explained in the "[Installing TraceCompass](../006-installing-tracecompass/)" labs), you can expand the `Experiment` folder, `Experiment`, `Views`, `LTTng-UST Callstack (Incubator)` and double-click on the `Flame Chart (incubator)` and the `Flame Graph (incubator)` views.
+
+![IncubatorFlameViews](screenshots/incubatorFlameViews.png "Open Incubator Flame Views")
+
+To resolve the symbols properly, you need to add the `wget` executable, located in the `traces` folder of this labs to the `Configure Symbols...` menu, in the tab title `GNU nm - [...]/clientUst` as shown below
+
+![UstKernelConfigureSymbols](screenshots/ustKernelConfigureSymbols.png "Userspace Kernel Configure Symbols")
+
+In the `Flame Chart (incubator)` view, below the callstack lines, we see a line showing the `Kernel Statuses`. That line is the same as the one from the `Control Flow` view, but is more practical as it does not need the 2 views opened together. This allows to see that even though the `connect_with_timeout_callback` function appears to take a lot of time, the thread was actually blocked most of the time.
+
+![UstKernelFlameChart](screenshots/ustKernelFlameChart.png "Userspace Kernel Flame Chart")
+
+By adding the kernel data to the userspace, we can compute the actual `CPU time` for each of the function. That information is available in the tooltip of the `Flame Graph (incubator)` view. So for the `connect_with_timeout_callback` function, we see that even though the total duration is 24 milliseconds, the actual CPU time of this function is only 76 microseconds.
+
+![UstKernelFlameGraph](screenshots/ustKernelFlameGraph.png "Userspace Kernel Flame Graph")
+
+We can obtain the critical path for the observed threads directly from the `Flame Chart (incubator)` view. We just right-click on the thread entry on the left, named `9512` and select the `Follow 9512/9512`.
+
+![UstKernelFollowThread](screenshots/ustKernelFollowThread.png "Userspace Kernel Follow Thread")
+
+This will show the critical path for this thread, which shows that the time during which we were blocked, it was waiting for the network, which is not surprising when tracing the `wget` process, but which can be very eye-opening for other applications. We also notice that the `main` function starts a few milliseconds after the process start. Looking at the rest of the critical path and the `Control Flow` view, we can observe the `lttng` preloading setup for this application taking place.
+
+![UstKernelCriticalPath](screenshots/ustKernelCriticalPath.png "Userspace Kernel Critical Path")
+
+Other kernel and userspace views can be opened together to observe, for instance, disk utilization during the thread's execution (though it would not say if the disk utilization is due to this thread, more investigation is needed) or system's total CPU usage, or where in the thread some system calls were made, etc. This allows to dig deeper into the application's behavior and interaction with the system, with rather simple and automatic instrumentation.
 
 - - -
 
 ### Conclusion
 
-In the lab, you have compiled a program with tracing helpers, traced the `ls` command and saw the builtin views available for `LTTng UST` traces, ie the *LTTng-UST CallStack* and the *UST memory* views. You should now be able to analyze the execution of an application in details in terms of memory usage and function calls.
+In the lab, you have compiled a program with tracing helpers, traced the `ls` command and saw the builtin views available for `LTTng UST` traces, ie the *LTTng-UST CallStack* and the *UST memory* views, as well as how we can leverage the userspace data with a system trace. You should now be able to analyze the execution of an application in details in terms of memory usage and function calls.
 
 - - -
 
