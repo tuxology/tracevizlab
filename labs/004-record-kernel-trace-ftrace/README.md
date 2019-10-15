@@ -1,6 +1,6 @@
 ## Record a Kernel Trace With Ftrace
 
-While this tutorial will mainly use LTTng for tracing, as it can provide both kernel and userspace traces, synchronized on the same time reference, it is also possible to get the same results for kernel tracing using ftrace. Ftrace has the advantage that it is builtin the linux kernel and many people are used to it. In this lab, you will obtain a kernel trace that can then be analyzed by the visualization tools, using ftrace and trace-cmd.
+While this tutorial will mainly use LTTng for tracing, as it can provide both kernel and userspace traces, synchronized on the same time reference, it is also possible to get the same results for kernel tracing using `ftrace`. Ftrace has the advantage that it is builtin the linux kernel and many people are used to it. In this lab, you will obtain a kernel trace that can then be analyzed by the visualization tools, using ftrace and trace-cmd.
 
 - - -
 
@@ -27,7 +27,7 @@ $ sudo trace-cmd record -e sched_switch -e sched_waking -e sched_pi_setprio -e s
 -e net_dev_queue -e netif_receive_skb \
 -e hrtimer_start -e hrtimer_cancel -e hrtimer_expire_entry -e hrtimer_expire_exit \
 -e sys* \
-ls -al
+wget https://lttng.org
 ```
 
 - - -
@@ -42,7 +42,7 @@ $ sudo trace-cmd report -R > myFtrace.txt
 
 Then you can import `myFtrace.txt` in TraceCompass and it should be recognized as an ftrace trace.
 
-You can also import the binary trace directly, but only if `trace-cmd` is available on the machine where TraceCompass is. The ftrace binary format calls the `trace-cmd report -R` command to obtain the trace. It just avoids one having to do the step above.
+You can also import the binary trace directly, but only if `trace-cmd` is available on the machine where TraceCompass is. The ftrace binary format calls the `trace-cmd report -R` command to obtain the trace. It just avoids the user having to do the step above.
 
 - - -
 
@@ -79,7 +79,7 @@ sudo echo 1 > /sys/kernel/debug/tracing/events/syscalls/enable
 sudo echo 1 > /sys/kernel/debug/tracing/tracing_on
 
 # Something to trace
-ls -al
+wget https://lttng.org
 
 sudo echo 0 > /sys/kernel/debug/tracing/tracing_on
 ```

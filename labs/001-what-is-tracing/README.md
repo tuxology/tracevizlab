@@ -8,7 +8,7 @@ Before going further in this tutorial and starting with the labs, let's define t
 
 `Tracing` consists in recording specific information during a program's or operating system's execution to better understand what is happening on the system. The simplest form of tracing is what we all learn in programming 101: printf!
 
-Every location in the code that we want to trace is called a `tracepoint` and every time a tracepoint is hit is called an `event`. The following example shows those concepts
+Every location in the code that we want to trace is called a `tracepoint` and every time a tracepoint is hit is called an `event`. Putting tracepoints in the code is called `instrumentation`. The following example shows those concepts
 
 ```
 int my_func(void* my_value) {
@@ -46,7 +46,7 @@ The `tracing` we're discussing here is high speed, low overhead tracing. With su
 
 Tracing is just another tool in the developer or sysadmin's toolbox. It is most often not the first one to use. But in some situations, in can be very useful, regardless of if the application to trace is instrumented or not (see next section).
 
-Tracing is best used to understand very complex system, or even simple ones, but the real added value comes when trying to understand complexity and all else fails.
+Tracing is best used to understand very complex systems, or even simple ones, but the real added value comes when trying to understand complexity and all else fails.
 
 First, let's see what else is in the toolbox and when to best use each of those tools.
 
@@ -56,6 +56,8 @@ First, let's see what else is in the toolbox and when to best use each of those 
 
 * If you want to know what happened at 8h06PM on your server farm when there was that big DDOS attack, then `log` files are the best first goto. The answer is probably there.
 
+* If you want to get performance metrics on your system through time, then `monitoring` is mandatory. Some highly detailed monitoring tools use `instrumentation`, the same as for tracing, to compute some metrics. But monitoring is mostly aggregation of data to throw alerts and show in nice graphs and dashboards.
+
 When these tools fails though, `tracing` is there:
 
 * When `profiling` will miss that call at around 17min in the execution where there was a huge latency, it will either go unnoticed, or be lost as a statistic, without context or detail. `Tracing` can detect that latency and you can then zoom in on it and see everything that happened around that time and led to that moment.
@@ -64,11 +66,13 @@ When these tools fails though, `tracing` is there:
 
 * When `log` files have put you on a trail, but looking at everything, you just can't put your finger on it. `Tracing` will show everything (well, almost) that is hidden from log data and you can have an overview of the whole system at a given time.
 
+* When `monitoring` shows a problematic period and querying the `logs` at that time shows the guilty component (or not), `tracing` will allow to drill down into that component or system at that time to help pinpoint the problem more accurately.
+
 - - -
 
-### What To Trace? Application Vs System Tracing
+### What To Trace? Application Vs System Vs Distributed Tracing
 
-So, what do we trace? Typically, applications have log statements in various locations, associated with a log level. Statements with high verbosity can be considered tracing statements. Log verbosity can be modified, either at system start or at runtime. Sometimes, various log handlers can be hooked to the application, per verbosity level. While file handlers are very current, other type of logging can be done. Sometimes, it can be defined at compile-time, `qemu` for instance, can compile some statements with various backends: `systemtap`, `lttng UST`, `simple` or `stderr`.
+So, what do we trace? Typically, applications have log statements in various locations, associated with a log level. Statements with high verbosity can be considered tracing statements. Log verbosity can be modified, either at system start or at runtime. Sometimes, various log handlers can be hooked to the application, per verbosity level. While file handlers are very current, other type of logging can be done. Sometimes, it can be defined at compile-time, `qemu` for instance, can compile some statements with various backends: `systemtap`, `LTTng UST`, `simple` or `stderr`.
 
 This is what we call `application tracing` as it gives information on the internal state of the application: what happens in user land.
 
@@ -76,9 +80,11 @@ Sounds easy and wonderful, but how many applications have tracepoints? Not that 
 
 Because there is also `system tracing`. Operating systems and drivers themselves have [a lot!] of tracepoints in their code, and that alone, gives a lot of information about an application, and mostly, about the system on which it's executing. So even without any user space data, a trace of the OS can be enough to identify many typical application problems.
 
-`application tracing` and `system tracing` together are very powerful. The former will allow to seize the problem, find it in time, and get the application context, like the picture of a group in front of the green screen. The latter will put this picture in its environment, ie draw the background of that group picture.
+`Application tracing` and `system tracing` together are very powerful. The former will allow to seize the problem, find it in time, and get the application context, like the picture of a group in front of the green screen. The latter will put this picture in its environment, ie draw the background of that group picture.
 
-In this tutorial, we will focus only on linux, but Windows also has its tracing framework, called [ETW](https://docs.microsoft.com/en-us/windows/desktop/etw/about-event-tracing)
+In this tutorial, we will focus only on linux, but Windows also has its tracing framework, called [ETW](https://docs.microsoft.com/en-us/windows/desktop/etw/about-event-tracing).
+
+Nowadays, applications are developed as micro-services running in containers that can be run on various machines, either physical or virtual. Micro-services communicate together through some message passing libraries or home-made communication. `Distributed tracing` allows to follow requests through the systems. APIs like `[OpenTracing API](https://opentracing.io/)` provide a means to instrument the various components of the system and many common communication libraries are already instrumented. They only require a tracer to enable collecting data.
 
 - - -
 
@@ -90,7 +96,13 @@ The rest of this tutorial will answer that question and more!
 
 #### Next
 
-* [Install LTTng on Ubuntu](../002-install-lttng-on-ubuntu) to install the tracing tools and record traces
+* [Install LTTng on Ubuntu](../002-install-lttng-on-ubuntu) to install `LTTng` as a tracing tools (for application and systems) and record traces
+or
+* [Record System Trace With LTTng](../003-record-kernel-trace-lttng) to record system traces with `lttng`, if it is already installed.
+or
+* [Record System Trace With Ftrace](../004-record-kernel-trace-ftrace) to record system traces with `ftrace`
+or
+* [Record System Trace With Perf](../005-record-kernel-trace-perf) to record system traces with `perf`
 or
 * [Installing Trace Compass](../006-installing-tracecompass) to install the visualization tool and use the traces provided with the tutorial
 or

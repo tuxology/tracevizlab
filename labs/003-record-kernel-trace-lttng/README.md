@@ -62,7 +62,7 @@ $ lttng start
 Execute the payload to trace, here a simple ```ls``` command
 
 ```
-$ ls -alt
+$ wget https://lttng.org
 ```
 
 Then stop and destroy the tracing session.
@@ -84,7 +84,7 @@ $ sudo pip3 install --upgrade git+git://github.com/tahini/lttng-utils.git@master
 See the README for more install options. Once installed, you can just run the trace record script with the command to run. For instance, to reproduce the same result as the previous task, simply do
 
 ```
-$ lttng-record-trace ls -alt
+$ lttng-record-trace wget https://lttng.org
 ```
 
 The trace will be saved in the current directory, unless you specify an ``--output`` path to the command line
@@ -103,7 +103,8 @@ $ rsync -avz <user>@<traced.host>:</path/to/trace/dir> traces/
 
 ### References
 
-[LTTng user documentation](http://lttng.org/docs)
+* [LTTng user documentation](http://lttng.org/docs)
+* [lttng-utils](https://github.com/tahini/lttng-utils) tracing helper documentation
 
 - - -
 
