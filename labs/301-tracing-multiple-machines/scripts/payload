@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SITE=http://www.polymtl.ca
+SITE=$1
 
 wget $SITE
 sleep 1

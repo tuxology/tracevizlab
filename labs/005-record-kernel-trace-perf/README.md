@@ -1,6 +1,6 @@
 ## Record a Kernel Trace With Ftrace
 
-While this tutorial will mainly use LTTng for tracing, as it can provide both kernel and userspace traces, synchronized on the same time reference, it is also possible to get the same results for kernel tracing using perf. Like ftrace, perf has the advantage that it is builtin the linux kernel and many people are used to it. It can do both sampling or tracing, it is a very flexible tracer. In this lab, you will obtain a kernel trace that can then be analyzed by the visualization tools, perf.
+While this tutorial will mainly use LTTng for tracing, as it can provide both kernel and userspace traces, synchronized on the same time reference, it is also possible to get the same results for kernel tracing using `perf`. Like ftrace, perf has the advantage that it is builtin the linux kernel and many people are used to it. It can do both sampling or tracing, it is a very flexible tracer. In this lab, you will obtain a kernel trace that can then be analyzed by the visualization tools.
 
 *Note on perf*: The perf binary trace is _not_ readable by Trace Compass. It has to be converted to CTF. [CTF or Common Trace Format](http://diamon.org/ctf/), is a binary trace format, very flexible and fast to write. It is the format used by LTTng kernel and userspace traces. There is a perf2ctf converter built in perf, but it requires compilation of perf with `libbabeltrace`, a library providing an API to write CTF in C. Most distro do not have this option compiled in and compiling it yourself means compiling the linux kernel sources. Debian has it, but we know of no other distro with this feature.
 
@@ -23,7 +23,7 @@ $ sudo perf record -a -e sched:sched_switch -e sched:sched_waking \
 -e net:net_dev_queue -e net:netif_receive_skb \
 -e timer:hrtimer_start -e timer:hrtimer_cancel -e timer:hrtimer_expire_entry -e timer:hrtimer_expire_exit \
 -e syscalls:sys_enter_* -e syscalls:sys_exit_* \
-ls -al
+wget https://lttng.org
 ```
 
 - - -
@@ -44,7 +44,7 @@ If you get the following error message, then you're out of luck, the CTF convers
 No conversion support compiled in. perf should be compiled with environment variables LIBBABELTRACE=1 and LIBBABELTRACE_DIR=/path/to/libbabeltrace/
 ```
 
-You may use LTTng or ftrace to obtain a kernel trace to visualize.
+You may use `lttng` or `ftrace` to obtain a kernel trace to visualize.
 
 - - -
 

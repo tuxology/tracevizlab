@@ -6,6 +6,8 @@ This repository contains a series of labs and guides for collecting traces from 
 
 Each lab has specific goals and objectives. The main text is present in the README of each lab's directory and contains  various tasks outlined chronologically, to achieve the goal and complete the lab. The text also contains suggestions for navigation of the tasks. There will also be screenshots for each lab to help you guide through the UI and visualizations. Sample traces for all the labs are saved in a compressed file named [TraceCompassTutorialTraces.tgz](https://github.com/tuxology/tracevizlab/blob/master/labs/TraceCompassTutorialTraces.tgz) which can allow the user to skip reproducing the experiment and generating traces.
 
+This lab can be reproduced, with a hands-on approach, with the tracing and visualization tools at hand. Or it can simply be read, in which case some sections of the labs, describing shorcuts and navigation options, may be skipped. Those sections are contained between :small_red_triangle_down: and :small_red_triangle: signs.
+
 ### Goals
 
   - Understand what tracing is and when it can be of help in diagnosing performance issues
