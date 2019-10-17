@@ -4,6 +4,8 @@ In this lab, you will learn how to instrument, compile and trace your own applic
 
 *Pre-requisites*: Have Trace Compass installed and opened. Have lttng-ust installed, most notably the `liblttng-ust-dev` package. You can follow the [Install LTTng on Ubuntu](../001-instal-lttng-on-ubuntu/) lab or read the [LTTng web site](http://lttng.org) for more information.
 
+*Note*: If you do not want to instrument the application and go straight to the analysis part for custom traces, you can directly go to the [scripted analysis for custom instrumentation](../204-scripted-analysis-for-custom-instrumentation) lab and use the trace provided with this tutorial.
+
 - - -
 
 ### Task 1: Understand The MPI Application To Trace
@@ -279,4 +281,6 @@ In the lab, you have instrumented and compiled a simple MPI application, with LT
 
 #### Next
 
+* [Script Analyzes For Custom Instrumentation](../204-scripted-analysis-for-custom-instrumentation) to see how we can analyze and observe traces with custom instrumentation
+or
 * [Back](../) for more options
