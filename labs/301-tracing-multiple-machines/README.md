@@ -2,19 +2,19 @@
 
 In this lab, you will learn to take traces from multiple machines that communicate through the network and how Trace Compass can analyze those traces from different machines, with different time clocks.
 
-*Pre-requisites*: This lab is a followup of the [Tracing wget](../102-tracing-wget-critical-path) lab: we obtained 2 traces of wgetting a same web page twice. We saw that the 2 requests had 2 very different durations. Now, we will also trace the website that is being fetched to see what happens there during this request on the server side. For this lab, you can use the traces provided in this repository. The lab explains how to generate your own traces, but to do so, you would need to have 2 machines, preferably physical machines, as clocks on virtual machine are a bit trickier and are the subject of their own lab later.
+*Pre-requisites*: This lab is a follow-up of the [Tracing wget](../102-tracing-wget-critical-path) lab: we obtained 2 traces of wgetting a same web page twice. We saw that the 2 requests had 2 very different durations. Now, we will also trace the website that is being fetched to see what happens there during this request on the server side. For this lab, you can use the traces provided in this repository. The lab explains how to generate your own traces, but to do so, you would need to have 2 machines, preferably physical machines, as clocks on virtual machine are a bit trickier.
 
 - - -
 
 ### Task 1: Getting the trace
 
-While it is easy to just start an lttng session on one machine and obtain a local trace, tracing multiple machines requires more operations to control tracing and collect traces afterwards. There is no blessed way of doing this unfortunately; everyone develops their own techniques and writes their script.
+While it is easy to just start an lttng session on one machine and obtain a local trace, tracing multiple machines requires more operations to control tracing and collect traces afterwards. There is no blessed way of doing this unfortunately; everyone develops their own techniques and writes their scripts.
 
 The easiest way is to start/stop tracing manually on each machine, run your workload, then stop the tracing. Of course, to do it really manually will result in traces that are longer than necessary if the workload is small, like in this case, but it can be a good approach to trace a situation that may happen in the coming minutes. Scripting the tracing will make smaller traces that span just the necessary time.
 
-We'll describe one possible approach to this kind of tracing here. We will trace 2 machines, one acting as a client (running the wget commands) and a server (serving the requests), so the tracing will be controlled from the client. We'll be using the 3 following bash scripts:
+We'll describe one possible approach to this kind of tracing here. We will trace 2 machines, one acting as a client (running the wget commands) and a server (serving the requests), so the tracing will be controlled from the client. We'll be using the 3 following bash scripts, that are also available in the [scripts](scripts/) directory:
 
-On the **server machine**, place the following script somewhere. We'll put it in ``~/setupKernelTrace``. This **creates a tracing session** with all required events. The trace will be saved to the trace directory sent in parameter (this allows to easily know where the trace is located, so how to retrieve it later), otherwise a name with the data will be computed for the trace.
+On the **server machine**, place the following script somewhere. We'll put it in the home ``~/`` directory and call it [`setupKernelTrace`](scripts/setupKernelTrace). This **creates a tracing session** with all required events. The trace will be saved to the trace directory sent in parameter (this allows to easily know where the trace is located, so how to retrieve it later), otherwise a name with the data will be computed for the trace.
 
 ```
 #!/bin/bash
@@ -49,7 +49,7 @@ lttng enable-event -k --channel more-subbuf timer_hrtimer_start,timer_hrtimer_ca
 
 ```
 
-On the **client machine** the following script will start the tracing on the server, then record a trace of the payload, finally stop the trace on the server and bring the trace to this machine. We'll save it as ``~/traceClientServer``
+On the **client machine** the following script will start the tracing on the server, then record a trace of the payload, finally stop the trace on the server and get the remote trace to this machine. We'll run it from the directory of your choice and save it as [`traceClientServer`](scripts/traceClientServer).
 
 ```
 #!/bin/bash
@@ -57,7 +57,7 @@ On the **client machine** the following script will start the tracing on the ser
 USER=$1
 SERVER=$2
 URL=$3
-if [ -z "$USER" || -z "$SERVER" || -z "$URL" ]
+if [ -z "$USER" ] || [ -z "$SERVER" ] || [ -z "$URL" ]
 then
 	echo "Usage: ./traceClientServer <ServerUserName> <ServerHostOrIp> <serverURL>"
 	echo ""
@@ -81,7 +81,7 @@ ssh $USER@$SERVER lttng destroy
 rsync -avz $USER@$SERVER:~/lttng-traces/$TRACE_NAME ./
 ```
 
-Finally, the following script on the **client machine** will contain the payload to trace, here 2 wgets of a web site.
+Finally, the following [`payload`](scripts/payload) script on the **client machine** will contain the payload to trace, here 2 wgets of a web site. This scripts should be in the same directory as the previous script.
 
 ```
 #!/bin/bash
@@ -96,25 +96,30 @@ wget $SITE
 
 After execution of those traces, you should have 2 traces on your working directory: one called ``payLoad-<date>`` and one called ``serverTrace``, from respectively the client and the server. These 2 traces will be imported in Trace Compass in the next step.
 
-> Note on **wifi**: If one of the machines connects to the network through wifi, the traces taken with the default events will not show the critical path through the network. To do so, additional events will be required. For now, with lttng, **tracing the following kernel functions** should make the dependency analyses possible:
->
-> lttng enable-event -k --channel more-subbuf --function netif_receive_skb_internal netif_receive_skb_internal
->
-> lttng enable-event -k --channel more-subbuf --function do_IRQ do_IRQ
+:grey_exclamation: If one of the machines connects to the network through wifi, the traces taken with the default events will not show the critical path through the network. To do so, additional events will be required. For now, with lttng 2.11 and below, **tracing the following kernel functions** should make the dependency analyses possible:
+
+```
+lttng enable-event -k --channel more-subbuf --function netif_receive_skb_internal netif_receive_skb_internal
+lttng enable-event -k --channel more-subbuf --function do_IRQ do_IRQ
+```
 
 - - -
 
 ### Task 2: Importing the traces in an experiment
 
-In Trace Compass, under the project on which to import the traces, right-click on the *Traces* folder. Select *Import...* to open the *Trace Import* wizard.
+In Trace Compass, under the project on which to import the traces, right-click on the `Traces` folder. Select `Import...` to open the *Trace Import* wizard.
 
-Browse for the folder containing the traces, then check each folder containing the traces on the left side. You should have two folders checked. In the options below, make sure the *Create experiment* is checked, with an experiment in the textbox beside the option, as shown in the screenshot below.
+Browse for the folder containing the traces, then check each folder containing the traces on the left side. You should have two folders checked. In the options below, make sure the **Create experiment** is checked, with an experiment in the textbox beside the option, as shown in the screenshot below.
 
 ![ImportExperiment](screenshots/importExperiment.png "Trace Compass Import Experiment")
 
 The traces will be imported. Then expand the *Experiments* folder to see the experiment that was just created with the 2 traces in it. Double-click on the experiment to open it.
 
 ![OpenExperiment](screenshots/openExperiment.png "Trace Compass Open Experiment")
+
+If you are using the traces provided with the tuturial, the ones we'll be using now are in the `301-tracing-multiple-machines` folder: `httpClient` and `httpServer`. To create an experiment with those 2, you can select them (by pressing `ctrl-left-click` on their names), then `right-click` and select `Open As Experiment...` -> `Generic Experiment`. It will automatically open the experiment with the 2 traces in it.
+
+![OpenAsExperiment](screenshots/openAsExperiment.png "Trace Compass Open As Experiment")
 
 - - -
 
@@ -130,9 +135,9 @@ Unless the 2 machines' clocks are perfectly synchronized, the 2 streams should a
 
 If the 2 machines are physical machines, they are independent and what happens on one does not affect the other. But in a case like ours, where they communicate through the network and we want to analyze the dependencies across the network, it is important that the timestamps of both traces use the same time reference, so that dependent events always happen in the right order (for example, a packet should always be sent before it is received).
 
-Trace Compass uses a trace synchronization algorithm to automatically calculate a formula to transform the timestamps of one trace into the time reference of the other trace. Before synchronizing, let's open the *Synchronization* view, by clicking the *Window* -> *Show view* (or type *Ctrl-3*) and type and select the ``Synchronization (Tracing)`` view.
+Trace Compass uses a *trace synchronization* algorithm to automatically calculate a formula to transform the timestamps of one trace into the time reference of the other trace. Before synchronizing, let's open the `Synchronization` view, by clicking the `Window` -> `Show view` (or type `Ctrl-3`) and type and select the ``Synchronization (Tracing)`` view.
 
-Right-click on the experiment and select *Synchronize traces...*. A window will open to select a reference trace. Any one will do in this case, so use the default selected one and click *Finish*. The trace synchronization task will run. It may take a while. At the end, the experiment will be closed.
+Right-click on the experiment and select `Synchronize traces...`. A window will open to select a reference trace. Any one will do in this case, so use the default selected one and click *Finish*. The trace synchronization task will run. It may take a while. At the end, the experiment will be closed.
 
 ![SynchronizeTraces](screenshots/synchronizeTraces.png "Synchronize traces")
 
@@ -154,9 +159,11 @@ When analyzing experiments with traces from different machines, most views of Tr
 
 Where there is added value in having an experiment is to calculate the distributed critical path of a thread. We traced a web request, there is communication between the machines, we can follow the critical path from the client to the server and back to the client.
 
-Open the ``Control Flow`` view and the ``Critical Flow`` view (either with *Window* -> *Show View*, or ``ctrl-3`` and typing the view name, or expanding the corresponding analysis under the trace, ie ``Linux Kernel`` and ``OS Execution Graph``).
+Open the ``Control Flow`` view and the ``Critical Flow`` view (either with `Window` -> `Show View`, or ``ctrl-3`` and typing the view name, or expanding the corresponding analysis under the trace, ie ``Linux Kernel`` and ``OS Execution Graph``).
 
 With focus on the ``Control Flow`` view, find the *wget* processes: press ``Ctrl-f`` and type *wget* in the search box. It will select the first *wget* process. Right-click on the process and click on ``Follow wget/<tid>``. This will trigger the ``OS Execution Graph`` analysis and at the end, the distributed critical path for this wget request will be shown.
+
+The screenshot below shows the critical path of a web request to a drupal web site, showing a lot of communication between apache and mysql.
 
 ![CriticalPathWgetCold](screenshots/criticalPathWgetCold.png "Critical Path Wget Cold")
 
@@ -166,7 +173,7 @@ Now in the ``Control Flow`` view, select the second *wget* process and right-cli
 
 ![CriticalPathWgetHot](screenshots/criticalPathWgetHot.png "Critical Path Wget Hot")
 
-Now, this analysis was done only with kernel traces from the client and server. We can clearly see the network and disk accesses on the critical path. What a simple kernel trace does not say is whether the time improvement of the second request is only due to in-memory request data, or if the web application also did something to help increase the speed of the second query. Is there some mechanism in the application that improved the query time or is it just simply OS-related. Another lab will show how to also trace the userspace on the server side to get more information from these requests.
+Now, this analysis was done only with kernel traces from the client and server. We can clearly see the network and disk accesses on the critical path. What a simple kernel trace does not say is whether the time improvement of the second request is only due to in-memory request data, or if the web application also did something to help increase the speed of the second query. Is there some mechanism in the application that improved the query time or is it just simply OS-related. Adding some userspace traces to this experiment could help dig deeper into the userspace parts of the request, show what was actually running, which tasks in the application made the database requests. For complex web requests made from a browser for instance, we could even have client side instrumentation that would tell us which browser tasks were responsible for the various http queries, etc. The possible userspace traces to add to this kind of analysis are as numerous and various as are the request framework and applications.
 
 - - -
 ### References:
@@ -185,4 +192,5 @@ When dealing with virtual machines, the synchronization approach described here 
 
 * [Tracing Containers](../302-system-tracing-containers)
 or
+* [Jaeger OpenTracing Traces](../303-jaeger-opentracing-traces) to see how Open Tracing traces can be used to add userspace information to this kind of experiment
 * [Back](../) for more options
