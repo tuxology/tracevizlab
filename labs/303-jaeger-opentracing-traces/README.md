@@ -28,7 +28,7 @@ Once you have Jaeger running and traced some traces, you can fetch those traces 
 
 ![RightClickMenu](screenshots/rightClickMenu.png "Trace Compass Traces Menu")
 
-You will be able to set all the filters you want to apply to your traces request. Once you click the fetch button, you will see a list of traces which you can select the ones you want to import from.
+You will be able to set all the filters you want to apply to your traces request. Once you click the fetch button, you will see a list of traces from which you can select the ones you want to import.
 
 ![FetchWindow](screenshots/fetchWindow.png "Trace Compass Fetch Jaeger Window")
 
@@ -36,7 +36,7 @@ Once you click finish, your traces will be imported in your workspace.
 
 ![FetchedTraces](screenshots/fetchedTraces.png "Trace Compass Fetched Traces")
 
-You can also open one of the traces in the `traces` directory of this lab.
+You can also open one of the traces in the `303-jaeger-opentracing-traces` directory in the trace archive of this tutorial.
 
 - - -
 

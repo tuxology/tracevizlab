@@ -10,7 +10,7 @@ In this lab, we will see the specifities of containers when it comes time to do 
 
 Containers are software schemes that allow to isolate runtime environments from other containers and the environment that hosts it. It has been compared with a `chroot` on steroids, where whole systems can run in complete isolation. It is much lighter than virtual machines because it shares a lot of resources with its host, and thus does not need a complete OS installation on the side, and its storage is often directly on the host system, so no need to assign disk files to the container.
 
-One of the resources shared with the is **the kernel**. There is one kernel for all the containers running in the machine. It is thus impossible for the container to do anything specific to the kernel, like installing modules or... tracing. So how can we trace containers? Simply said, by tracing the host. But tracing the host will see everything that happens on the system, ie the container we're interested in and all the other ones.
+One of the resources shared with the host is **the kernel**. There is one kernel for all the containers running in the machine. It is thus impossible for the container to do anything specific to the kernel, like installing modules or... tracing. So how can we trace containers? Simply said, by tracing the host. But tracing the host will see everything that happens on the system, ie the container we're interested in and all the other ones.
 
 At the kernel level, containerization is managed using `cgroups` and `namespaces`. Processes and threads are assigned to cgroups and namespaces. By analyzing those associations, we can have a picture of our system's containerization. Namespaces can be nested within other namespaces.
 
@@ -24,7 +24,7 @@ If you have access to a machine with containers, you may obtain a trace of that 
 
 The `namespace` information is important to match threads and processes to containers. This information is available when forking a process, so in the `sched_process_fork` event. But for the process that are already started at the beginning of the trace, one needs the `lttng_statedump_process_state` event, that advertises the namespaces and virtual TIDs of each thread in each of those namespaces.
 
-For a test trace, the `httpServer` trace of the [previous lab](../301-tracing-multiple-machines) traced a web server in a docker container, so this trace can be used for this lab.
+For a test trace, the `httpServer` trace of the [previous lab](../301-tracing-multiple-machines), in the `301-tracing-multiple-machines` directory, traced a web server in a docker container, so this trace can be used for this lab.
 
 - - -
 

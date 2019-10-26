@@ -3,15 +3,15 @@
 USER=$1
 SERVER=$2
 URL=$3
-if [ -z "$USER" || -z "$SERVER" || -z "$URL" ]
+if [ -z "$USER" ] || [ -z "$SERVER" ] || [ -z "$URL" ]
 then
 	echo "Usage: ./traceClientServer <ServerUserName> <ServerHostOrIp> <serverURL>"
 	echo ""
-	echo "Example: ./traceClientServer myUser 5.5.5.2 http://www.polymtl.ca
+	echo "Example: ./traceClientServer myUser 5.5.5.2 http://www.polymtl.ca"
 	exit 0
 fi
 
-TRACE_NAME = serverTrace
+TRACE_NAME=serverTrace
 
 # Start tracing on the server side through ssh
 ssh $USER@$SERVER ./setupKernelTrace $TRACE_NAME
