@@ -84,7 +84,7 @@ Because there is also `system tracing`. Operating systems and drivers themselves
 
 In this tutorial, we will focus only on linux, but Windows also has its tracing framework, called [ETW](https://docs.microsoft.com/en-us/windows/desktop/etw/about-event-tracing).
 
-Nowadays, applications are developed as micro-services running in containers that can be run on various machines, either physical or virtual. Micro-services communicate together through some message passing libraries or home-made communication. `Distributed tracing` allows to follow requests through the systems. APIs like `[OpenTracing API](https://opentracing.io/)` provide a means to instrument the various components of the system and many common communication libraries are already instrumented. They only require a tracer to enable collecting data.
+Nowadays, applications are developed as micro-services running in containers that can be run on various machines, either physical or virtual. Micro-services communicate together through some message passing libraries or home-made communication. `Distributed tracing` allows to follow requests through the systems. APIs like [`OpenTracing API`](https://opentracing.io/) provide a means to instrument the various components of the system and many common communication libraries are already instrumented. They only require a tracer to enable collecting data.
 
 - - -
 
