@@ -41,7 +41,7 @@ Since we know which process we are interested in, we can search for it in the `C
 
 Once you have done that, you can right-click on the `wget` line and select `Follow wget/<tid>` where tid is the Thread ID of wget in your trace. As we can see, for this example, you would've selected `Follow wget/5628`. The `Follow <thread>` means we are interested in additional information on this thread and it will trigger all analyses and actions that concerns a single thread. The *Critical Path* analysis is one of them. After executing, the result of the critical path should appear in the `Critical Flow` view.
 
-The first screenshot shows the full critical path and the second is zoomed in towards the beginning of the process. the process.
+The first screenshot shows the full critical path and the second is zoomed in towards the beginning of the process.
 
 ![FollowProcess](screenshots/followProcess.png "Trace Compass Follow Process")
 
