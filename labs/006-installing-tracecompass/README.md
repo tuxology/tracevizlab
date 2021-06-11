@@ -6,25 +6,25 @@ In this lab, you will install Trace Compass on the machine you'll use to view th
 
 - - -
 
-### Task 1: Install Java > 8
+### Task 1: Install Java > 11
 
-Trace Compass is an Eclipse-based application and needs at least Java 8 to run. Make sure you have the correct version.
+Trace Compass is an Eclipse-based application and needs at least Java 11 to run. Make sure you have the correct version.
 
 ```
 $ java -version
-openjdk version "1.8.0_172"
-OpenJDK Runtime Environment (build 1.8.0_172-b11)
-OpenJDK 64-Bit Server VM (build 25.172-b11, mixed mode)
+openjdk version "11.0.11" 2021-04-20
+OpenJDK Runtime Environment (build 11.0.11+9-Ubuntu-0ubuntu2.18.04)
+OpenJDK 64-Bit Server VM (build 11.0.11+9-Ubuntu-0ubuntu2.18.04, mixed mode, sharing)
 ```
 
 If the java command is not found or you have an older version of java installed, you need to install java. On an ubuntu machine, it would be
 
 ```
-$ sudo apt-get install openjdk-8-jre
+$ sudo apt-get install openjdk-11-jre
 $ java -version
-openjdk version "1.8.0_171"
-OpenJDK Runtime Environment (build 1.8.0_171-8u171-b11-0ubuntu0.18.04.1-b11)
-OpenJDK 64-Bit Server VM (build 25.171-b11, mixed mode)
+openjdk version "11.0.11" 2021-04-20
+OpenJDK Runtime Environment (build 11.0.11+9-Ubuntu-0ubuntu2.18.04)
+OpenJDK 64-Bit Server VM (build 11.0.11+9-Ubuntu-0ubuntu2.18.04, mixed mode, sharing)
 ```
 
 If the version is still not correct, you may need to update your default java version using the following command
@@ -37,7 +37,7 @@ There are 2 choices for the alternative java (providing /usr/bin/java).
 ------------------------------------------------------------
 * 0            /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java      1101      auto mode
   1            /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java      1101      manual mode
-  2            /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java   1081      manual mode
+  2            /usr/lib/jvm/java-11-openjdk-amd64/jre/bin/java   1111      manual mode
 
 Press <enter> to keep the current choice[*], or type selection number: **2**
 ```
