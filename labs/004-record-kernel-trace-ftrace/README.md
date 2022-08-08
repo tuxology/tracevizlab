@@ -52,36 +52,36 @@ If `trace-cmd` cannot be installed, it is possible to use ftrace directly in the
 
 ```bash
 sudo mount -t debugfs nodev /sys/kernel/debug
-sudo echo 1 > /sys/kernel/debug/tracing/events/sched/sched_wakeup/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/sched/sched_switch/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/sched/sched_waking/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/sched/sched_pi_setprio/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/sched/sched_process_fork/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/sched/sched_process_exit/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/sched/sched_process_free/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/irq/softirq_raise/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/irq/softirq_entry/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/irq/softirq_exit/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/irq/irq_handler_entry/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/irq/irq_handler_exit/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/block/block_rq_complete/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/block/block_rq_insert/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/block/block_rq_issue/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/block/block_bio_frontmerge/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/power/cpu_frequency/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/net/net_dev_queue/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/net/netif_receive_skb/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/timer/hrtimer_start/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/timer/hrtimer_cancel/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/timer/hrtimer_expire_entry/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/timer/hrtimer_expire_exit/enable
-sudo echo 1 > /sys/kernel/debug/tracing/events/syscalls/enable
-sudo echo 1 > /sys/kernel/debug/tracing/tracing_on
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/sched/sched_wakeup/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/sched/sched_switch/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/sched/sched_waking/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/sched/sched_pi_setprio/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/sched/sched_process_fork/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/sched/sched_process_exit/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/sched/sched_process_free/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/irq/softirq_raise/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/irq/softirq_entry/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/irq/softirq_exit/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/irq/irq_handler_entry/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/irq/irq_handler_exit/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/block/block_rq_complete/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/block/block_rq_insert/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/block/block_rq_issue/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/block/block_bio_frontmerge/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/power/cpu_frequency/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/net/net_dev_queue/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/net/netif_receive_skb/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/timer/hrtimer_start/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/timer/hrtimer_cancel/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/timer/hrtimer_expire_entry/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/timer/hrtimer_expire_exit/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/events/syscalls/enable
+echo 1 | sudo tee /sys/kernel/debug/tracing/tracing_on
 
 # Something to trace
 wget https://lttng.org
 
-sudo echo 0 > /sys/kernel/debug/tracing/tracing_on
+echo 0 | sudo tee /sys/kernel/debug/tracing/tracing_on
 ```
 
 Then, to obtain the trace to import in TraceCompass:
