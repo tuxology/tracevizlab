@@ -8,6 +8,8 @@ In this lab, you will install Trace Compass on the machine you'll use to view th
 
 ### Task 1: Install Java > 11
 
+#### On Ubuntu machines
+
 Trace Compass is an Eclipse-based application and needs at least Java 11 to run. Make sure you have the correct version.
 
 ```
@@ -44,7 +46,9 @@ Press <enter> to keep the current choice[*], or type selection number: **2**
 
 - - -
 
-In Windows and MacOs, download the jdk [here](https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)
+#### On other platforms
+
+In Windows and MacOs, download Temurin OpenJDK from Eclipse Adoptium [here](https://adoptium.net/)
 
 ### Task 2: Get Trace Compass
 
