@@ -78,7 +78,7 @@ $ lttng destroy
 The [lttng-utils](https://github.com/tahini/lttng-utils) script can be used to trace instead of the commands of the previous task. First, get and install the script
 
 ```
-$ sudo pip3 install --upgrade git+git://github.com/tahini/lttng-utils.git@master
+$ sudo pip3 install --upgrade git+https://github.com/tahini/lttng-utils.git@master
 ```
 
 See the README for more install options. Once installed, you can just run the trace record script with the command to run. For instance, to reproduce the same result as the previous task, simply do
