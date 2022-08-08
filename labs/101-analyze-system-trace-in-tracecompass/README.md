@@ -38,6 +38,8 @@ You can **zoom out to see the complete trace** by double-clicking on the time gr
 
 :small_red_triangle_down:
 
+:exclamation: *The keyboard shortcuts in this section require the selection to be the chart itself. If, for example, you click on the time bar at the top the keyboard shortcuts will not take effect.*
+
 You can zoom in and out in time and pan the view left and right by using the ``w``, ``a``, ``s``, ``d`` keyboard shortcuts or ``ctrl-scroll`` and ``middle-click + mouse move``, this last one can also pan the view up and down.
 
 To reduce the size of entries, so that you can see more of them on the screen at the same time, you can press `ctrl- -`. It will make the view unreadable, but puts everything on screen, so it can show obvious potential problems. `ctrl- +` will increase the size again and `ctrl-0` will bring it back to default.
