@@ -63,13 +63,26 @@ $ cd trace-compass
 $ ./tracecompass
 ```
 
-You should reach an empty workspace. And voilà! You are now ready to import and analyze traces with Trace Compass. Proceed to other labs.
+You should reach an empty workspace. 
 
 ![empty workspace](screenshots/emptyWorkspace.png "Trace Compass empty workspace")
 
+### Task 3: Create an empty Tracing Project
+
+To import and analyse traces with Trace Compass a `Tracing` project is needed to collect such traces together logically.
+
+1. Click on the `Create a new Tracing project` link in the `Project Explorer` view
+2. Enter `Tracing` as the name of the project
+3. Press `Finish`
+
+And voilà! You are now ready to import and analyze traces with Trace Compass. Proceed to other labs.
+
+![empty workspace with tracing project](screenshots/emptyWorkspaceWithTracing.png "Trace Compass empty workspace")
+
+
 - - -
 
-### Task 3: Install the Required Add-Ons For This Tutorial
+### Task 4: Install the Required Add-Ons For This Tutorial
 
 Some labs in this tutorial require additional plugins that are not part of the main Trace Compass tool, but are available through the Trace Compass Incubator repo.  We will add those required plugins now.
 
@@ -92,11 +105,11 @@ Check those plugins in the *Install* wizard, as shown below. Then click *Finish*
 
 - - -
 
-### Task 4: Import the Traces For The Tutorial
+### Task 5: Import the Traces For The Tutorial
 
 Each lab comes with the instructions to produce the traces yourself, so *if you plan on making your own traces, you may skip this step*. Otherwise, there is an [archive](../TraceCompassTutorialTraces.tgz) that contains all the traces for the labs. You may import it now.
 
-Upon opening Trace Compass, there is a default project named *Tracing* in the ``Project Explorer``, expand it and right-click on the *Traces* folder. Select *Import...* to open the *Trace Import* wizard.
+In Task 3 above you created a project named *Tracing* in the ``Project Explorer``. Expand it and right-click on the *Traces* folder. Select *Import...* to open the *Trace Import* wizard.
 
 ![ImportTraceMenu](screenshots/importTraceMenu.png "Trace Compass Import Trace Menu")
 
