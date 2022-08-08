@@ -52,13 +52,13 @@ In Windows and MacOs, download Temurin OpenJDK from Eclipse Adoptium [here](http
 
 ### Task 2: Get Trace Compass
 
-Go to the [Trace Compass web site](http://tracecompass.org) and click on the big green button to download the latest release of Trace Compass.
+Go to the [Trace Compass web site](http://tracecompass.org) and click on the big blue button to download the latest release of Trace Compass.
 
 Then extract the content of the downloaded archive and simply start trace-compass from the extracted folder
 
 ```
 $ cd ~/Downloads
-$ tar xf trace-compass-3.3.0-20180307-1910-linux.gtk.x86_64.tar.gz
+$ tar xf trace-compass-8.0.0-20220620-0814-linux.gtk.x86_64.tar.gz
 $ cd trace-compass
 $ ./tracecompass
 ```
