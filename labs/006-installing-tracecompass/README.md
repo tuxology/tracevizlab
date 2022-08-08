@@ -93,7 +93,7 @@ To install the plugins, go to the *Tools* -> *Add-ons*
 A dialog will open with a list of plugins that can be installed. For this tutorial, we will needs the following:
 
 * **Generic Callstack (Incubator)**: For various labs
-* **Global Filters (Incubator)**: For various labs
+* **Trace Compass Filters (Incubator)**: For various labs
 * **Trace Compass Scripting Javascript (Incubation)**: For scripting labs
 * **Trace Compass ftrace (Incubation)**: If you have system traces with ftrace
 * **Virtual Machine And Container Analysis (Incubator)**: For advanced topics with containers and virtual machine
