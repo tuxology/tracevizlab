@@ -38,7 +38,7 @@ But printf is usually used for quick instantaneous debugging of an application a
 
 Logging is another form of tracing. It usually associates a timestamp with events to better understand the timing in the application. But we usually log only high level information, as disk space is a limited resource (right?)
 
-The `tracing` we're discussing here is high speed, low overhead tracing. With such tracing, the tracepoints can be present in the code at all time (linux has tons of tracepoints in its code, ready to be hooked to), they have a near-zero overhead when not tracing and a very low one one with a tracer enabled. Tracers can handle hundreds of thousands events/second. Some tracers, like ftrace, lttng and perf store the events on disk for later processing, others, like ebpf, handle them on the fly in callbacks that can aggregate data to gather statistics or can immediatly react to any anomaly.
+The `tracing` we're discussing here is high speed, low overhead tracing. With such tracing, the tracepoints can be present in the code at all time (linux has tons of tracepoints in its code, ready to be hooked to), they have a near-zero overhead when not tracing and a very low overhead with a tracer enabled. Tracers can handle hundreds of thousands events/second. Some tracers, like ftrace, lttng and perf store the events on disk for later processing, others, like ebpf, handle them on the fly in callbacks that can aggregate data to gather statistics or can immediatly react to any anomaly.
 
 - - -
 
