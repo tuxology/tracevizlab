@@ -81,7 +81,7 @@ The [lttng-utils](https://github.com/tahini/lttng-utils) script can be used to t
 $ sudo pip3 install --upgrade git+https://github.com/tahini/lttng-utils.git@master
 ```
 
-See the README for more install options. Once installed, you can just run the trace record script with the command to run. For instance, to reproduce the same result as the previous task, simply do
+See the [README](https://github.com/tahini/lttng-utils#readme) for more install options. Once installed, you can just run the trace record script with the command to run. For instance, to reproduce the same result as the previous task, simply do
 
 ```
 $ lttng-record-trace wget https://lttng.org
