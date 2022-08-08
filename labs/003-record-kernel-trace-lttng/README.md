@@ -59,7 +59,7 @@ Next, you can start the tracing session
 $ lttng start
 ```
 
-Execute the payload to trace, here a simple ```ls``` command
+Execute the payload to trace, here a simple ```wget``` command
 
 ```
 $ wget https://lttng.org
