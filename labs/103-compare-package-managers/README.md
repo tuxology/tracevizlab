@@ -21,7 +21,7 @@ The list on the left will show the folder structure inside that archive, you can
 You can also obtain your own trace for your favorite package manager with some variation on this command:
 
 ```
-$ lttng-record-trace sudo apt-get install tree
+$ lttng-record-trace sudo apt install tree
 ```
 
 Import the archive for each of the package manager, they should now appear under the `Traces` directory.

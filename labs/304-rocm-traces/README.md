@@ -8,7 +8,7 @@ This tutorial will guide you through getting a trace with ROC-profiler and ROC-t
 - Have ROCm installed with a [compatible GPU](https://github.com/RadeonOpenCompute/ROCm#Hardware-and-Software-Support) with ROC-profiler and ROC-tracer. You can follow the [ROCm Installation](https://rocmdocs.amd.com/en/latest/Installation_Guide/Installation-Guide.html) to get everything installed.
 - Have babeltrace2 and python3-bt2 installed. Once you have added the LTTng ppa, you will be able to install python3-bt2 through apt. [Get babeltrace](https://babeltrace.org/#bt2-get)
 - Java 11
-    Ubuntu: `apt-get install openjdk-11-jdk`
+    Ubuntu: `apt install openjdk-11-jdk`
     Fedora: `dnf install java-11-openjdk.x86_64`
 - If you intend to use the Theia trace extension, you will need to install the [pre-requisites for the Theia IDE](https://github.com/eclipse-theia/theia/blob/master/doc/Developing.md#prerequisites)
 

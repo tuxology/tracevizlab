@@ -9,7 +9,7 @@ While this tutorial will mainly use LTTng for tracing, as it can provide both ke
 `trace-cmd` is a helper application for ftrace that does not require to directly set values in debugfs in order to trace. It is available as a package in most linux distributions, so to install, just ask your preferred package manager, for instance
 
 ```
-sudo apt-get install trace-cmd
+sudo apt install trace-cmd
 ```
 
 - - -

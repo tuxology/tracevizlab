@@ -10,7 +10,7 @@ In this lab, you will learn how to instrument, compile and trace your own applic
 
 ### Task 1: Understand The MPI Application To Trace
 
-For this lab, we'll instrument an MPI application, taken from the [MPI tutorial](https://mpitutorial.com/) examples. We'll instrument the `ring` application, in which one mpi worker sends a value to the next and so on until the value comes back to the first worker. The subset of files used for this lab, original and instrumented, are in the [code](code/) directory of this lab. To compile and run it, you'll need the `openmpi` development package (in Ubuntu, `sudo apt-get install mpi-default-dev`). A trace of the application is also available in the trace archive that comes with this tutorial.
+For this lab, we'll instrument an MPI application, taken from the [MPI tutorial](https://mpitutorial.com/) examples. We'll instrument the `ring` application, in which one mpi worker sends a value to the next and so on until the value comes back to the first worker. The subset of files used for this lab, original and instrumented, are in the [code](code/) directory of this lab. To compile and run it, you'll need the `openmpi` development package (in Ubuntu, `sudo apt install mpi-default-dev`). A trace of the application is also available in the trace archive that comes with this tutorial.
 
 ```bash
 $ git clone https://github.com/wesleykendall/mpitutorial.git

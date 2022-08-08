@@ -8,28 +8,22 @@ In this lab, you will install lttng on an Ubuntu machine
 
 ### Task 1: Install lttng for kernel tracing
 
-First install the lttng PPA repository:
+First make sure your package manager list is up to date
 
 ```
-$ sudo apt-add-repository ppa:lttng/stable-2.10
-```
-
-This should automatically fetch the updates for all repos. If not, you may need to manually update your repositories
-
-```
-$ sudo apt-get update
+$ sudo apt update
 ```
 
 For kernel tracing only, the **lttng-modules-dkms** and **lttng-tools** packages need to be installed:
 
 ```
-$ sudo apt-get install lttng-tools lttng-modules-dkms
+$ sudo apt install lttng-tools lttng-modules-dkms
 ```
 
 The package installation will have created a group called **tracing**. This group allows its members to be able to run lttng commands without requiring to be *sudo* and, in consequence, to save traces that are directly readable by the user instead of saving them as root. The installation does not add the user to the **tracing** group, so you may do it at this point.
 
 ```
-$ sudo usermod -a -G tracing <user>
+$ sudo usermod -a -G tracing $USER
 ```
 Make sure to log off and log in the user to apply the groups modification. You can also start a shell logged in the tracing group using:
 
@@ -46,25 +40,25 @@ You are now ready to get a kernel trace. You may proceed to the [Record a kernel
 To trace userspace applications with some builtin features, for example function entry and exit, application memory allocations and other calls to the libc library:
 
 ```
-$ sudo apt-get install liblttng-ust0
+$ sudo apt install liblttng-ust0
 ```
 
 To add userspace tracepoints to your own application:
 
 ```
-$ sudo apt-get install liblttng-ust-dev
+$ sudo apt install liblttng-ust-dev
 ```
 
 To trace Java applications instrumented with either JUL or Log4j:
 
 ```
-$ sudo apt-get install liblttng-ust-agent-java
+$ sudo apt install liblttng-ust-agent-java
 ```
 
 To instrument and trace python3 applications:
 
 ```
-$ sudo apt-get install python3-lttngust
+$ sudo apt install python3-lttngust
 ```
 
 - - -

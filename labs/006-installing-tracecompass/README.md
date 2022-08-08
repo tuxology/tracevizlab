@@ -22,7 +22,7 @@ OpenJDK 64-Bit Server VM (build 11.0.11+9-Ubuntu-0ubuntu2.18.04, mixed mode, sha
 If the java command is not found or you have an older version of java installed, you need to install java. On an ubuntu machine, it would be
 
 ```
-$ sudo apt-get install openjdk-11-jre
+$ sudo apt install openjdk-11-jre
 $ java -version
 openjdk version "11.0.11" 2021-04-20
 OpenJDK Runtime Environment (build 11.0.11+9-Ubuntu-0ubuntu2.18.04)
