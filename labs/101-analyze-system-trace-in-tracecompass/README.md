@@ -8,17 +8,19 @@ In this lab, you will learn to open a system trace in Trace Compass and navigate
 
 ### Task 1: Opening a trace
 
-Upon opening Trace Compass, there is a default project named *Tracing* in the ``Project Explorer``, expand it and right-click on the *Traces* folder. Select *Import...* to open the *Trace Import* wizard.
+*If you are using the traces provided as archive with the labs follow the steps outlined in `Import the Traces For The Tutorial` in [Installing Trace Compass](../006-installing-tracecompass) and skip ahead to the end of this task to double-click on `tracing-wget/wget-first-call`*
+
+Expand the *Tracing* project created in [Installing Trace Compass](../006-installing-tracecompass), and right-click on the *Traces* folder. Select *Import...* to open the *Trace Import* wizard.
 
 ![ImportTraceMenu](screenshots/importTraceMenu.png "Trace Compass Import Trace Menu")
 
-Browse for the folder containing the trace, then check that folder in the left textbox as shown in the screenshot below and click *Finish*. If you are using the traces provided as archive with the labs, you may directly import the archive by selecting the *Select archive file* radio button and browsing to the trace `.tar.gz` file.
+Browse for the folder containing the trace, then check that folder in the left textbox as shown in the screenshot below and click *Finish*.
 
 ![ImportTraceDialog](screenshots/importTraceDialog.png "Trace Compass Import Trace Dialog")
 
-A trace named kernel will show up under the *Traces* folder. You can double-click on it to actually open it. With the tutorial archive, you may open the `clienKernel` trace. This will open the *Kernel* perspective
+A trace named `kernel` will show up under the *Traces* folder. You can double-click on it to actually open it. With the tutorial archive, you open the `tracing-wget/wget-first-call` trace.
 
-![KernelTraceJustOpened](screenshots/kernelTraceJustOpened.png "Kernel Trace Just Opened")
+![kernelOrWgetFirstCall](screenshots/kernelOrWgetFirstCall.png "Kernel Or Wget First Call")
 
 - - -
 
