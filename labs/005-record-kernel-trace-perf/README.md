@@ -6,7 +6,17 @@ While this tutorial will mainly use LTTng for tracing, as it can provide both ke
 
 - - -
 
-### Task 1: Record a Trace With Perf
+### Task 1: Install perf
+
+`perf` is an application for performance analysis. It is available as part of linux tools in most linux distributions, so to install, just ask your preferred package manager, for instance
+
+```
+sudo apt install linux-tools-generic
+```
+
+- - -
+
+### Task 2: Record a Trace With Perf
 
 `perf` is a tool that can be used either for sampling, tracing or gathering performance counters. It is very flexible and can provide a lot of useful information. The [perf documentation](https://perf.wiki.kernel.org/index.php/Main_Page) contains exhaustive information on the various perf commands and option.
 
@@ -28,7 +38,7 @@ wget https://lttng.org
 
 - - -
 
-### Task 2: Convert the Trace to CTF
+### Task 3: Convert the Trace to CTF
 
 To open it in TraceCompass, the trace has to be converted to CTF. To do so, use the following command.
 
