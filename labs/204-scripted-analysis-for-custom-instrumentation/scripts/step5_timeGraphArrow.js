@@ -80,20 +80,18 @@ while (iter.hasNext()) {
 	}
 }
 
-// Done parsing the events, close the state system at the time of the last event
-if (event != null) {
+// Done parsing the events, close the state system at the time of the last event, it needs to be done manually otherwise the state system will still be waiting for values and will not be considered finished building if (event != null) {
 	ss.closeHistory(event.getTimestamp().toNanos());
 }
 
 // Get list wrappers from Trace Compass for the entries and arrows.
 var tgEntries = createListWrapper();
 var tgArrows = createListWrapper();
+/* Prepare the time graph data, there is few enough entries and arrows that it can be done once and returned once */
 
 // Map the worker ID to an entry ID
 var mpiWorkerToId = {};
 
-// FIX 1 : ss.getQuarks("*") cause une ambiguïté de signature avec Rhino
-// → on reconstruit la liste des workers depuis tidToWorkerMap
 var workerIds = [];
 for (var tid in tidToWorkerMap) {
 	var wid = "" + tidToWorkerMap[tid];
@@ -133,8 +131,6 @@ for (var i = 0; i < arrows.length; i++) {
 	}
 }
 
-// FIX 2 : Rhino ne convertit pas automatiquement les fonctions JS en
-// java.util.function.Function → utiliser JavaAdapter
 var entriesList = tgEntries.getList();
 var arrowsList  = tgArrows.getList();
 
@@ -150,8 +146,7 @@ var getArrowsFunction = new JavaAdapter(java.util.function.Function, {
 	}
 });
 
-// Create a scripted data provider for this analysis
-provider = createScriptedTimeGraphProvider(analysis, getEntriesFunction, null, getArrowsFunction);
+// Create a scripted data provider for this analysis, using script functions to get the entries, row model data and arrows. Since the entries have a quark associated with them which contains the data to display, there is no need for a scripted getRowData function, so we send nullprovider = createScriptedTimeGraphProvider(analysis, getEntriesFunction, null, getArrowsFunction);
 if (provider != null) {
 	// Open a time graph view displaying this provider
 	openTimeGraphView(provider);
