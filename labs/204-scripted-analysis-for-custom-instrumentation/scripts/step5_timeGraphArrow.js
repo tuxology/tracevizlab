@@ -80,68 +80,78 @@ while (iter.hasNext()) {
 	}
 }
 
-// Done parsing the events, close the state system at the time of the last event, it needs to be done manually otherwise the state system will still be waiting for values and will not be considered finished building
+// Done parsing the events, close the state system at the time of the last event
 if (event != null) {
 	ss.closeHistory(event.getTimestamp().toNanos());
 }
 
-// Get list wrappers from Trace Compass for the entries and arrows. The conversion between javascript list and java list is not direct, so we need a wrapper
+// Get list wrappers from Trace Compass for the entries and arrows.
 var tgEntries = createListWrapper();
 var tgArrows = createListWrapper();
-
-/* Prepare the time graph data, there is few enough entries and arrows that it can be done once and returned once */
 
 // Map the worker ID to an entry ID
 var mpiWorkerToId = {};
 
-// Get all the quarks of the entries
-quarks = ss.getQuarks("*");
+// FIX 1 : ss.getQuarks("*") cause une ambiguïté de signature avec Rhino
+// → on reconstruit la liste des workers depuis tidToWorkerMap
+var workerIds = [];
+for (var tid in tidToWorkerMap) {
+	var wid = "" + tidToWorkerMap[tid];
+	var alreadyIn = false;
+	for (var k = 0; k < workerIds.length; k++) {
+		if (workerIds[k] === wid) { alreadyIn = true; break; }
+	}
+	if (!alreadyIn) { workerIds.push(wid); }
+}
+
 // Prepare the entries
 var mpiEntries = [];
-for (i = 0; i < quarks.size(); i++) {
-	quark = quarks.get(i);
-	// Get the mpi worker ID, and find its quark
-	mpiWorkerId = ss.getAttributeName(quark);
-	// Create an entry with the worker ID as name and the quark. The quark will be used to populate the entry's data.
-	entry = createEntry(mpiWorkerId, {'quark' : quark});
-	mpiWorkerToId[mpiWorkerId] = entry.getId();
+for (var i = 0; i < workerIds.length; i++) {
+	var wid = workerIds[i];
+	var quark = ss.getQuarkAbsoluteAndAdd(wid);
+	var entry = createEntry(wid, {'quark' : quark});
+	mpiWorkerToId[wid] = entry.getId();
 	mpiEntries.push(entry);
 }
+
 // Sort the entries numerically
 mpiEntries.sort(function(a,b){return Number(a.getName()) - Number(b.getName())});
 // Add the entries to the entry list
-for (i = 0; i < mpiEntries.length; i++) {
+for (var i = 0; i < mpiEntries.length; i++) {
 	tgEntries.getList().add(mpiEntries[i]);
 }
 
 // Prepare the arrows
-for (i=0; i < arrows.length; i++) {
-	arrow = arrows[i];
-
-	// For each arrow, we get the source and destination entry ID from its mpi worker ID
-	srcId = mpiWorkerToId[arrow["source"]];
-	dstId = mpiWorkerToId[arrow["dest"]];
-	// Get the start time and calculate the duration
-	startTime = arrow["time"];
-	duration = arrow["endTime"] - startTime;
-	// Add the arrow to the arrows list
-	tgArrows.getList().add(createArrow(srcId, dstId, startTime, duration, 1));
+for (var i = 0; i < arrows.length; i++) {
+	var arrow = arrows[i];
+	var srcId = mpiWorkerToId["" + arrow["source"]];
+	var dstId = mpiWorkerToId["" + arrow["dest"]];
+	var startTime = arrow["time"];
+	var duration = arrow["endTime"] - startTime;
+	if (srcId != null && dstId != null) {
+		tgArrows.getList().add(createArrow(srcId, dstId, startTime, duration, 1));
+	}
 }
 
-// A function used to return the entries to the data provider. It receives the filter in parameter, which contains the requested time range and any additional information
-function getEntries(parameters) {
-	// The list is static once built, return all entries
-	return tgEntries.getList();
-}
+// FIX 2 : Rhino ne convertit pas automatiquement les fonctions JS en
+// java.util.function.Function → utiliser JavaAdapter
+var entriesList = tgEntries.getList();
+var arrowsList  = tgArrows.getList();
 
-// A function used to return the arrows to the data provider. It receives the filter in parameter, which contains the requested time range and any additional information
-function getArrows(parameters) {
-	// Just return all the arrows, the view will take those in the range
-	return tgArrows.getList();
-}
+var getEntriesFunction = new JavaAdapter(java.util.function.Function, {
+	apply: function(parameters) {
+		return entriesList;
+	}
+});
 
-// Create a scripted data provider for this analysis, using script functions to get the entries, row model data and arrows. Since the entries have a quark associated with them which contains the data to display, there is no need for a scripted getRowData function, so we send null
-provider = createScriptedTimeGraphProvider(analysis, getEntries, null, getArrows);
+var getArrowsFunction = new JavaAdapter(java.util.function.Function, {
+	apply: function(parameters) {
+		return arrowsList;
+	}
+});
+
+// Create a scripted data provider for this analysis
+provider = createScriptedTimeGraphProvider(analysis, getEntriesFunction, null, getArrowsFunction);
 if (provider != null) {
 	// Open a time graph view displaying this provider
 	openTimeGraphView(provider);
